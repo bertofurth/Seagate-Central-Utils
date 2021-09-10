@@ -18,5 +18,12 @@ https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel
 See the individual directories in this project to view instructions
 for each tool
 
+## Tools that require the new kernel
+
 * syncthing - File syncronisation tool
+
+
+## Tools that do not require the new kernel
+
+* procps - Proper versions of top, ps, kill, etc
 
