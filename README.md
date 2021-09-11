@@ -47,19 +47,19 @@ https://github.com/bertofurth/Seagate-Central-Samba/
 
 ### /usr/local/... added to Seagate Central PATH
 The instructions in this project are organized so that new software
-will be installed on the Seagate Central under the /usr/local directory.
+will be installed on the Seagate Central under the "/usr/local" directory.
 This is so that none of the original software utilities on the 
 Seagate Central are overwritten. This makes it easy to revert back to the 
 original software if the new versions are not working properly.
 
 For this reason the PATH on the Seagate Central needs to be updated to
-include the appropriate /usr/local subdirectories otherwise new
+include the appropriate "/usr/local" subdirectories otherwise new
 utilities will need to be executed by specifying their full location.
 
 Changing the path can be done in a few ways. The easiest is to
-edit the /etc/login.defs file on the Seagate Central with an editor
+edit the "/etc/login.defs" file on the Seagate Central with an editor
 like "nano" or "vi" so that the ENV_SUPATH and ENV_PATH variables 
-have the appropriate /usr/local directories listed first in the PATHs
+have the appropriate "/usr/local" directories listed first in the PATHs
 as follows
 
     ENV_SUPATH      PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
