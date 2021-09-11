@@ -16,7 +16,7 @@ project at
 https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel
 
 See the individual directories in this project to view instructions
-for each tool
+specific for each tool
 
 ## Tools that require the new kernel
 
@@ -29,8 +29,8 @@ for each tool
 
 
 ## Prerequisites
-Unless otherwise noted in the procedure the following preequisites apply
-to all of the instructions.
+Unless otherwise noted the following preequisites apply to all of the
+instructions in this project.
 
 ### su/root access on the Seagate Central.
 Make sure that you can establish an ssh session to the Seagate Central
@@ -45,7 +45,7 @@ automatically re-enable su access as a result of the procedure.
 
 https://github.com/bertofurth/Seagate-Central-Samba/
 
-### /usr/local in PATH
+### /usr/local/... added to Seagate Central PATH
 The instructions in this project are organized so that new software
 will be installed on the Seagate Central under the /usr/local directory.
 This is so that none of the original software utilities on the 
@@ -54,20 +54,22 @@ original software if the new versions are not working properly.
 
 For this reason the PATH on the Seagate Central needs to be updated to
 include the appropriate /usr/local subdirectories otherwise new
-utilities will need to be executed by specifying their specific 
-directory location.
+utilities will need to be executed by specifying their full location.
 
 Changing the path can be done in a few ways. The easiest is to
 edit the /etc/login.defs file on the Seagate Central with an editor
 like "nano" or "vi" so that the ENV_SUPATH and ENV_PATH variables 
-have the appropriate /usr/local directories added as follows
+have the appropriate /usr/local directories listed first in the PATHs
+as follows
 
     ENV_SUPATH      PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
     ENV_PATH        PATH=/usr/local/bin:/bin:/usr/bin
 
-Another option is to create a .profile or another similar bash startup
-file in the home directories of the users who will log in to the unit
-and place the PATH additions there.
+Another option is to edit the ".profile" or another similar bash startup
+file in the home directory of any user who will log in to the unit
+and place the PATH additions there. For example
+
+    PATH=/usr/local/sbin:/usr/local/bin:$PATH
 
 ### Know how to copy files between your host and the Seagate Central. 
 Not only should you know how to transfer files to and from your 
@@ -75,3 +77,84 @@ Seagate Central NAS and the build host, ideally you'll know how
 to transfer files **even if the samba service is not working**. I 
 would suggest that if samba is not working to use FTP or SCP which
 should both still work.
+
+## Troubleshooting
+Here are some issues commonly enocuntered when installing new
+software.
+
+### The old version of a tool is still being run
+IF you are trying to run a new tool but the old version is still
+running then the most likely explanation is that the PATH has not
+been reconfigured properly or has not been given the opportunity 
+to be applied.
+
+Check that the PATH has been modified in the appropriate startup
+files and that it lists "/usr/local/bin" and "/usr/local/sbin" before
+any other directories in the PATH.
+
+Make sure that after changing the PATH in your startup files that you 
+log out of and then back into the ssh session in order for the changes 
+to take effect.
+
+Check the PATH by issuing the "echo $PATH" command. 
+
+Use the "which file-name" command to display which version of a tool is 
+being invoked. For example
+  
+    # which top
+    /usr/local/bin/top
+  
+Make sure that the version under "/usr/local/bin" is being is invoked 
+instead of the old version which is normally under "/usr/bin" or "/bin" .
+   
+Confirm that the new version can actually be run by specifying the full
+directory location. For example
+
+    # /usr/local/bin/top
+
+Make sure that the new version of the tool has the executable file 
+attribute. You may need to issue the "chmod 755 file-name" command 
+to ensure that the file is able to be executed.
+
+### Shared libraries
+When trying to run new software an error similar to the following may
+appear
+
+    xxxx: error while loading shared libraries: libxxx.so.X: cannot open shared object file: No such file or directory
+
+If this happens make sure to confirm that the required new shared libary
+files were correctly transferred from the extracted software archive to
+the /usr/local/lib directory on the Seagate Central.
+
+Use the "ldd file-name" command to check which libaries are required by 
+the program being executed and check that they are in place as per the 
+output of the ldd command.
+
+For example
+
+    # ldd /usr/local/bin/top
+        libprocps.so.8 => /usr/local/lib/libprocps.so.8 (0x355a0000)
+        libncurses.so.5 => /usr/lib/libncurses.so.5 (0x355f0000)
+        libdl.so.2 => /lib/libdl.so.2 (0x35640000)
+        libc.so.6 => /lib/libc.so.6 (0x35670000)
+        /lib/ld-linux.so.3 (0x35560000)
+
+The "ldd -v" form of the command will give even more detailed information.
+
+### Wrong binary format
+When trying to run new software, errors similar to the following may
+appear
+
+    not a dynamic executable
+    
+    line 1: syntax error: ")" unexpected
+    
+The most likely cause of these kinds of errors is that the binaries that
+have been installed have not been cross compiled for the Seagate Central
+arm 32 architecture.
+
+Confirm that when the sofware is being compiled that a cross compiler is
+being used and not a native compiler that builds binaries for the 
+build system itself.
+
+    
