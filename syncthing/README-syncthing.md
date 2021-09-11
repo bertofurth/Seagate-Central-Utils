@@ -12,8 +12,8 @@ https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel
 
 syncthing will not work with the original Seagate Central kernel.
 
-# Obtain syncthing
-## Option 1 - Download syncthing
+## Obtain syncthing
+### Option 1 - Download syncthing binary
 You can download the precompiled **Linux ARM** version of syncthing
 from the syncthing page at
 
@@ -25,12 +25,14 @@ with the "tar -xf" command.
 The "syncthing" binary in the extracted folder is the one that needs
 to be transferred to the Seagate Central.
 
-## Option 2 - Cross compile syncthing
-Make sure you have the most recent version of "go" installed on
-your build system. As of writing this is "go1.16".
+### Option 2 - Cross compile syncthing
+Make sure you have a recent version of "go" installed on your build 
+system. This procedure was tested using "go1.16" which was the latest
+available as of the time of writing.
 
 Download and extract the latest stable version of syncthing source
-code. In this example we download version 1.18.2
+code. In this example we download the latest version available as of
+tiem time of writing, v1.18.2
 
     wget https://github.com/syncthing/syncthing/releases/download/v1.18.2/syncthing-source-v1.18.2.tar.gz
     tar -xf syncthing-source-v1.18.2.tar.gz
@@ -44,20 +46,20 @@ platform
 A new file called "syncthing" will be built. It should be about 20M 
 in size.
 
-# syncthing.sh
-syncthing does not come with an "init" based startup script so I 
-have created my own very simple one as seen in this project directory
-called "syncthing.sh".
+## syncthing.sh
+syncthing does not come with an "init" based startup script so we 
+have included a custom startup script found in this project called
+"syncthing.sh" to work on the Seagate Central
 
 Note that this script assumes that there is a user called "syncthing"
 that will be running the syncthing service. For this reason you should
-either edit the script to use a different existing Seagate Central user
-or create a user "syncthing" on the Seagate Central using the Web 
-Management interface.
+create a user "syncthing" on the Seagate Central using the Web 
+Management interface. Alternately edit the "syncthing.sh" script to
+specify a different userID.
 
-Also be aware that the script is setup to activate the syncthing GUI
-on port 8384 of the Segate Central Ethernet interface. If this is not
-desirable then the script needs to be edited accordingly.
+**Security Note** Be aware that the script is setup to activate the
+syncthing GUI on port 8384 of the Segate Central Ethernet interface. 
+If this is not desirable then the script needs to be edited accordingly.
 
 ## Transfer syncthing to the Seagate Central
 Copy "syncthing" and "syncthing.sh" to the Seagate Central.
@@ -88,7 +90,7 @@ the following command.
 Once syncthing has started for the first time, log in to the configuration 
 gui webpage by browsing to port 8384 of your NAS IP address. For example
 
-    http://192.168.1.99:8384
+    http://192.0.2.99:8384
 
 When you initially log in to the GUI you will be confronted with a warning
 message asking you to configure a password for the GUI straight away. 
@@ -97,6 +99,6 @@ message asking you to configure a password for the GUI straight away.
 The syncthing logs are located at /var/log/syncthing
 
 I would suggest that since the Seagate Central is not a particularly powerful
-platform that you only give syncthing "light" duties. 
-
-
+platform that you only give syncthing "light" duties. It may be that during
+the initial sync between a client and the Seagate Central that involves a large
+data transer the system may be temporarily be a little overwhelmed.
