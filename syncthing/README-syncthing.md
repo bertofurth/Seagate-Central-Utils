@@ -57,9 +57,11 @@ create a user "syncthing" on the Seagate Central using the Web
 Management interface. Alternately edit the "syncthing.sh" script to
 specify a different userID.
 
-**Security Note** Be aware that the script is setup to activate the
-syncthing GUI on port 8384 of the Segate Central Ethernet interface. 
-If this is not desirable then the script needs to be edited accordingly.
+**Security Note** Be aware that the "synthing.sh" script will activate
+the syncthing GUI on port 8384 of the Segate Central Ethernet by default.
+Many people consider it best practise to disable the syncthing GUI
+after is has been configured. You may need to modify the "syncthing.sh"
+startup script accordingly.
 
 ## Transfer syncthing to the Seagate Central
 Copy "syncthing" and "syncthing.sh" to the Seagate Central.
