@@ -70,9 +70,9 @@ PREFIX=/usr/local
 
 #
 # The directory where executables will be installed on the
-# target device. On the Seagate Central these are installed
-# in /usr.
-EXEC_PREFIX=/usr
+# target device. We use /usr/local so as to not overwrite the
+# native binaries in /usr
+EXEC_PREFIX=/usr/local/
 
 #
 # Specify a directory on the building host containing the
