@@ -30,7 +30,9 @@ USER=syncthing
 
 start_daemon () {
         # Increase UDP buffer size as per syncthing docs
-        sysctl -w net.core.rmem_max=2500000
+        if [ $(sysctl -n net.core.rmem_max) -lt 2500000 ]; then
+	    sysctl -w net.core.rmem_max=2500000
+        fi
 
         touch $LOG
         chown $USER $LOG
@@ -38,7 +40,7 @@ start_daemon () {
         # Start syncthing GUI on port 8384. This may not 
         # be desirable for everyone as it can be a security
         # issue.
-        su -c "$DAEMON -logfile=$LOG -gui-address=[::]:8384" $USER &
+        su -c "$DAEMON -logfile=$LOG -gui-address=[::]:8384 > /dev/null 2>&1" $USER &
 }
 
 stop_daemon () {
@@ -52,10 +54,12 @@ stop_daemon () {
 case "$1" in
     start)
         logger "Starting $DESC"
+	echo "Starting $DESC"
         start_daemon
         ;;
     stop)
         logger "Stopping $DESC" "$NAME"
+	echo "Stopping $DESC"
         stop_daemon
         ;;
     reload)
@@ -63,7 +67,7 @@ case "$1" in
         echo "$NAME doesn't respond to SIGHUP. Try restart."
         ;;
     restart|force-reload)
-        logger "Restarting $DESC"
+        logger "Restarting $DESC" "$NAME"
 	stop_daemon
 	sleep 10
 	start_daemon
