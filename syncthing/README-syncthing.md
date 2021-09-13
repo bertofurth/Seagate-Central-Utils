@@ -56,11 +56,21 @@ syncthing does not come with an "init" based startup script so we
 have included a custom startup script in this project called
 "syncthing-init.sh" to work on the Seagate Central.
 
-Note that this script assumes that there is a user called "syncthing"
+This script is setup to assume that there is a user called "syncthing"
 that will be running the syncthing service. For this reason you should
-create a user "syncthing" on the Seagate Central using the Web 
-Management interface. Alternately edit the "syncthing-init.sh" script
-to specify a different userID.
+create a user "syncthing" on the Seagate Central. 
+
+If you create the "syncthing" user using the Web Management interface
+then a new samba share will be created for "syncthing".
+
+If you use the command line "adduser" tool on the Seagate Central as
+follows then a user will be created but no samba share will be put in 
+place.
+
+    adduser -h /Data/syncthing -s /bin/false syncthing
+
+Alternately edit the "syncthing-init.sh" script to specify a different
+existing userID to run the service.
 
 **Security Note** Be aware that the "synthing.sh" script will activate
 the syncthing GUI on port 8384 of the Segate Central Ethernet by default.
