@@ -153,20 +153,16 @@ referred to as the base working directory going forward.
 Refer to the README-project.md file in the project directory for
 details of what source code needs to be downloaded.
 
+Required software archives need to be downloaded to the **src**
+subdirectory and then the archives need to be extracted.
+
 In general we have tried to use either the latest stable versions 
 of libraries and utilities or, where required, the same version as
 found on the Seagate Central itself.
 
-The procedure is usually to change into the **src** subdirectory
-of the project, download the required source code archives with a
-command such as **wget** or **curl -OL** then extract the archives
-with the **tar -xf** command.
-
-There is a script in the **src** subdirectory called 
-**download-src.sh** that attempts to download and extract the
-source archives using the versions that were tested during this
-procedure, however we would suggest checking to see if more recent
-versions are available and using those.
+There is a script in each utility subdirectory called something 
+similar to **download-myutil-src.sh** that attempts to download and
+extract the source archives using the versions that were tested.
 
 ### Seagate Central libraries and headers
 Some, but not all, projects require that libraries be downloaded
