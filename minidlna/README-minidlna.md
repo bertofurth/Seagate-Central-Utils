@@ -169,11 +169,16 @@ On it's initial run, miniDLNA took a very long time to index the existing
 media library however, once this initial indexing was complete the system 
 ran smoothly.
 
+I would suggest waiting until miniDLNA has compiled it's initial cache and
+index before trying to access it from a remote media player.
+
 ### miniDLNA status webpage
 The miniDLNA server provides a brief status webpage accesible via the 
 Seagate Central's ip address on port 8200. For example
 
     http://192.0.2.99:8200/
 
-
+This page is useful in that it indicates if miniDLNA is still in the process
+of building it's cache. It also shows useful statistics about what types
+of media it has cataloged and what devices are connected to it.
 
