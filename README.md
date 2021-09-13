@@ -388,6 +388,7 @@ to display the software version may vary between utilities.
 Here are some possibilities.
 
      myutil -v
+     myutil -V
      myutil --version
      myutil --help
      myutil -?
