@@ -9,6 +9,8 @@ export TOP=$(pwd)
 export OBJ=$TOP/obj/
 export SRC=$TOP/src/
 
+ARGS=$@
+
 #
 # check_source_dir <source-name>
 #
@@ -83,7 +85,7 @@ configure_it()
 #
 make_it()
 {
-	make -j$J $@
+	make -j$J $@ $ARGS
 	if [ $? -ne 0 ]; then
     	   echo
            echo make for $LIB_NAME failed. Exiting
