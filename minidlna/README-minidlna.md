@@ -53,15 +53,15 @@ the same major version numbers, will still work with this guide.
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
-by issuing the **download-minidlna-src.sh** command.
+by running the **download-minidlna-src.sh** script.
 
 ## Installation
 ### Optional - Reducing the software size
 #### Optional - Remove or strip static libraries (Strongly reccomended)
 The static libraries generated while building minidlna take up a
 particularly large amount of disk space. For this reason it is **very**
-strongly reccommended that the static libraries be deleted or at the
-very least stripped as per the instructions in the **README.md** file.
+strongly reccommended that the static libraries be deleted, or at the
+very least "stripped" as per the instructions in the **README.md** file.
 
 ### Install the new software
 In addition to transferring and installing the cross compiled software,
