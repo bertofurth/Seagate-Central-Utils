@@ -96,7 +96,7 @@ Install the syncthing-init.sh startup script
 
 Configure the script to be invoked at system startup.
 
-    update-rc.d syncthing-init.sh defaults 30
+    update-rc.d syncthing-init.sh defaults 72
 
 ## Start syncthing and configure a GUI password
 Start syncthing by rebooting the Seagate Central or manually by issuing
