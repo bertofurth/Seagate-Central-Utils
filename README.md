@@ -359,7 +359,7 @@ and becoming the root user.
 Change to the directory where the archive has been copied to and
 extract it.
 
-    tar -xvf seagate-central-procps.tar.gz
+    tar -xvf seagate-central-myutil.tar.gz
      
 Note, you may get warning messages similar to the following but these
 are safe to ignore.
@@ -369,9 +369,9 @@ are safe to ignore.
 A new directory containing the expanded archive will be created.
 Change into this directory.
 
-    cd seagate-central-procps
+    cd seagate-central-myuitl
 
-### Install the new procps software
+### Install the new software
 The structure of files in the extracted archive should be such that
 we can simply copy everything under the usr subdirectory straight
 to the /usr directory of the Seagate Central.
