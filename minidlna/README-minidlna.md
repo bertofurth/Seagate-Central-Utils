@@ -307,10 +307,15 @@ than miniDLNA.
 
 The version of Twonky installed on the Seagate Central has no
 documented or obvious interface that can be used for configuration or
-optimization. 
+optimization. The only exception is that the Seagate Central Web
+Management interface allows for the Twonky service to be turned
+off.
 
 The miniDLNA configuration file provides options that allow for
 targeted scanning of particular folders for particular types of
 content. Twonky is setup to blindly catalog everything in the
 Public folder regardless of whether it's appropriate to share 
 to media players on the network.
+
+TODO : Modify the Seagate Central Web Management interface to refer
+to miniDLNA and not Twonky
