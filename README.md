@@ -9,9 +9,10 @@ for the Seagate Central NAS.
 ### Command line tools
 * procps - Fully functional standard versions of top, ps, kill, etc
 * less - Full version of tool used to view text files, "less is more".
+* screen - GNU screen is a terminal multplexer. 
 
 ### TODO
-* TODO : screen, Joplin server?
+* TODO : Joplin server?
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
