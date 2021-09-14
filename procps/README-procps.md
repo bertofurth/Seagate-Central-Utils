@@ -18,7 +18,7 @@ instructions below for procps specific notes and procedures.
 
 ## Build Procedure
 ### Source code download and extraction
-This procedure was tested using the following versions of sotware.
+This procedure was tested using the following versions of software.
 Unless otherwise noted these are the latest stable releases at the
 time of writing. Hopefully later versions, or at least those with
 the same major version numbers, will still work with this guide.

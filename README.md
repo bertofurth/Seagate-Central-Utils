@@ -2,10 +2,16 @@
 Instructions for compiling and installing new and updated utilities 
 for the Seagate Central NAS.
 
-* procps - Fully functional standard versions of top, ps, kill, etc
+### Servers
 * minidlna - Efficient media server replacement for the inbuilt Twonky DLNA 
 * syncthing - Multi platform file synchronisation tool 
-* TODO : less, screen, Joplin server?
+
+### Command line tools
+* procps - Fully functional standard versions of top, ps, kill, etc
+* less - Full version of tool used to view text files, "less is more".
+
+### TODO
+* TODO : screen, Joplin server?
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
