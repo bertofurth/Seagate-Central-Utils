@@ -12,7 +12,7 @@ for the Seagate Central NAS.
 * screen - GNU screen is a terminal multplexer. 
 
 ### TODO
-* TODO : Joplin server?
+* TODO : Joplin server, Motion
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
