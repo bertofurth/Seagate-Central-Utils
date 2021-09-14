@@ -1,0 +1,13 @@
+# Sample ".screenrc" for the Seagate Central
+
+# Copy this file as ".screenrc" into your home
+# directory
+
+# Start "/bin/bash" for screen sessions as this works
+# better with screen than the default /bin/sh (busybox) 
+shell /bin/bash
+
+shelltitle ':|bash'
+
+# Set the number of lines to "remember" for scrollback
+defscrollback 1000

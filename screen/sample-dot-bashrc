@@ -1,0 +1,38 @@
+# A sample ".bashrc" file for use with GNU screen
+
+# Place this file in your home directory as ".bashrc"
+
+# Set the username color
+# but make "root" red background
+if [ "$EUID" -ne 0 ]; then
+     # Normal User. Uncomment one color's command
+     # Black
+     #PS1='\[\033[00;30m\]\u\[\033[00m\]@\h \w\$'
+     # Red
+     #PS1='\[\033[00;31m\]\u@\h\[\033[00m\] \w\$'
+     # Green
+     #PS1='\[\033[00;32m\]\u\[\033[00m\]@\h \w\$'
+     # Yellow
+     #PS1='\[\033[00;33m\]\u\[\033[00m\]@\h \w\$'
+     # Dark Blue
+     #PS1='\[\033[00;34m\]\u\[\033[00m\]@\h \w\$'
+     # Purple
+     PS1='\[\033[00;35m\]\u\[\033[00m\]@\h \w\$'
+     # Light Blue
+     #PS1='\[\033[00;36m\]\u\[\033[00m\]@\h \w\$'
+     # White
+     #PS1='\[\033[00;37m\]\u\[\033[00m\]@\h \w\$'
+else
+     #Red highlighted.
+     PS1='\[\033[07;31m\]\u@\h\[\033[00m\] \w\$'
+fi
+
+# Check if screen is running
+if [ ! -z $STY ]; then
+    # This lets screen display the running process name
+    # in the window status display.
+    PROMPT_COMMAND='printf "\033k\033\\"'
+    
+    # Show "screen number" at the prompt. 
+    PS1=$PS1$WINDOW':'
+fi
