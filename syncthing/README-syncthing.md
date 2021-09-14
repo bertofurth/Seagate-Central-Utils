@@ -22,10 +22,10 @@ the **README.md** file is not really relevant here. That is,
 you only need to follow the instructions below to compile and
 install Syncthing.
 
-## Obtain syncthing
-### Option 1 - Download syncthing binary
-You can obtain a precompiled **Linux ARM** version of syncthing
-from the syncthing download page at
+## Obtain Syncthing
+### Option 1 - Download Syncthing binary
+You can obtain a precompiled **Linux ARM** version of Syncthing
+from the Syncthing download page at
 
 https://syncthing.net/downloads/
 
@@ -35,20 +35,20 @@ with the "tar -xf" command.
 The extracted folder should contain a binary file called "syncthing".
 This file needs to be transferred to the Seagate Central.
 
-### Option 2 - Cross compile syncthing
+### Option 2 - Cross compile Syncthing
 Make sure you have a recent version of "go" installed on your build 
 system. This procedure was tested using "go1.16" which was the latest
 available as of the time of writing.
 
-Download and extract the latest stable version of syncthing source
+Download and extract the latest stable version of Syncthing source
 code. In this example we download the latest version available as of
-tiem time of writing, v1.18.2
+time time of writing, v1.18.2
 
     wget https://github.com/syncthing/syncthing/releases/download/v1.18.2/syncthing-source-v1.18.2.tar.gz
     tar -xf syncthing-source-v1.18.2.tar.gz
 
 Change into the extracted source code directory and execute the 
-following command to cross compile syncthing for the arm 32 
+following command to cross compile Syncthing for the arm 32 
 platform
 
      go run build.go -goos linux -goarch arm build
@@ -56,37 +56,48 @@ platform
 A new file called "syncthing" will be built. This file needs to
 be transferred to the Seagate Central.
 
+#### Create "syncthing" user
+The Syncthing service will be run by a dedicated user called "syncthing".
+This is more secure than simply running the service as "root" because 
+it means that if the Syncthing service suffers a fault, or if any
+currently unknown security issue is exploited in the Syncthing software,
+the damage will be limited to only the Syncthing service rather than the
+rest of the system.
+
+The easiest way to create a new user is to use the Seagate Central Web
+Management interface as follows.
+
+Login to the Seagate Central Web Management interface as an admin
+user.
+
+Select the "Users" tab and then click on the "Add a new user" button.
+
+Enter "syncthing" for the "Username" and enter a password. 
+
+There is no need to fill in the "Remote Access" field with an email
+address.
+
+Do NOT select the "Administrator" checkbox. There is no need to make
+the "syncthing" user a system administrator.
+
+Finally click on the "Save" button.
+
 ## syncthing-init.sh
-syncthing does not come with an "init" based startup script so we 
+Syncthing does not come with an "init" based startup script so we 
 have included a custom startup script in this project called
 "syncthing-init.sh" to work on the Seagate Central.
 
-This script is setup to assume that there is a user called "syncthing"
-that will be running the syncthing service. For this reason you should
-create a user "syncthing" on the Seagate Central. 
-
-If you create the "syncthing" user using the Web Management interface
-then a new samba share will be created for "syncthing".
-
-If you use the command line "adduser" tool on the Seagate Central as
-follows then a user will be created but no samba share will be put in 
-place.
-
-    adduser -h /Data/syncthing -s /bin/false syncthing
-
-Alternately edit the "syncthing-init.sh" script to specify a different
-existing userID to run the service.
-
 **Security Note** Be aware that the "synthing.sh" script will activate
-the syncthing GUI on port 8384 of the Segate Central Ethernet by default.
-Many people consider it best practise to disable the syncthing GUI
+the Syncthing GUI on port 8384 of the Seagate Central Ethernet by default.
+Many people consider it best practise to disable the Syncthing GUI
 after is has been configured. You may need to modify the "syncthing.sh"
 startup script accordingly.
 
-## Transfer syncthing to the Seagate Central
-Copy "syncthing" and "syncthing-init.sh" to the Seagate Central.
+## Transfer Syncthing software to the Seagate Central
+Copy the "syncthing" binary and the "syncthing-init.sh" startup script
+to the Seagate Central.
 
-## Install syncthing on the Seagate Central
+## Install Syncthing on the Seagate Central
 Log into the Seagate Central via ssh and issue the su command to become
 the root user.
 
@@ -103,43 +114,38 @@ Configure the script to be invoked at system startup.
 
     update-rc.d syncthing-init.sh defaults 72
 
-## Start syncthing and configure a GUI password
+## Start Syncthing and configure a GUI password
 Start syncthing by rebooting the Seagate Central or manually by issuing
 the following command.
 
 /etc/init.d/syncthing-init.sh start
 
-Once syncthing has started for the first time, log in to the configuration 
-gui webpage by browsing to port 8384 of your NAS IP address. For example
+Once Syncthing has started for the first time, log in to the configuration 
+GUI webpage by browsing to port 8384 of your NAS IP address. For example
 
     http://192.0.2.99:8384
 
 When you initially log in to the GUI you will be confronted with a warning
-message asking you to configure a password for the GUI straight away. 
+message asking you to configure a password for the GUI straight away. It
+is highly recommended that this advice be followed and a password 
+configured for Syncthing at this point.
 
-See synthing documentation for further instructions on setting up
-syncthing.
+See Synthing documentation for further instructions on setting up
+Syncthing.
 
 https://docs.syncthing.net/
 
 ## Troubleshooting
 ### Logs
-The syncthing logs are located at /var/log/syncthing
+The Syncthing logs are located at /var/log/syncthing
 
+### CPU consumption
 I would suggest that since the Seagate Central is not a particularly powerful
-platform that you only give syncthing "light" duties. It may be that during
-and initial sync or while a large data transer is taking place the system may
-be temporarily be a little overwhelmed.
+platform that you only give Syncthing "light" duties. It may be that during
+an initial sync or while a large data transfer is taking place the system may
+temporarily be a little overwhelmed.
 
-Additionally I would not suggest enabling full encryption functionality
+Additionally, I would not suggest enabling full encryption functionality
 for folders with a large volume of data as this may further strain the limited
 CPU resources of the unit.
 
-### Configuration
-The vast majority of Syncthing configuration is done via the web interface
-gui running on port 8384, however it's possible to tweak other configuration 
-by modifying the configuration xml file located by default at
-
-    /Data/syncthing/.config/syncthing
-
-Refer to Syncthing documentation for more details.
