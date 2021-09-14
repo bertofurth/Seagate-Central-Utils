@@ -5,15 +5,17 @@ session.
 
 https://www.gnu.org/software/screen/screen
 
-GNU screen is useful when connecting to a "headless" server like the
-Seagate Central because it means that only one ssh session 
+GNU screen is useful when connecting to a "headless" server like
+the Seagate Central because it means that only one ssh session 
 needs to be established to the server, but within that one 
 session, multiple sessions running different terminal processes
-can be managed.
+can be managed. For example, you can quickly switch between "screens",
+or display multiple "screens" at once all within the one primary
+ssh session.
 
 Another feature of GNU screen is that the primary ssh session can
 be disconnected but the terminal sessions within screen will keep
-running. This means that processes invoked in the shell can continue
+running. This means that processes invoked in a "screen" can continue
 to run even when the client ssh session is disconnected. Later on
 the connection to the existing screen session can be resumed.
 
@@ -99,7 +101,13 @@ the session name
 or
 
     screen -x my-session
-     
-I would suggest trying to find a good instructional video describing
-how to use GNU screen as reading about it does not do it justice.
+
+You can even establish another ssh session from another client
+and have that other client connect to the **same** screen session. 
+That is, you can have multiple clients watching what's going on
+in a particular terminal session at the same time.
+
+I would suggest trying to find a good instructional **video**
+describing how to use GNU screen as reading about it does not do
+it justice.
 
