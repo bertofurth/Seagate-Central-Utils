@@ -8,7 +8,7 @@ for the Seagate Central NAS.
 
 ### Command line tools
 * procps - Fully functional standard versions of top, ps, kill, etc
-* less - Used to view text files, "less is more".
+* less - Full version of tool used to view text files, "less is more".
 
 ### TODO
 * TODO : screen, Joplin server?
