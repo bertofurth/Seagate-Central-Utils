@@ -13,11 +13,12 @@ can be managed. For example, you can quickly switch between "screens",
 or display multiple "screens" at once all within the one primary
 ssh session.
 
-Another feature of GNU screen is that the primary ssh session can
-be disconnected but the terminal sessions within screen will keep
-running. This means that processes invoked in a "screen" can continue
-to run even when the client ssh session is disconnected. Later on
-the connection to the existing screen session can be resumed.
+Another important feature of GNU screen is that the primary ssh
+session can be disconnected but the screen terminal sessions created
+by screen will keep running anyway. This means that processes invoked
+in a "screen" can continue to run even when the client ssh session is
+disconnected. Later on the connection to the existing screen session
+can be resumed.
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
@@ -110,4 +111,9 @@ in a particular terminal session at the same time.
 I would suggest trying to find a good instructional **video**
 describing how to use GNU screen as reading about it does not do
 it justice.
+
+See the "sample-dot-screenrc" and "sample-dot-bashrc" files in
+this project directory for an example of a useful screen
+and bash configuration file that can work well with screen
+on the Seagate Central.
 
