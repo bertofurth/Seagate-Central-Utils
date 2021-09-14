@@ -318,4 +318,4 @@ Public folder regardless of whether it's appropriate to share
 to media players on the network.
 
 TODO : Modify the Seagate Central Web Management interface to refer
-to miniDLNA and not Twonky
+to miniDLNA and not Twonky.
