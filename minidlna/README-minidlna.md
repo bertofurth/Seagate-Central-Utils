@@ -1,4 +1,3 @@
-### BERTO stop doesn't work
 # README-minidlna.md
 miniDLNA (AKA ReadyMedia) is a lightweight DLNA media server
 that is compatible with a wide range of media players including 
@@ -275,10 +274,10 @@ containing a large media library of approximately 100,000 Photos,
 miniDLNA used much less CPU resources than Twonky and up to 5
 times less memory during normal operation. 
 
-Every time the system boots Twonky seems to spend about 15 minutes
-performing some kind of index check that consumes the most of the
-system's CPU resources however miniDLNA starts without any significant
-CPU utilization.
+Of particular note, every time the Seagate Central boots the Twonky
+service seems to spend about 15 minutes performing some kind of
+index check that consumes the most of the system's CPU resources
+however miniDLNA starts without any significant CPU utilization.
 
 As per the Troubleshooting section, miniDLNA does take a long time
 to perform the initial indexing of media content but this only occurs
