@@ -111,6 +111,12 @@ the "minidlna" user a system administrator.
 
 Finally click on the "Save" button.
 
+Bear in mind that any content folders you specify in the 
+"/etc/minidlna.conf" configuration file with the "media_dir" option
+need to be readable by the "minidlna" user. By default, folders under 
+"/Data/Public" and "/Data/minidlna" are in this category but folders
+under other user's "/Data" directories are not.
+
 #### Startup script - /etc/init.d/minidlna-init.sh
 In order for miniDLNA to run at system startup, an init script starting 
 the server is required. We have included a custom startup script in this
