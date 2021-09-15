@@ -4,13 +4,14 @@ for the Seagate Central NAS.
 
 ### Servers
 * minidlna - Efficient media server replacement for the inbuilt Twonky DLNA 
-* syncthing - Multi platform file synchronisation tool 
+* syncthing - Multi platform file synchronisation tool (go)
 
 ### Command line tools
 * procps - Fully functional standard versions of top, ps, kill, etc
 * coreutils - GNU coreutils basic unix commands.
 * less - Full version of tool used to view text files, "less is more".
 * screen - GNU screen is a terminal multplexer. 
+* diskus - Tool to quickly gauge disk usage (rust)
 
 ### TODO
 * TODO : Joplin server, Motion
