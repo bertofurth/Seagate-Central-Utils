@@ -223,7 +223,7 @@ catalogued and what clients are connected.
 The page also indicates if the process of building the media database
 is active by displaying a message reading "Media scan in progress".
 
-### High CPU during initial indexing
+### Initial indexing time and high CPU
 The very first time miniDLNA is started it performs an initial indexing
 of the media library. This once off process can take a very long time and
 generate a high CPU. Once the media database is built the server
@@ -285,9 +285,11 @@ service seems to spend about 15 minutes performing some kind of
 index check that consumes the most of the system's CPU resources
 however miniDLNA starts without any significant CPU utilization.
 
-As per the Troubleshooting section, miniDLNA does take a long time
-to perform the initial indexing of media content but this only occurs
-once when the service is first activated and not on each system reboot.
+As per the Troubleshooting section, miniDLNA takes a long time to
+perform the initial indexing of a large media library however, this
+only occurs once when the service is first activated and not on each
+system reboot. In the tested example with over 100,000 different 
+media files it took well over 12 hours to generate the initial index.
 
 The disk space used by the miniDLNA database was less than half that
 of the Twonky database covering the same media content.
