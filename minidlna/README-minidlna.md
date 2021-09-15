@@ -74,7 +74,10 @@ be scanned for content are located.
 Content directories can optionally be prefixed with any combination of
 "A" "P" and "V" followed by a comma (,) to indicate that the folder 
 should be indexed only for Audio, Pictures and/or Video content. No
-prefix means all media content will be indexed. For example
+prefix means all media content will be indexed. For example the 
+following configuration will scan the Public "Music" folder for audio,
+the "Photos" folder for Pictures and Video, and the "Videos" folder
+for all types of media content.
 
     media_dir=A,/Data/Public/Music
     media_dir=PV,/Data/Public/Photos
@@ -113,9 +116,7 @@ Finally click on the "Save" button.
 
 Bear in mind that any content folders you specify in the 
 "/etc/minidlna.conf" configuration file with the "media_dir" option
-need to be readable by the "minidlna" user. By default, folders under 
-"/Data/Public" and "/Data/minidlna" are in this category but folders
-under other user's "/Data" directories are not.
+need to be readable by the "minidlna" user. 
 
 #### Startup script - /etc/init.d/minidlna-init.sh
 In order for miniDLNA to run at system startup, an init script starting 
@@ -223,7 +224,7 @@ catalogued and what clients are connected.
 The page also indicates if the process of building the media database
 is active by displaying a message reading "Media scan in progress".
 
-### High CPU during initial indexing
+### Initial indexing time and high CPU
 The very first time miniDLNA is started it performs an initial indexing
 of the media library. This once off process can take a very long time and
 generate a high CPU. Once the media database is built the server
@@ -285,9 +286,11 @@ service seems to spend about 15 minutes performing some kind of
 index check that consumes the most of the system's CPU resources
 however miniDLNA starts without any significant CPU utilization.
 
-As per the Troubleshooting section, miniDLNA does take a long time
-to perform the initial indexing of media content but this only occurs
-once when the service is first activated and not on each system reboot.
+As per the Troubleshooting section, miniDLNA takes a long time to
+perform the initial indexing of a large media library however, this
+only occurs once when the service is first activated and not on each
+system reboot. In the tested example with over 100,000 different 
+media files it took well over 12 hours to generate the initial index.
 
 The disk space used by the miniDLNA database was less than half that
 of the Twonky database covering the same media content.

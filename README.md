@@ -307,6 +307,12 @@ be deleted to save a small amount of disk space.
     rm -rf cross/usr/local/share/man
     rm -rf cross/usr/local/share/info
     
+#### Optional - Remove multi-language files
+If you are happy to keep all command outputs in English, then you can 
+delete the files provide support for other languages.
+
+    rm -rf cross/usr/local/share/locale
+
 #### Optional - Remove header files
 Header files, which are only used when compiling software, can be removed
 to save a small amount of disk space.
