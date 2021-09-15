@@ -51,7 +51,7 @@ own username and NAS IP address.
 After executing the scp command you'll be prompted for the password
 for that username on the Seagate Central.
 
-### "less" tips
+### "less" basic usage
 View a text file using less by running the less command as per the 
 following example.
 
@@ -61,7 +61,8 @@ You can also "pipe" the output of another command to less.
 
      dmesg | less
      
-Here are my personal favorite key commands in less. 
+Here are my personal favorite key commands that can be used while
+viewing data in less. 
 
 #### Quit
 * q - quit
@@ -87,7 +88,7 @@ Here are my personal favorite key commands in less.
     
 #### Display
 * -N - show line numbers
-* = or ctrl-G - show current file name
+* = or ctrl-G - show current file name and position in file
 
 #### Marking
 * mx - Replace "x" with any letter. Mark a position in the file
