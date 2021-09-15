@@ -8,6 +8,7 @@ for the Seagate Central NAS.
 
 ### Command line tools
 * procps - Fully functional standard versions of top, ps, kill, etc
+* coreutils - GNU coreutils basic unix commands.
 * less - Full version of tool used to view text files, "less is more".
 * screen - GNU screen is a terminal multplexer. 
 
