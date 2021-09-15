@@ -74,7 +74,10 @@ be scanned for content are located.
 Content directories can optionally be prefixed with any combination of
 "A" "P" and "V" followed by a comma (,) to indicate that the folder 
 should be indexed only for Audio, Pictures and/or Video content. No
-prefix means all media content will be indexed. For example
+prefix means all media content will be indexed. For example the 
+following configuration will scan the Public "Music" folder for audio,
+the "Photos" folder for Pictures and Video, and the "Videos" folder
+for all types of media content.
 
     media_dir=A,/Data/Public/Music
     media_dir=PV,/Data/Public/Photos
@@ -113,9 +116,7 @@ Finally click on the "Save" button.
 
 Bear in mind that any content folders you specify in the 
 "/etc/minidlna.conf" configuration file with the "media_dir" option
-need to be readable by the "minidlna" user. By default, folders under 
-"/Data/Public" and "/Data/minidlna" are in this category but folders
-under other user's "/Data" directories are not.
+need to be readable by the "minidlna" user. 
 
 #### Startup script - /etc/init.d/minidlna-init.sh
 In order for miniDLNA to run at system startup, an init script starting 
