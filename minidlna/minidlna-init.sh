@@ -30,13 +30,13 @@ ARGS="-u $USER -P $PIDFILE"
 start_daemon() {
         touch $LOG
         chown $USER $LOG
-    	echo "Starting $LONGDESC: $DESC"
+    	echo "Starting $LONGDESC: $NAME"
       	start-stop-daemon --start --pidfile $PIDFILE --verbose --exec $DAEMON -- $NEW_ARGS	
     	echo "done"
 }
 
 stop_daemon(){
-	echo "Stopping $LONGDESC: $DESC"
+	echo "Stopping $LONGDESC: $NAME"
    	if [ -e $PIDFILE ]; then
       		start-stop-daemon --stop --verbose --pidfile $PIDFILE
         	rm $PIDFILE
