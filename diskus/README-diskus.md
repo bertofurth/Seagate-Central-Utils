@@ -1,22 +1,71 @@
-# README-coreutils.md
-coreutils is a set of utilities providing some of the basic
-core commands of a modern GNU base unix system. 
+# README-diskus.md
+diskus is a tool written in Rust that calculates disk usage
+faster than the standard "du" tool.
 
-https://www.gnu.org/software/coreutils/![image](https://user-images.githubusercontent.com/53927348/133438365-71bf5616-1bf5-4462-a3dd-dd1bafd2a9b2.png)
+https://github.com/sharkdp/diskus/
 
-Most basic unix commands are already implemented on the Seagate
-Central however many are provided by the "busybox" tool which
-has a focus on saving disk space as opposed to providing full 
-functionality. Other coreutils are simply not included on
-the Seagate Central.
+The "du" tool is the most popular way to tally disk usage on the
+command line however it can take a long time for the tool to
+traverse a complicated file system with thousands of files and
+directories. 
 
-The build and installation instructions below are designed to be
-read in conjunction with the main set of instructions in the
-**README.md** file located in the base directory of the
-Seagate-Central-Utils project. 
+By making use of multiple threads, the "diskus" tool speeds up
+the process. My own tests on the Seagate Central indicate that
+"diskus" is almost twice as fast as "du".
 
-Refer to **README.md** for the overall guidelines and refer to the
-instructions below for "coreutils" specific notes and procedures.
+The main reason the cross compilation of this particular tool is
+documented is because it a "Rust" based utility. Hopefully the
+cross compilation procedure in this project will apply equally
+well to other Rust based software.
+
+Since this project uses Rust, the build instructions in the main
+**README.md** file are not really relevant. It is only strictly 
+necessary to refer to the instructions below for the Rust specific
+cross compilation for this project.
+
+This cross compilation procedure is based on the information at
+
+https://github.com/japaric/rust-cross
+
+## Prerequisites
+### Required software on build host
+#### gcc cross compiler
+Even though we are building Rust based software it is still
+necessary to have a gcc based cross compilation toolsuite for Seagate 
+Central available because the Rust compiler makes use of the gcc
+linker program.
+
+There is a guide to generate a gcc cross compilation toolchain suitable
+for the Seagate Central at the following link.
+
+https://github.com/bertofurth/Seagate-Central-Toolchain
+
+#### Rust compiler
+There are a number of ways to install a Rust compiler however these
+instructions are based on the "Rust Up" tool.
+
+https://rust-lang.github.io/rustup/index.html
+
+Install "Rust up" as a normal user by downloading and invoking the
+installation process as follows
+
+    curl https://sh.rustup.rs -sSf | sh
+
+Restart your shell session to apply the changes to the PATH that the
+above command has automatically made for you.
+
+Install the appropriate cross compilation "crate" for the arm 32 based 
+Seagate Central.
+
+    rustup target add arm-unknown-linux-gnueabi
+
+#### Other prerequisites
+Refer to the following sections in the main **README.md** file for
+other prerequisites.
+* su/root access on the Seagate Central.
+* Know how to copy files between your host and the Seagate Central
+* Do not perform these procedures as the root user on the build machine
+* Optional - Add /usr/local/... to Seagate Central PATH
 
 ## Build Procedure
 ### Source code download and extraction
@@ -25,60 +74,104 @@ Unless otherwise noted these are the latest stable releases at the
 time of writing. Hopefully later versions, or at least those with
 the same major version numbers, will still work with this guide.
 
-* gmp-6.2.1 - http://mirrors.kernel.org/gnu/gmp/gmp-6.2.1.tar.xz
-* acl-2.3.1 - http://download.savannah.gnu.org/releases/acl/acl-2.3.1.tar.xz
-* coreutils-8.32 - http://mirrors.kernel.org/gnu/coreutils/coreutils-8.32.tar.xz
+* diskus-0.6.0 - https://github.com/sharkdp/diskus/archive/refs/tags/v0.6.0.tar.gz
 
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
-them. This can be done automatically for the versions listed above
-by running the **download-coreutils-src.sh** script.
+them using the "tar -xf" command.
 
-### Seagate Central libraries and headers
-We need to copy over some specific library files and headers from the
-Seagate Central to the build host so that they can be used during the
-build process.
+### Build the Rust based software
+Before building the Rust based software, you will need to make a note of
+the full path location of the "arm-XXX-linux-gnueabi-gcc" cross compiling
+tool that is a part of the Seagate Central cross compilation toolset.
+In the examples given below this tool is located at
 
-Create the appropriate sub directories under the base working 
-directory to store the libraries and headers in. By default we use the
-"sc-libs" subdirectory to store Seagate Central libraries and headers.
+    $HOME/Seagate-Central-Toolchain/cross/tools/bin/arm-sc-linux-gnueabi-gcc
 
-    mkdir -p sc-libs/usr/lib
-    mkdir -p sc-libs/usr/include
-    
-The following commands show the required libraries and headers required
-being copied by using the scp command. You will need to substitute your own 
-username and NAS IP address.  
+Set an environment variable telling the Rust cross compiler the location 
+of this version of gcc
 
-    scp admin@192.0.2.99:/usr/lib/libcap.so.2 sc-libs/usr/lib/libcap.so
-    scp admin@192.0.2.99:/usr/lib/libattr.so.1 sc-libs/usr/lib/libattr.so.1
-    ln -s libattr.so.1 sc-libs/usr/lib/libattr.so
-    scp -r admin@192.0.2.99:/usr/include/attr sc-libs/usr/include/
-    scp -r admin@192.0.2.99:/usr/include/sys sc-libs/usr/include/
-       
-After executing the scp command you'll be prompted for the password
-for that username on the Seagate Central.
+    export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_LINKER=$HOME/Seagate-Central-Toolchain/cross/tools/bin/arm-sc-linux-gnueabi-gcc
+
+Finally, change to the source directory associated with the tool being built
+and issue the following "cargo build" command in the source code directory to
+cross compile the software.
+
+    cd src/diskus-0.6.0/
+    cargo build --target arm-unknown-linux-gnueabi
+
+The generated binary executable will be located in the 
+"target/arm-unknown-linux-gnueabi/debug" subdirectory.
+
+You can optionally also specify the "--target-dir directory-name" parameter
+to "cargo build" to specify a different base directory for the generated
+build products.
 
 ## Installation
-The entire suite of coreutils commands are built by the build scripts
-in this project directory, however it may not be necessary to install
-all of them on the Seagate Central.
+Change to the directory containing the generated "diskus" cross compiled 
+binary
 
-We would suggest only installing the specific utilities where you are
-genuinely not happy with the version provided on the Seagate Central.
+     cd src/diskus-0.6.0/target/arm-unknown-linux-gnueabi/debug
 
-For your reference here is a full list of the coreutils commands built 
-by these instructions.
+### Optional - Strip the binary (Recommended)
+The generated binary is quite large because it contains a large amount of
+debugging data. "stripping" the binary will reduce its size by up to 90%
+so it is highly recommended.
 
-b2sum, base32, base64, basename, basenc, cat, chacl, chcon, chgrp, 
-chmod, chown, chroot, cksum, comm, cp, csplit, cut, date, dd, df, dir, 
-dircolors, dirname, du, echo, env, expand, expr, factor ,false, fmt, 
-fold, getfacl, groups, head, hostid, id, install, join, kill, link,
-ln, logname, ls, md5sum, mkdir, mkfifo, mknod, mktemp, mv, nice, nl, 
-nohup, nproc, numfmt, od, paste, pathchk, pinky, pr, printenv, printf,
-ptx, pwd, readlink, realpath, rm, rmdir, runcon, seq, setfacl, 
-sha1sum, sha224sum, sha256sum ,sha384sum, sha512sum, shred, shuf, 
-sleep, sort, split, stat, stdbuf, stty, sum, sync, tac, tail, tee, 
-test, timeout, touch, tr, true, truncate, tsort, tty, uname, unexpand,
-uniq, unlink, uptime, users, vdir, wc, who, whoami, yes
+     strip diskus
+     
+### Transfer cross compiled binary to the Seagate Central
+Since there's only one binary executable file being transferred to the
+Seagate Central there's no need to create a tar archive as per the other
+installation procedures.
+
+This single binary executable file can be copied to the Seagate Central
+in the same way that other files are normally copied to the NAS. 
+
+In the following example we use the scp command to transfer the file.
+You will need to substitute your own username and NAS IP address. After
+executing the scp command you'll be prompted for the user's password.
+
+    scp diskus admin@192.0.2.99:
+    
+### Login to the Seagate Central
+Establish an ssh session to the Seagate Central.
+
+The commands after this point in the procedure must be executed with
+root privileges on the Seagate Central. This can be done by either
+prepending **sudo** to each command or by issuing the **su** command
+and becoming the root user.
+
+### Install the new software
+Install the new binary to the /usr/local/bin directory as follows.
+
+    install -D -o root -m 755 diskus /usr/local/bin/diskus
+     
+Perform a sanity check to make sure the new tool is executable
+by running the following command to check the version of the utility
+that has been installed.
+
+     diskus -V
+     
+Note that if the system PATH has not been modified accordingly then
+you may need to specify the full path name when running a newly
+installed executable.
+
+## Basic "diskus" usage
+Show total disk usage of the current directory and subdirectories
+
+    diskus
+     
+Show total disk usage of multiple directories (e.g. /Data/admin and
+/Data/Public)
+
+    diskus /Data/admin /Data/Public
+
+Only use 1 cpu thread (slower but less CPU resources)
+
+    diskus -j1
+    
+Show "help" 
+
+    diskus --help
 
