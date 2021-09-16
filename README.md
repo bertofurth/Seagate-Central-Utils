@@ -3,8 +3,8 @@ Instructions for compiling and installing new and updated utilities
 for the Seagate Central NAS.
 
 ### Servers
-* minidlna - Efficient media server replacement for the inbuilt Twonky DLNA 
-* syncthing - Multi platform file synchronisation tool (go)
+* minidlna - Efficient media server replacement for the inbuilt Twonky DLNA. 
+* syncthing - Multi platform file synchronisation tool. (go)
 
 ### Command line tools
 * procps - Fully functional standard versions of top, ps, kill, etc
