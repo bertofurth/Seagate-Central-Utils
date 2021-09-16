@@ -11,7 +11,7 @@ for the Seagate Central NAS.
 * coreutils - GNU coreutils basic unix commands.
 * less - Full version of tool used to view text files, "less is more".
 * screen - GNU screen is a terminal multplexer. 
-* diskus - Tool to quickly gauge disk usage (rust)
+* diskus - Check disk usage. Faster than "du". (rust)
 
 ### TODO
 * TODO : Joplin server, Motion
