@@ -22,7 +22,7 @@
 
 DESC="Syncthing"
 NAME=syncthing
-DAEMON=/usr/local/bin/$NAME
+DAEMON=/usr/local/sbin/$NAME
 LOG=/var/log/$NAME
 USER=syncthing
 
