@@ -41,7 +41,7 @@ the same major version numbers, will still work with this guide.
 * flac-1.3.3 - https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.3.tar.xz
 * libvorbis-1.3.7 - https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.tar.xz
 * sqlite-3.36.0 - https://www.sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
-* ffmpeg-4.4 - http://ffmpeg.org/releases/ffmpeg-4.4.tar.xz
+* ffmpeg-4.4 (libav*) - http://ffmpeg.org/releases/ffmpeg-4.4.tar.xz
 * minidlna-1.3.0 - https://downloads.sourceforge.net/project/minidlna/minidlna/1.3.0/minidlna-1.3.0.tar.gz
 
 Download the required source code archives for each component to 
