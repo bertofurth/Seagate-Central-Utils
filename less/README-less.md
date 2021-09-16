@@ -64,9 +64,10 @@ You can also "pipe" the output of another command to less.
 Here are my personal favorite key commands that can be used while
 viewing data in less. 
 
-#### Quit
+#### Quit and Help
 * q - quit
-
+* h - help
+* 
 #### Movement
 * Up arrow or k - Up
 * Down arrow or j - Down
@@ -75,6 +76,7 @@ viewing data in less.
 * g or < - start of file
 * G or > - end of file
 * <num>g or <num>G - Goto line number <num>
+* F - Keep displaying more text (like tail -f)
 
 #### Search
 * /pattern  - Search for "pattern" forwards (regexp)
