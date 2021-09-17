@@ -281,12 +281,10 @@ You can reduce the size of the software that will be installed
 on the Seagate Central by deleting or "stripping" components that
 aren't normally useful to store on the Seagate Central itself.
 
-#### Optional - Remove or strip static libraries (Strongly recommended)
-For completeness sake we have setup the build scripts to build both
-shared and static libraries.
-
-The static libraries are generally only useful while compiling a static
-binary on a build host.
+#### Optional - Remove static libraries (Strongly recommended)
+Many of the build scripts in this project to build both shared and
+static libraries. The static libraries are generally only useful while
+compiling a static binary on a build host.
  
 Since you're unlikely to be performing any compilation on the Seagate
 Central itself, we suggest that you remove any static libraries from
@@ -295,11 +293,20 @@ save a significant amount of disk space.
 
     rm cross/usr/local/lib/*.a
 
-An alternative is to keep the static libraries but to "strip" them in
-order to remove debugging information. This can also save a great deal
-of disk space.
+An alternative is to keep the static libraries but to "strip" them as
+per the information below.
 
-    strip cross/usr/local/lib/*.a
+#### Optional - Strip binaries and executables
+Binaries and executables generated in this project have debugging
+information embedded in them by default. A small amount of space 
+(around 20%) can be saved by removing this debugging information 
+using the "strip" command. The following example searches through
+the "cross" subdirectory and "strips" any appropriate files.
+
+     find cross/ -type f -exec strip {} \;
+     
+"strip" command error messages saying "file format not recognized" are 
+safe to ignore.
 
 #### Optional - Remove documentation
 Documentation, which is unlikely to be read on the Seagate Central, can
@@ -330,21 +337,6 @@ source code again and get the headers that way.
 To remove the headers run the following command.
 
     rm -r cross/usr/local/include
-
-#### Optional - Strip binaries and executables
-Executables generated in this project have debugging information embedded
-in them by default. A small amount of space (maybe 10% - 20%) can be saved
-by removing this debugging information using the "strip" command as follows.
-
-     strip cross/usr/local/bin/*
-     strip cross/usr/local/sbin/*
-     strip cross/usr/local/lib/*
-     
-If there are other subdirectories where binaries are stored in the archive
-then these can be stripped as well.
-   
-"strip" command error messages saying "file format not recognized" are safe
-to ignore.
 
 ### Transfer cross compiled binaries to the Seagate Central
 Generate an archive that can be transferred to the Seagate Central by 
