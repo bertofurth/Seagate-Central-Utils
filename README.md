@@ -291,7 +291,10 @@ Central itself, we suggest that you remove any static libraries from
 the software before it is transferred to the Seagate Central. This can
 save a significant amount of disk space.
 
-    rm cross/usr/local/lib/*.a
+The following command finds static libraries in the "cross" 
+subdirectory and deletes them.
+
+    find cross/ -name "*.a" -exec rm {} \;
 
 An alternative is to keep the static libraries but to "strip" them as
 per the information below.
@@ -300,8 +303,10 @@ per the information below.
 Binaries and executables generated in this project have debugging
 information embedded in them by default. A small amount of space 
 (around 20%) can be saved by removing this debugging information 
-using the "strip" command. The following example searches through
-the "cross" subdirectory and "strips" any appropriate files.
+using the "strip" command. 
+
+The following example searches through the "cross" subdirectory 
+and "strips" any appropriate files.
 
      find cross/ -type f -exec strip {} \;
      
