@@ -311,7 +311,7 @@ be deleted to save a small amount of disk space.
     
 #### Optional - Remove multi-language files
 If you are happy to keep all command outputs in English, then you can 
-delete the files provide support for other languages.
+delete the files that provide support for other languages.
 
     rm -rf cross/usr/local/share/locale
 
