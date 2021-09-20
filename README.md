@@ -13,7 +13,10 @@ for the Seagate Central NAS.
 * screen - Terminal multplexer useful for "headless" servers.
 * diskus - Check disk usage. Faster than "du". (rust)
 
-* TODO : Joplin server, Motion, wget / curl
+### TODO 
+* Joplin server
+* Motion - Video camera monitoring software
+* wget / curl
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
