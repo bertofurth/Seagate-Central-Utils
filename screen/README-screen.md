@@ -28,6 +28,12 @@ Seagate-Central-Utils project.
 Refer to **README.md** for the overall guidelines and refer to the
 instructions below for GNU screen specific notes and procedures.
 
+## TLDNR
+The quick "TLDNR" instructions for building screen are the same as the
+"TLDNR" instructions in the main README.md file however you must first 
+download the ncurses libraries from the Seagate Central as per the
+**Seagate Central libraries and headers** section below. 
+
 ## Build Procedure
 ### Source code download and extraction
 This procedure was tested using the following versions of software.
@@ -76,7 +82,7 @@ for the screen session as follows
 
     screen -S my-session
 
-Once screen is running new screens can be created by pressing
+Once screen is running, new screens can be created by pressing
 "Control-a" followed by "c".
 
 Most screen commands are "Ctrl-a" followed by a key. Some other
