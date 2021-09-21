@@ -32,6 +32,6 @@ fi
 cd ..
 
 # Copy the generated binary into the expected place
-mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX
-cp target/arm-unknown-linux-gnueabi/debug/diskus $BUILDHOST_DEST/$EXEC_PREFIX/
+mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX/bin
+cp target/arm-unknown-linux-gnueabi/debug/diskus $BUILDHOST_DEST/$EXEC_PREFIX/bin/
 finish_it
