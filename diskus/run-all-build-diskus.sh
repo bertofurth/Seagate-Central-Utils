@@ -1,33 +1,39 @@
-!#/bin/bash
-SECONDS=0
-if ! type cargo > /dev/null ; then
-    echo "Unable to find cargo. Has rust been installed?"
-    echo "Exiting"
-    exit -1
-fi
-cd src
-LIB_NAME=$(ls -1drv diskus*/ | cut -f1 -d'/' | head -1)
-if [ -z $LIB_NAME ]; then
-    echo
-    echo Unable to find source directory for diskus
-    echo Has the source code been extracted\? \(tar -xf\)
-    exit -1
-fi
-cd src/$LIB_NAME
-cargo build --target arm-unknown-linux-gnueabi 
-if [ $? -ne 0 ]; then
-    echo
-    echo cargo build for $LIB_NAME failed.
-    echo Exiting \($SECONDS seconds\)
-    exit -1
-fi
-mkdir -p cross/usr/local
-cp src/$LIB_NAME/target/arm-unknown-linux-gnueabi/debug/discus cross/usr/local
+#!/bin/bash
+#
+# run_all_builds.sh [start-stage-num]
+# 
+# Run all the cross compiling scripts in order.
+#
+# Optionally specify a starting stage number.
+#
+# Only run this if you're confident that the
+# scripts will work. Run them individually in
+# the correc order on the first attempt.
+#
 
-echo
-echo "****************************************"
-echo
-echo Success! Finished installing discus to cross/usr/local/ \($SECONDS seconds\)
-echo
-echo "****************************************"
-echo
+start_stage=$1
+SECONDS=0
+current_stage=0
+
+checkerr()
+{
+    if [ $? -ne 0 ]; then
+	echo " Failure at stage $current_stage : $script_name  "
+	echo " Fix problems and re-commence stage with "
+	echo " $0 $current_stage "
+	exit 1
+    fi
+}
+
+for script_name in build-*.sh
+do
+    let current_stage++
+    if [[ $current_stage -ge $start_stage ]]; then	   
+	echo Running stage $current_stage : $script_name
+	./$script_name
+	checkerr
+    fi
+done
+echo Finished. Total build took $SECONDS seconds
+
+
