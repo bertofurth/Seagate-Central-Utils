@@ -4,8 +4,8 @@
 # Make sure you have "tclsh" installed
 #
 
-source build-common
-source build-functions
+source ../build-common
+source ../build-functions
 check_source_dir "sqlite"
 change_into_obj_directory
 configure_it --prefix=$PREFIX \

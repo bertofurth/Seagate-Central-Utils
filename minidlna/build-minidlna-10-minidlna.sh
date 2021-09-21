@@ -1,6 +1,6 @@
 #!/bin/bash
-source build-common
-source build-functions
+source ../build-common
+source ../build-functions
 check_source_dir "minidlna"
 
 # MiniDLNA 1.3.0 doesn't seem to build well "out
@@ -20,14 +20,14 @@ check_source_dir "minidlna"
 # symbols needed by the other libraries. See
 # https://stackoverflow.com/questions/45135/why-does-the-order-in-which-libraries-are-linked-sometimes-cause-errors-in-gcc
 #
-# export LIBS="-lswresample -ldl -lm"
+#export LIBS="-lswresample -ldl -lm"
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
 	     --sbindir=$EXEC_PREFIX/sbin \
 	     --host=$ARCH 
 #	     --enable-static
-make_it -j1 V=1
+make_it
 install_it
 finish_it
 
