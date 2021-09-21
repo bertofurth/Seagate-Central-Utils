@@ -29,7 +29,7 @@ the same major version numbers, will still work with this guide.
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
-by running the **download-procps-src.sh** script.
+by running the **download-src-less.sh** script.
 
 ### Seagate Central libraries and headers
 We need to copy over one specific library file from the Seagate
