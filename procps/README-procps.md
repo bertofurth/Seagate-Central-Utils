@@ -17,7 +17,7 @@ Refer to **README.md** for the overall guidelines and refer to the
 instructions below for procps specific notes and procedures.
 
 ## TLDNR
-The quick "TLDNR" instructions for building screen are the same as the
+The quick "TLDNR" instructions for building procps are the same as the
 "TLDNR" instructions in the main README.md file however, you must first 
 download the ncurses libraries from the Seagate Central as per the
 **Seagate Central libraries and headers** section below. 
