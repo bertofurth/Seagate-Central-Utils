@@ -41,7 +41,7 @@ the same major version numbers, will still work with this guide.
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
-by running the **download-screen-src.sh** script.
+by running the **download-src-screen.sh** script.
 
 ### Seagate Central libraries and headers
 We need to copy over one specific library file from the Seagate
@@ -63,8 +63,12 @@ own username and NAS IP address.
 After executing the scp command you'll be prompted for the password
 for that username on the Seagate Central.
 
-### Basic GNU screen usage
+Note, if you *really* don't want to link against the ncurses libraries 
+on the Seagate Central then you can build your own version by reading 
+and following the instructions in the 
+"build-screen-01-ncurses-headers.sh" script.
 
+### Basic GNU screen usage
 Invoke screen by simply running the "screen" command.
 
 A more sophisticated way of invoking screen is to specify an identity
@@ -75,27 +79,35 @@ for the screen session as follows
 Once screen is running new screens can be created by pressing
 "Control-a" followed by "c".
 
-Switch between screens with the following key commands
+Most screen commands are "Ctrl-a" followd by a key. Some other
+useful commands to control screen are as follows.
 
 * Move to the "next" screen - Ctrl-a  "space"
 * Move to the "previous" screen - Ctrl-a  "backspace"
 * List available screens - Ctrl-a  "w"
 * Move straight to screen number X - Ctrl-a  "X" (Where X is a digit)
-* Disconnect from screen - Ctrl-a  "D"
+* Disconnect from screen but leave the session running - Ctrl-a  "d"
 * Help - Ctrl-a  "?"
 
-After disconnecting from a screen session, you can list the running
-screen sessions with the "screen -ls" command as per the following 
-example
+Interesting note, if you're used to pressing "Ctrl-a" in a bash
+shell session or in an editor to move to the beginning of a line,
+you'll need to replace that with "Ctrl-a" followed by "a" while
+using screen. It's annoying at first but you'll quickly get used to 
+it!!
+
+After disconnecting from a screen session the session will stil
+be running. This is one of the most useful aspects of screen.
+Tou can list the running screen sessions with the "screen -ls"
+command as per the following example
 
     $ ./screen -ls
     There is a screen on:
             32000.my-session   (Detached)
     1 Socket in /tmp/uscreens/S-admin.
 
-Now you can reconnect to that screen with the "screen -x "
-command by either using the numerical screen number or
-the session name
+You can reconnect to a screen with the "screen -x " command by
+either using the numerical screen number or the session name.
+For example
 
     screen -x 32000
     
@@ -105,8 +117,8 @@ or
 
 You can even establish another ssh session from another client
 and have that other client connect to the **same** screen session. 
-That is, you can have multiple clients watching what's going on
-in a particular terminal session at the same time.
+That is, multiple clients are able to watch and interact with a
+particular terminal session at the same time.
 
 I would suggest trying to find a good instructional **video**
 describing how to use GNU screen as reading about it does not do
