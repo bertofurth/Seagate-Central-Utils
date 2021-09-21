@@ -27,9 +27,9 @@ read in conjunction with the utility specific instructions as seen
 in the **README-myutil.md** file located in utility subdirectory.
 
 ### TLDNR
-On a build server with an appropriate cross compilation suite installed
-run the following commands to download and compile "myutil". (Replace
-"myutil" with the name of the actual utility being built.)
+On a build server with the "arm-sc-linux-gnueabi- cross compilation 
+suite installed, run the following commands to download and compile
+"myutil". (Replace "myutil" with the name of the utility being built.)
 
     # Copy this project to your build server
     git clone https://github.com/bertofurth/Seagate-Central-Utils.git
@@ -228,11 +228,12 @@ required.
        
 ### Customize the build scripts
 You may need to edit the variables at the top of the **build-common**
-file in your project directory to suit your build environment.
+file in the project root directory to suit your build environment.
 
-These parameters are arranged roughly in order of their likelihood
-of needing to be changed. The first two are the most important to get
-right.
+Listed below are the two important parameters to get right. 
+
+There are some other parameters and environment variables that can
+be set and modified. See details in the text of the script itself.
 
 #### CROSS_COMPILE (Important)
 This parameter sets the prefix name of the cross compiling toolkit.
@@ -243,53 +244,18 @@ will have a dash (-) at the end.
 
     CROSS_COMPILE=arm-sc-linux-gnueabi-
     
-#### CROSS and TOOLS (Important)
+#### CROSS, TOOLS and SYSROOT (Important)
 The location of the root of the cross compiling tool suite on the 
-compiling host (CROSS), and the location of the cross compiling 
-binary executables such as arm-XXX-linux-gnueabi-gcc (TOOLS).
+compiling host (CROSS), the location of the cross compiling 
+binary executables such as arm-XXX-linux-gnueabi-gcc (TOOLS), and
+the location of the compiler's platform specific libraries and
+header files (SYSROOT).
 
 Make sure to use an absolute path and not the ~ or . symbols.
 
     CROSS=$HOME/Seagate-Central-Toolchain/cross
     TOOLS=$CROSS/tools/bin
-
-#### J (Number of CPU threads) 
-Set the number of threads to use when compiling. Generally set 
-equal to or less than the number of CPU cores on the building machine. 
-Set to 1 when troubleshooting.
-    
-    J=6
-
-#### BUILDHOST_DEST (Unlikely to need changing)
-The directory on the building host where binaries and other 
-generated files will be temporarily installed before being copied 
-to the Seagate Central.
-
-This is different to PREFIX and EXEC_PREFIX (see below) which is where 
-the generated files will be installed to on the Seagate Central.
-
-     BUILDHOST_DEST=$(pwd)/cross
-
-#### PREFIX, EXEC_PREFIX (Unlikely to need changing)
-The directories where the libraries (PREFIX) and executables
-(EXEC_PREFIX) will be installed on the target device (i.e. on
-the Seagate Central). These should probably be left as "/usr/local".
-
-     PREFIX=/usr/local
-     
-     EXEC_PREFIX=/usr/local
-
-#### SEAGATE_LIBS_BASE (Unlikely to need changing)
-Some projects require libraries to be copied from the Seagate
-Central to the build host to be used during compilation. If this
-is the case then specify a directory containing the root of
-these library files. 
-
-If this directory is changed then make sure the step that 
-downloads libraries from the Seagate Central to the build host
-is modified accordingly.
-
-     SEAGATE_LIBS_BASE=$(pwd)/sc-libs
+    SYSROOT=$CROSS/sysroot
      
 ### Run the build scripts in order
 The build scripts are named in the numerical order that they need 
@@ -466,7 +432,7 @@ subdirectory of the base working directory.
 ### Configure logs
 If the configure stage of a build is failing, then verbose configure
 logs are generally stored in a file called "config.log" underneath
-the "obj/myutil" sub directory.
+the "obj/component-name" sub directory.
 
 Search for configure logs by running the following command from the
 base working directory.
@@ -479,14 +445,14 @@ verbose and detailed by adding some options to the build commands.
 For example, to restrict a build to one thread and to produce more
 verbose output, specify the "-j1 V=1" parameters as follows.
 
-     ./build-myutil-01-library1.sh -j1 V=1 |& tee myutil-build-log.txt
+     ./build-myutil-01-library1.sh -j1 V=1 
      
 "-d" may be added in order to troubleshoot issues with "make" itself 
 as opposed to the compilation part of the process. Note that "-d" 
 generates a very large amount of logs.
 
 ### Make sure required build tools are installed
-If the compilation process complains about a too not being installed
+If the compilation process complains about a tool not being installed
 or a command not being found then it may be necessary to install that
 utility on your build host.
 
