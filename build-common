@@ -181,7 +181,10 @@ export NOSTDINC_FLAGS="--sysroot=$SYSROOT -I$SYSROOT/usr/include \
 
 #
 # For some configure scripts it's important to have access
-# to the pkg-config information for libraries
+# to the pkg-config information for libraries. Note that
+# some packages also require a configure flag like
+# "--pkg-config=pkg-config" to point to a working version of 
+# pkg-config.
 #
 export PKG_CONFIG_PATH="$BUILDHOST_DEST/$PREFIX/lib/pkgconfig"
 
