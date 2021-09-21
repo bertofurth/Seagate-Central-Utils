@@ -28,6 +28,12 @@ Seagate-Central-Utils project.
 Refer to **README.md** for the overall guidelines and refer to the
 instructions below for GNU screen specific notes and procedures.
 
+## TLDNR
+The quick "TLDNR" instructions for building screen are the same as the
+"TLDNR" instructions in the main README.md file however, you must first 
+download the ncurses libraries from the Seagate Central as per the
+**Seagate Central libraries and headers** section below. 
+
 ## Build Procedure
 ### Source code download and extraction
 This procedure was tested using the following versions of software.
@@ -76,10 +82,10 @@ for the screen session as follows
 
     screen -S my-session
 
-Once screen is running new screens can be created by pressing
+Once screen is running, new screens can be created by pressing
 "Control-a" followed by "c".
 
-Most screen commands are "Ctrl-a" followd by a key. Some other
+Most screen commands are "Ctrl-a" followed by a key. Some other
 useful commands to control screen are as follows.
 
 * Move to the "next" screen - Ctrl-a  "space"
@@ -95,9 +101,12 @@ you'll need to replace that with "Ctrl-a" followed by "a" while
 using screen. It's annoying at first but you'll quickly get used to 
 it!!
 
-After disconnecting from a screen session the session will stil
-be running. This is one of the most useful aspects of screen.
-Tou can list the running screen sessions with the "screen -ls"
+After disconnecting from a screen session, the session will still
+be running. This is one of the most useful aspects of screen as 
+it means you can leave a process running while not needing to
+maintain an ssh connection to the server.
+
+You can list the running screen sessions with the "screen -ls"
 command as per the following example
 
     $ ./screen -ls
@@ -105,8 +114,8 @@ command as per the following example
             32000.my-session   (Detached)
     1 Socket in /tmp/uscreens/S-admin.
 
-You can reconnect to a screen with the "screen -x " command by
-either using the numerical screen number or the session name.
+You can reconnect to a screen session with the "screen -x " command
+by either using the numerical screen number or the session name.
 For example
 
     screen -x 32000
@@ -118,7 +127,7 @@ or
 You can even establish another ssh session from another client
 and have that other client connect to the **same** screen session. 
 That is, multiple clients are able to watch and interact with a
-particular terminal session at the same time.
+screen terminal session at the same time.
 
 I would suggest trying to find a good instructional **video**
 describing how to use GNU screen as reading about it does not do
