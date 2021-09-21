@@ -18,14 +18,16 @@ check_source_dir "syncthing"
 #
 unset CC
 
+mkdir -p $LOG
 # Perform the build
-go run build.go -goos linux -goarch arm build
+go run build.go -goos linux -goarch arm build |& tee $LOG/"$NAME"_make.log
 if [ $? -ne 0 ]; then
     echo
-    echo go build for $LIB_NAME failed.
+    echo go build for $LIB_NAME failed. See $LOG/"$NAME"_make.log
     echo Exiting \($SECONDS seconds\)
     exit -1
 fi
+echo make for $LIB_NAME complete. See $LOG/"$NAME"_make.log
 
 # Copy the generated binary into the expected place
 mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX/sbin

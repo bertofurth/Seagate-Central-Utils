@@ -15,20 +15,24 @@ cd src
 
 #
 # When building with Rust we need to supply the
-# name and location of the gcc we wish to use
-# as well as the linker flags we need to pass.
+# name and location of the cross compiling gcc
+# and the required linker flags with
+# "-C link-arg=" for each linker flag argument.
 #
 export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_LINKER=$TOOLS/$CC
 export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_RUSTFLAGS="-C link-arg=--sysroot=$SYSROOT"
 
-cargo build --target arm-unknown-linux-gnueabi
+mkdir -p $LOG
 
+cargo build --target arm-unknown-linux-gnueabi |& tee $LOG/"$NAME"_make.log
 if [ $? -ne 0 ]; then
     echo
-    echo cargo build for $LIB_NAME failed.
+    echo cargo build for $LIB_NAME failed. See $LOG/"$NAME"_make.log
     echo Exiting \($SECONDS seconds\)
     exit -1
 fi
+echo cargo build for $LIB_NAME complete. See $LOG/"$NAME"_make.log
+
 cd ..
 
 # Copy the generated binary into the expected place
