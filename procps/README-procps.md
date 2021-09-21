@@ -29,7 +29,7 @@ the same major version numbers, will still work with this guide.
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
-by running the **download-procps-src.sh** script.
+by running the **download-src-procps.sh** script.
 
 ### Seagate Central libraries and headers
 We need to copy over one specific library file from the Seagate
@@ -49,6 +49,11 @@ password for that username on the Seagate Central.
 
     scp admin@192.0.2.99:/usr/lib/libncurses.so.5.0.7 sc-libs/usr/lib/
        
+Note, if you *really* don't want to link against the ncurses libraries 
+on the Seagate Central then you can build your own version by reading 
+and following the instructions in the "build-procps-01-ncurses-headers.sh"
+script.
+
 ### Troubleshooting Installation
 #### UNKNOWN version     
 When checking the version of procps tools using the "--version" command
