@@ -1,6 +1,6 @@
 #!/bin/bash
-source build-common
-source build-functions
+source ../build-common
+source ../build-functions
 export CXXFLAGS=$CXXFLAGS" -std=gnu++11"
 
 # https://stackoverflow.com/questions/37475222/ncurses-6-0-compilation-error-error-expected-before-int
