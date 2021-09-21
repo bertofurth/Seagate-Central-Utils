@@ -51,6 +51,11 @@ own username and NAS IP address.
 After executing the scp command you'll be prompted for the password
 for that username on the Seagate Central.
 
+Note, if you *really* don't want to link against the ncurses libraries 
+on the Seagate Central then you can build your own version by reading 
+and following the instructions in the "build-less-01-ncurses-headers.sh"
+script.
+
 ### "less" basic usage
 View a text file using less by running the less command as per the 
 following example.
