@@ -46,19 +46,28 @@ available as of the time of writing.
 
 Download and extract the latest stable version of Syncthing source
 code. In this example we download the latest version available as of
-time time of writing, v1.18.2
+time time of writing, v1.18.2, however please check for updated 
+releases on the syncthing.net webpage.
 
-    wget https://github.com/syncthing/syncthing/releases/download/v1.18.2/syncthing-source-v1.18.2.tar.gz
+    cd src
+    wget https://github.com/syncthing/syncthing/archive/refs/tags/v1.18.2.tar.gz
     tar -xf syncthing-source-v1.18.2.tar.gz
 
 Change into the extracted source code directory and execute the 
 following command to cross compile Syncthing for the arm 32 
 platform
 
+     cd syncthing-1.18.2
      go run build.go -goos linux -goarch arm build
 
-A new file called "syncthing" will be built. This file needs to
-be transferred to the Seagate Central.
+A new file called "syncthing" will be built. 
+
+The built executable can be stripped to remove debugging information and
+reduce it's size as follows
+
+     strip syncthing
+     
+This file now needs to be transferred to the Seagate Central.
 
 #### Create "syncthing" user
 The Syncthing service will be run by a dedicated user called "syncthing".
