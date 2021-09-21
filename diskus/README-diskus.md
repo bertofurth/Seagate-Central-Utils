@@ -78,8 +78,11 @@ the same major version numbers, will still work with this guide.
 * diskus-0.6.0 - https://github.com/sharkdp/diskus/archive/refs/tags/v0.6.0.tar.gz
 
 Download the required source code archives for each component to 
-the **src** subdirectory of the base working directory and extract
-them using the "tar -xf" command.
+the src subdirectory of the base working directory and extract them.
+This can be done automatically for the versions listed above by running 
+the **download-src-diskus.sh** script as follows
+
+     ./download-src-diskus.sh
 
 ### Build the Rust based software
 Before building the Rust based software, you will need to make a note of
@@ -94,6 +97,12 @@ of this version of gcc
 
     export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_LINKER=$HOME/Seagate-Central-Toolchain/cross/tools/bin/arm-sc-linux-gnueabi-gcc
 
+We also need to supply a linker parameter for Rust to pass to the gcc
+compiler which specifies the location of the "sysroot" of the libraries
+belonging to the cross compilation toolkit.
+
+    export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_RUSTFLAGS="-C link-arg=--sysroot=$HOME/Seagate-Central-Toolchain/cross/sysroot/"
+    
 Finally, change to the source directory associated with the tool being built
 and issue the following "cargo build" command in the source code directory to
 cross compile the software.
