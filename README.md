@@ -25,7 +25,7 @@ utility being built.
 
 The build and installation instructions in this file are designed to be
 read in conjunction with the utility specific instructions as seen
-in the **README-myutil.md** file located in utility subdirectory.
+in the **README-myutil.md** file located in the "myutil" subdirectory.
 
 ### TLDNR
 On a build server with the "arm-sc-linux-gnueabi-" cross compilation 
@@ -58,8 +58,8 @@ Establish an ssh connection to the Seagate Central. Execute the following
 commands after issuing the "su" command or prefix "sudo" to each command
 to run as root.
 
-     tar -xvf myutil.tar.gz
-     cd myutil
+     tar -xvf seagate-central-myutil.tar.gz
+     cd seagate-central-myutil
      cp -r usr/* /usr
 
 See the per utility README-myutil.md file for any utility specific
