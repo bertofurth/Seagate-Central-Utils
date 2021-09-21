@@ -47,6 +47,8 @@ configure_it --prefix=$PREFIX \
 # Generate embedded terminal definitions for
 # the most basic of terminals.
 # I've included the most common types here
+# but you may wish to add others.
+#
 mkdir -p $OBJ/$LIB_NAME/ncurses/
 pushd $SRC/$LIB_NAME/ncurses
 tinfo/MKfallback.sh /usr/share/terminfo \
