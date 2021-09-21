@@ -21,16 +21,7 @@ cd src
 export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_LINKER=$TOOLS/$CC
 export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABI_RUSTFLAGS="-C link-arg=--sysroot=$SYSROOT"
 
-
-#       -C link-arg=-L$SYSROOT/lib \
-#       -C link-arg=-L$SYSROOT/usr/lib \
-#       -C link-arg=-Wl,-rpath-link=$SYSROOT/lib \
-#       -C link-arg=-Wl,-rpath-link=$SYSROOT/usr/lib"
-
 cargo build --target arm-unknown-linux-gnueabi
-
-#      --config link-arg="-Wl,-rpath-link=$SYSROOT/lib" \
-#      --config link-arg="-Wl,-rpath-link=$SYSROOT/usr/lib"
 
 if [ $? -ne 0 ]; then
     echo

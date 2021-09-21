@@ -24,7 +24,7 @@ checkerr()
     fi
 }
 
-BEFORE=$(du -s cross/ | cut -f1)
+BEFORE=$(du -b -s cross/ | cut -f1)
 
 let current_stage++
 echo Running stage $current_stage : Delete static libraries
@@ -53,7 +53,7 @@ echo Running stage $current_stage : Strip binaries
 find cross/ -type f -exec strip {} \;  &> /dev/null
 checkerr
 
-AFTER=$(du -s cross/ | cut -f1)
+AFTER=$(du -b -s cross/ | cut -f1)
 echo Finished. Bytes before - $BEFORE  Bytes after - $AFTER
 
 
