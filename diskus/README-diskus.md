@@ -1,12 +1,12 @@
 # README-diskus.md
-diskus is a tool written in Rust that calculates disk usage
+**diskus** is a tool written in Rust that calculates disk usage
 faster than the standard "du" tool.
 
 https://github.com/sharkdp/diskus/
 
 The "du" tool is the most popular way to tally disk usage on the
 command line however it can take a long time for the tool to
-traverse a complicated file system with thousands of files and
+catalog a complicated file system with thousands of files and
 directories. 
 
 By making use of multiple threads, the "diskus" tool speeds up
@@ -35,8 +35,9 @@ necessary to have a gcc based cross compilation toolsuite for Seagate
 Central available because the Rust compiler makes use of the gcc
 linker program.
 
-There is a guide to generate a gcc cross compilation toolchain suitable
-for the Seagate Central at the following link.
+We recommend using the **Seagate-Central-Toolchain** project at the
+following link to generate a GCC cross compilation toolchain suitable
+for the Seagate Central.
 
 https://github.com/bertofurth/Seagate-Central-Toolchain
 
@@ -61,7 +62,7 @@ Seagate Central.
 
 #### Other prerequisites
 Refer to the following sections in the main **README.md** file for
-other prerequisites.
+details about other prerequisites.
 * su/root access on the Seagate Central.
 * Know how to copy files between your host and the Seagate Central
 * Do not perform these procedures as the root user on the build machine
