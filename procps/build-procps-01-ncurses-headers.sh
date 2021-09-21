@@ -3,6 +3,34 @@ source ../build-common
 source ../build-functions
 export CXXFLAGS=$CXXFLAGS" -std=gnu++11"
 
+# Check to see if libncurses.so has been downloaded
+# from the Seagate Central.
+
+# If you don't want to do this then read the instructions
+# further below in this script for information about
+# building your own version of ncurses.
+
+if [ ! -f $SEAGATE_LIBS_BASE/usr/lib/libncurses.so ]; then
+    echo
+    echo "*************************"
+    echo "*************************"
+    echo "**       WARNING       **"
+    echo "*************************"
+    echo "*************************"
+    echo
+    echo "libncurses.so not found!!"
+    echo
+    echo "Did you download it from the Seagate Central as "
+    echo "per the instructions in the README-procps.md file?? "
+    echo
+    echo "Read this script ($0) for more details."
+    echo
+    echo "Sleeping for 30 seconds before continuing."
+    echo "Press Ctrl-c to interrupt and fix this problem."
+    echo
+    sleep 30
+fi
+
 # https://stackoverflow.com/questions/37475222/ncurses-6-0-compilation-error-error-expected-before-int
 export CPPFLAGS=$CPPFLAGS" -P"
 
