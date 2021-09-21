@@ -1,12 +1,18 @@
-# README-procps.md
-procps is a suite of tools including ps, top and kill that
-view and manipulate system status. The versions natively
-included in the Seagate Central are based on the busybox tool
-and are therefore quite crippled and don't use standard command
-line parameters that would be familiar to experienced unix
-users.
+# README-motion.md
+Motion monitors video signals from a range of network and
+USB based cameras. Motion can be used to monitor activity 
+and view live streams.
 
-https://gitlab.com/procps-ng/procps/-/wikis/home
+https://motion-project.github.io/
+
+In order for Motion to work with a USB camera connected to
+the Seagate Central, the kernel must be upgraded and customized
+to include support for any connected USB camera as per
+
+See TODO BERTO BERTO GET THE KERNEL STUFF WORKING
+
+Motion can work with external, network based cameras without
+any kernel modification.
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
@@ -17,10 +23,10 @@ Refer to **README.md** for the overall guidelines and refer to the
 instructions below for procps specific notes and procedures.
 
 ## TLDNR
-The quick "TLDNR" instructions for building procps are the same as the
-"TLDNR" instructions in the main README.md file however, you must first 
-download the ncurses libraries from the Seagate Central as per the
-**Seagate Central libraries and headers** section below. 
+The quick "TLDNR" instructions for building motion are the same as the
+"TLDNR" instructions in the main README.md file however, the in depth
+configuration of motion once it is installed is beyond what a TLDNR can
+cover. Please see the installation instructions below for more details. BERTO
 
 ## Build Procedure
 ### Source code download and extraction
@@ -29,36 +35,29 @@ Unless otherwise noted these are the latest stable releases at the
 time of writing. Hopefully later versions, or at least those with
 the same major version numbers, will still work with this guide.
 
-* ncurses-0.6.22 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
-* procps-3.3.16 - https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.bz2
+* libjpeg-turbo-2.1.1 - https://downloads.sourceforge.net/project/libjpeg-turbo/2.1.1/libjpeg-turbo-2.1.1.tar.gz
+* zlib-1.2.11 - https://zlib.net/zlib-1.2.11.tar.xz
+* ffmpeg-4.4 (libav*) - http://ffmpeg.org/releases/ffmpeg-4.4.tar.xz
+* tiff-4.3.0 - https://download.osgeo.org/libtiff/tiff-4.3.0.tar.gz
+* libpng-1.6.37 - https://download.sourceforge.net/libpng/libpng-1.6.37.tar.xz
+* libwebp-1.2.1 - https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.1.tar.gz
+* gmp-6.2.1 - http://mirrors.kernel.org/gnu/gmp/gmp-6.2.1.tar.xz
+* nettle-3.7.3 - http://mirrors.kernel.org/gnu/nettle/nettle-3.7.3.tar.gz
+* libtasn1-4.17.0 - http://mirrors.kernel.org/gnu/libtasn1/libtasn1-4.17.0.tar.gz
+* gnutls-3.6.16 - https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz
+* libmicrohttpd-0.9.73 - http://mirrors.kernel.org/gnu/libmicrohttpd/libmicrohttpd-0.9.73.tar.gz
+* alsa-lib-1.2.5 - https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.5.tar.bz2
+* v4l-utils-1.20.0 - https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2
+* motion-4.3.2 - https://github.com/Motion-Project/motion/archive/refs/tags/release-4.3.2.tar.gz
 
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
-by running the **download-src-procps.sh** script.
+by running the **download-src-motion.sh** script as follows.
 
-### Seagate Central libraries and headers
-We need to copy over one specific library file from the Seagate
-Central to the build host, namely "/usr/lib/libncurses.so.5.0.7", 
-so that it can be linked to during the build process.
+    ./download-src-motion.sh
 
-Create an appropriate sub directory under the base working 
-directory to store the library in. By default we use the "sc-libs"
-subdirectory to store Seagate Central libraries.
-
-    mkdir -p sc-libs/usr/lib
-    
-In this example we copy the required library using the scp command. 
-You will need to substitute your own username and NAS IP address.
-After executing the scp command you'll be prompted for the 
-password for that username on the Seagate Central. 
-
-    scp admin@192.0.2.99:/usr/lib/libncurses.so.5.0.7 sc-libs/usr/lib/
-       
-Note, if you *really* don't want to link against the ncurses libraries 
-on the Seagate Central then you can build your own version by reading 
-and following the instructions in the "build-procps-01-ncurses-headers.sh"
-script.
+BERTO BERTO
 
 ### Troubleshooting Installation
 #### UNKNOWN version     
@@ -72,3 +71,17 @@ example.
 This is a known issue in some recent versions of the procps tools. As
 long as the tool is reporting as being part of "props-ng" and not 
 "busybox" then there is nothing to worry about.
+
+
+### BERTO Configuration 
+
+## With a USB cam
+
+## With a network cam
+
+
+## Mention about CPU load
+
+
+
+
