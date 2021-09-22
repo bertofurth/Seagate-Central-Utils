@@ -1,6 +1,6 @@
 # Seagate-Central-Utils
 Instructions for compiling and installing new and updated utilities 
-for the Seagate Central NAS.
+for the Seagate Central NAS (ARM32 - armv6l) based platform.
 
 ### Servers
 * minidlna - Efficient media server replacement for the inbuilt Twonky DLNA. 
@@ -17,6 +17,8 @@ for the Seagate Central NAS.
 * Joplin server
 * Motion - Video camera monitoring software
 * wget / curl
+* gprof - CPU profiling tool. Troublehshoot high cpu.
+* uemacs / jove - https://opensource.com/article/20/3/lightweight-emacs
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
@@ -25,7 +27,7 @@ utility being built.
 
 The build and installation instructions in this file are designed to be
 read in conjunction with the utility specific instructions as seen
-in the **README-myutil.md** file located in the "myutil" subdirectory.
+in the **README-myutil.md** file located in each "myutil" subdirectory.
 
 ### TLDNR
 On a build server with the "arm-sc-linux-gnueabi-" cross compilation 
