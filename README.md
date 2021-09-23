@@ -465,52 +465,6 @@ appropriate packages that need installing. For example
 OpenSuse : zypper search tool-name
 Debian : apt search tool-name
 
-### ncurses
-Some of the utilities in this project depend on the ncurses
-library which governs sophisticated terminal screen interactions.
-
-Since cross compiling this library from scratch can be difficult,
-we have decided that the best way to use this library is to copy
-it from the Seagate Central for linking when building a utility
-that depends on it.
-
-If you try to build such a utility without first downloading
-the ncurses library you'll get a warning message while building
-similar to the following
-
-    *************************
-    *************************
-    **       WARNING       **
-    *************************
-    *************************
-
-    libncurses.so not found!!
-
-    Did you download it from the Seagate Central as
-    per the instructions in the README-myutil.md file??
-
-You can download the ncurses library for linking as follows.
-
-Create an appropriate sub directory under the base working 
-directory to store the library in. By default we use the "sc-libs"
-subdirectory to store Seagate Central libraries.
-
-    mkdir -p sc-libs/usr/lib
-    
-In this example we copy the required library from the Seagate Central
-using the scp command and we rename it to "libncurses.so". You will 
-need to substitute your own username and NAS IP address.  
-
-    scp admin@192.0.2.99:/usr/lib/libncurses.so.5.0.7 sc-libs/usr/lib/libncurses.so
-       
-After executing the scp command you'll be prompted for the password
-for that username on the Seagate Central.
-
-Note, if you *really* don't want to link against the ncurses libraries 
-on the Seagate Central then you can build your own version by reading 
-and following the instructions in the 
-"build-myutil-XX-ncurses-headers.sh" script.
-
 ## Troubleshooting Installation
 Here are some issues commonly encountered when installing newly
 built software on the Seagate Central.
@@ -552,7 +506,7 @@ Make sure that the new version of the tool has the executable file
 attribute. You may need to issue the "chmod 755 myutil" command 
 to ensure that the file is able to be executed.
 
-### terminals database is inaccessible
+### ncurses : terminals database is inaccessible
 When trying to run a command that uses complicated screen interactions
 such as a menu or interactive display, an error message similar to the 
 following may appear
@@ -560,21 +514,25 @@ following may appear
     terminals database is inaccessible
     
 This may be because the terminal type you are using to access the 
-Seagate Central is not supported by the native "ncurses" library.
+Seagate Central is not supported by the "ncurses" library.
 
-The limited range of terminal types the Seagate Central natively 
+The limited range of terminal types that ncurses is setup to
 supports is as follows.
 
-    ansi, dumb, linux, rxvt, rxvt-unicode, screen, sun, vt100, vt102, 
-    vt200, vt220, vt52, xterm, xterm-color, xterm-xfree86
+    linux vt100 vt102 xterm xterm-256color screen 
+    xterm-xfree86 ansi vt220 rxvt dumb
 
-The easiest thing to do is to manually set the terminal type to "linux".
-This which is one of the most commonly used terminal types.
+The easiest thing to do is to modify the configuration of your
+ssh client to use one of the above listed terminal types.
 
-     TERM=linux
+Another alternative is to manually set the terminal type to "linux".
+This is one of the most commonly used terminal types.
 
-Alternately, reconfigure your ssh client to emulate one of the above 
-listed terminal types when connecting to the Seagate Central.
+    TERM=linux
+
+Alternately, modify the ncurses build script to include the terminal
+name that you need supported, rebuild the affected utility and
+re-install it on the Seagate Central.
 
 ### Shared libraries
 When trying to run new software an error similar to the following may
