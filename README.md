@@ -12,13 +12,14 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * less - Full version of tool used to view text files, "less is more".
 * screen - Terminal multiplexer useful for "headless" servers.
 * diskus - Check disk usage. Faster than "du". (rust)
+* pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
 
 ### TODO 
 * Joplin server
 * Motion - Video camera monitoring software
 * wget / curl
 * gprof - CPU profiling tool. Troublehshoot high cpu.
-* uemacs / jove - https://opensource.com/article/20/3/lightweight-emacs
+* pEmacs / jove - https://opensource.com/article/20/3/lightweight-emacs
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
@@ -48,7 +49,7 @@ suite installed, run the following commands to download and compile
     ./run-all-build-myutil.sh
     
     # Remove optional excess components from the software
-    ./trim-build.sh
+    ./trim-build-myutil.sh
     
     # Create an archive of the software
     mv cross seagate-central-myutil

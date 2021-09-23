@@ -1,12 +1,16 @@
-# README-less.md
-less is a "pager", meaning it is used to display text files in
-a terminal or ssh session.
+# README-pEmacs.md
+pEmacs / Perfect Emacs / "pe" is a small footprint GNU Emacs 
+editor clone.
 
-https://greenwoodsoftware.com/less/faq.html
+https://github.com/hughbarney/pEmacs
 
-The version of "less" included with the native Seagate Central
-firmware is the devil's spawn!! It doesn't support the search 
-function which is one of the most useful features of "less".
+"pe" supports all of the major key combinations that standard GNU
+Emacs does but without some of the more sophisticated and less
+frequently used features.
+
+I quickly added this useful tool to the Seagate Central because I
+I can't stand the "nano" editor and despite my sincerest efforts, I'm 
+not a "vi" guy.
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
@@ -14,13 +18,7 @@ read in conjunction with the main set of instructions in the
 Seagate-Central-Utils project. 
 
 Refer to **README.md** for the overall guidelines and refer to the
-instructions below for notes and procedures specific to "less".
-
-## TLDNR
-The quick "TLDNR" instructions for building less are the same as the
-"TLDNR" instructions in the main README.md file however, you must first 
-download the ncurses libraries from the Seagate Central as per the
-**Seagate Central libraries and headers** section below. 
+instructions below for notes and procedures specific to "pEmacs".
 
 ## Build Procedure
 ### Source code download and extraction
@@ -29,104 +27,31 @@ Unless otherwise noted these are the latest stable releases at the
 time of writing. Hopefully later versions, or at least those with
 the same major version numbers, will still work with this guide.
 
-* ncurses-0.6.22 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
-* less-590 - http://mirrors.kernel.org/gnu/less/less-590.tar.gz
+* ncurses-6.2 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
+* pEmacs - https://github.com/hughbarney/pEmacs (use "git clone")
 
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
-by running the **download-src-less.sh** script.
+by running the **download-src-pEmacs.sh** script.
 
-### Seagate Central libraries and headers
-We need to copy over one specific library file from the Seagate
-Central to the build host, namely "libncurses.so", so that it can 
-be linked to during the build process.
+## Installation
+To invoke pEmacs simply run the command "pe" followed by the file-name
+in the same way as any other command line editor is invoked.
 
-Create an appropriate sub directory under the base working 
-directory to store the library in. By default we use the "sc-libs"
-subdirectory to store Seagate Central libraries.
+If you are inclined, you can also create a symbolic link as follows
+so that calling "emacs" will execute "pe".
 
-    mkdir -p sc-libs/usr/lib
+    ln -s pe /usr/local/bin/emacs
     
-In this example we copy the required library using the scp command
-and we rename it to "libncurses.so". You will need to substitute your
-own username and NAS IP address.  
+## "pe" basic usage
+To exit from "pe" simply type Ctrl-X followed by Ctrl-C at which point
+you'll be asked whether you want to save your file.
 
-    scp admin@192.0.2.99:/usr/lib/libncurses.so.5.0.7 sc-libs/usr/lib/libncurses.so
-       
-After executing the scp command you'll be prompted for the password
-for that username on the Seagate Central.
+Beyond that, all the keystrokes are the same as for the GNU Emacs editor
+except for a few small exceptions. Please refer to the useful guide at the
+pEmacs homepage for an overview of the available commands.
 
-Note, if you *really* don't want to link against the ncurses libraries 
-on the Seagate Central then you can build your own version by reading 
-and following the instructions in the "build-less-01-ncurses-headers.sh"
-script.
+https://github.com/hughbarney/pEmacs
 
-### "less" basic usage
-View a text file using less by running the less command as per the 
-following example.
-
-     less textfile.txt
-
-You can also "pipe" the output of another command to less.
-
-     dmesg | less
-     
-Here are my personal favorite key commands that can be used while
-viewing data in less. 
-
-#### Quit and Help
-* q - quit
-* h - help
-
-#### Movement
-* Up arrow or k - Up
-* Down arrow or j - Down
-* f - Forward one window
-* b - Back one window
-* g or < - start of file
-* G or > - end of file
-* NNg or NNG - Goto line number "NN" where "NN" is a number
-* F - Keep displaying more text (like tail -f)
-
-#### Search
-* /pattern  - Search for "pattern" forwards (regexp)
-* ?pattern - Search for "pattern" backwards (regexp)
-* n - Go to the next match of "pattern"
-* N - Go to the previous match "pattern"
-* &pattern - Show only lines that match "pattern" (regexp)
-* ctrl-C - Show all lines of the file (after running &pattern)
-* /, ? or & then up/down arrow - Scroll through search history.
-* -I - Ignore case in search patterns 
-
-#### Display
-* -N - show line numbers
-* = or ctrl-G - show current file name and position in file
-
-#### Marking
-* mx - Replace "x" with any letter. Mark a position in the file
-* 'x - Go back to mark "x"
-
-#### The LESS environment variable
-The LESS environment variable can be used to configure the behavior
-of the "less" program by specifying the "less" command line
-parameters to apply each time "less" runs.
-
-For example, by default "less" will perform case sensitive searches 
-when using the "/pattern" command.  Many users prefer that it performs
-case *insentitive* searches unless a capital letter is used in the
-specified "pattern" search term.
-
-This can be configured by using the "-i" flag.
-
-In addition many people prefer that "less" always show the current
-file name and position in file while displaying data. This can be
-controlled with the "-M" flag.
-
-Both of these flags can be set by either appending them to the "less"
-command when it is run, or by specifying them in the LESS environment 
-variable as follows.
-
-    export LESS="-i -M"
-
-This variable can be set in a shell startup script such as ".bashrc".
+Any basic GNU emacs tutorial or guide will also apply to "pe".
