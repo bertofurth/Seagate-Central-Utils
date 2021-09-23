@@ -4,9 +4,9 @@ a terminal or ssh session.
 
 https://greenwoodsoftware.com/less/faq.html
 
-The version of "less" included with the Seagate Central is the
-devil's spawn. (It's based on "busybox") It doesn't support the
-search function which is one of the most useful parts of "less".
+The version of "less" included with the native Seagate Central
+firmware is the devil's spawn!! It doesn't support the search 
+function which is one of the most useful features of "less".
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
@@ -14,7 +14,7 @@ read in conjunction with the main set of instructions in the
 Seagate-Central-Utils project. 
 
 Refer to **README.md** for the overall guidelines and refer to the
-instructions below for "less" specific notes and procedures.
+instructions below for notes and procedures specific to "less".
 
 ## TLDNR
 The quick "TLDNR" instructions for building less are the same as the
@@ -39,8 +39,8 @@ by running the **download-src-less.sh** script.
 
 ### Seagate Central libraries and headers
 We need to copy over one specific library file from the Seagate
-Central to the build host, namely libncurses, so that it can be
-linked to during the build process.
+Central to the build host, namely "libncurses.so", so that it can 
+be linked to during the build process.
 
 Create an appropriate sub directory under the base working 
 directory to store the library in. By default we use the "sc-libs"
@@ -78,7 +78,7 @@ viewing data in less.
 #### Quit and Help
 * q - quit
 * h - help
-* 
+
 #### Movement
 * Up arrow or k - Up
 * Down arrow or j - Down
@@ -96,9 +96,9 @@ viewing data in less.
 * N - Go to the previous match "pattern"
 * &pattern - Show only lines that match "pattern" (regexp)
 * ctrl-C - Show all lines of the file (after running &pattern)
-* ? or & then up arrow : Scroll through search pattern history
-* -I - ignore case in your search pattern 
-    
+* /, ? or & then up/down arrow - Scroll through search history.
+* -I - Ignore case in search patterns 
+
 #### Display
 * -N - show line numbers
 * = or ctrl-G - show current file name and position in file
