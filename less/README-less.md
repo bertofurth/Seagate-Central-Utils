@@ -23,7 +23,7 @@ Unless otherwise noted these are the latest stable releases at the
 time of writing. Hopefully later versions, or at least those with
 the same major version numbers, will still work with this guide.
 
-* ncurses-0.6.22 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
+* ncurses-6.2 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
 * less-590 - http://mirrors.kernel.org/gnu/less/less-590.tar.gz
 
 Download the required source code archives for each component to 
