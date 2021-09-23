@@ -16,12 +16,6 @@ Seagate-Central-Utils project.
 Refer to **README.md** for the overall guidelines and refer to the
 instructions below for notes and procedures specific to "less".
 
-## TLDNR
-The quick "TLDNR" instructions for building less are the same as the
-"TLDNR" instructions in the main README.md file however, you must first 
-download the ncurses libraries from the Seagate Central as per the
-**Seagate Central libraries and headers** section below. 
-
 ## Build Procedure
 ### Source code download and extraction
 This procedure was tested using the following versions of software.
