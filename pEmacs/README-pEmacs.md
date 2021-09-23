@@ -9,7 +9,7 @@ standard GNU Emacs does but without some of the more sophisticated
 and less frequently used features.
 
 I quickly added this useful tool to the Seagate Central because I
-I can't stand the native "nano" editor and despite my sincerest 
+can't stand the native "nano" editor and despite my sincerest 
 efforts, I'm not a "vi" guy.
 
 There are a number of other lightweight Emacs clones such as "atto"
