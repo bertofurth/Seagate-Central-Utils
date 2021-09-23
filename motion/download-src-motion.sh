@@ -20,6 +20,7 @@ gnutls='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz'
 libmicrohttpd='http://mirrors.kernel.org/gnu/libmicrohttpd/libmicrohttpd-0.9.73.tar.gz'
 alsalib='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.5.tar.bz2'
 v4lutils='https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2'
+libx264='https://code.videolan.org/videolan/x264/-/archive/stable/x264-stable.tar.bz2'
 motion='https://github.com/Motion-Project/motion/archive/refs/tags/release-4.3.2.tar.gz'
 
 echo_archives() {
