@@ -32,10 +32,9 @@ instructions below for procps specific notes and procedures.
 
 ## TLDNR
 The quick "TLDNR" instructions for building motion are the same as the
-"TLDNR" instructions in the main README.md file however, the in depth
-configuration of motion once it is installed is beyond what a TLDNR can
+"TLDNR" instructions in the main README.md file however, the installation
+and configuration of motion is installed is beyond what a TLDNR can
 cover. Please see the installation instructions below for more details.
-BERTO
 
 ## Build Procedure
 ### Source code download and extraction
@@ -67,22 +66,18 @@ by running the **download-src-motion.sh** script as follows.
 
     ./download-src-motion.sh
 
-BERTO BERTO
+## Installation
+
+
+Configuration
 
 
 
-### Troubleshooting Installation
-#### UNKNOWN version     
-When checking the version of procps tools using the "--version" command
-parameter the version may appear as UNKNOWN as per the following
-example.
 
-     # ps --version
-     ps from procps-ng UNKNOWN
+Adding startup scripts (create one)
 
-This is a known issue in some recent versions of the procps tools. As
-long as the tool is reporting as being part of "props-ng" and not 
-"busybox" then there is nothing to worry about.
+
+
 
 
 ### BERTO Configuration 
@@ -91,6 +86,7 @@ long as the tool is reporting as being part of "props-ng" and not
 
 ## With a network cam
 
+### Troubleshooting Installation
 
 ## Mention about CPU load
 
