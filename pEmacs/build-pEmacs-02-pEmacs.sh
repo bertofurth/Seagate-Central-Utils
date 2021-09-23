@@ -29,8 +29,8 @@ make_it
 
 # Copy the newly built binary "pe" to the destination dir
 
-mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX
-cp ./pe $BUILDHOST_DEST/$EXEC_PREFIX/
+mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX/bin
+cp ./pe $BUILDHOST_DEST/$EXEC_PREFIX/bin
 if [ $? -ne 0 ]; then
     echo
     echo Couldn\'t copy \"pe\" from $(pwd). Check build!
