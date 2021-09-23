@@ -37,31 +37,6 @@ the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
 by running the **download-src-less.sh** script.
 
-### Seagate Central libraries and headers
-We need to copy over one specific library file from the Seagate
-Central to the build host, namely "libncurses.so", so that it can 
-be linked to during the build process.
-
-Create an appropriate sub directory under the base working 
-directory to store the library in. By default we use the "sc-libs"
-subdirectory to store Seagate Central libraries.
-
-    mkdir -p sc-libs/usr/lib
-    
-In this example we copy the required library using the scp command
-and we rename it to "libncurses.so". You will need to substitute your
-own username and NAS IP address.  
-
-    scp admin@192.0.2.99:/usr/lib/libncurses.so.5.0.7 sc-libs/usr/lib/libncurses.so
-       
-After executing the scp command you'll be prompted for the password
-for that username on the Seagate Central.
-
-Note, if you *really* don't want to link against the ncurses libraries 
-on the Seagate Central then you can build your own version by reading 
-and following the instructions in the "build-less-01-ncurses-headers.sh"
-script.
-
 ### "less" basic usage
 View a text file using less by running the less command as per the 
 following example.
