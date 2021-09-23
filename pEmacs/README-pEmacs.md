@@ -64,8 +64,8 @@ the source code, run the following command from the base working directory.
      patch src/pEmacs/search.c ./0001-pEmacs-Optional-Arrow-exit-search.patch
 
 An important note, the author of pEmacs was aware of this issue but 
-resolving it properly would have actually added quite a bit of size to
-pEmacs which would have gone against the spirit of the project. In my view
+resolving it properly would have added quite a bit of size to pEmacs 
+which would have gone against the spirit of the project. In my view
 it was a worthwhile tradeoff to make.
 
 ## Installation
@@ -80,8 +80,8 @@ Invoke "pe" in the same way as any other text editor. For example
 
     pe my-file.txt
 
-To exit from "pe" simply type Ctrl-X followed by Ctrl-C at which point
-you'll be asked whether you want to save your file.
+To save your work type Ctrl-X followed by Ctrl-S. To exit from "pe" simply
+type Ctrl-X followed by Ctrl-C.
 
 Beyond that, all the keystrokes are the same as for the GNU Emacs editor
 except for a few small exceptions. Please refer to the useful guide at the
