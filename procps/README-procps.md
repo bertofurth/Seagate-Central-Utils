@@ -23,7 +23,7 @@ Unless otherwise noted these are the latest stable releases at the
 time of writing. Hopefully later versions, or at least those with
 the same major version numbers, will still work with this guide.
 
-* ncurses-0.6.22 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
+* ncurses-6.2 - http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz    
 * procps-3.3.16 - https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.bz2
 
 Download the required source code archives for each component to 
