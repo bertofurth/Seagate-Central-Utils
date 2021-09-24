@@ -84,12 +84,27 @@ Adding startup scripts (create one)
 
 ## With a USB cam
 
+
+
+
+
+Note, some cameras can generate two or more /dev/videoX entries. Only
+the first one is a valid source of video streaming for motion. The 
+others provide metadata. See
+
+https://unix.stackexchange.com/questions/512759/multiple-dev-video-for-one-physical-device
+
 ## With a network cam
 
 ### Troubleshooting Installation
 
 ## Mention about CPU load
 
+the larger each image that motion has to process, the more CPU load
+so configure your network cameras to use a "sub" stream that might
+not generate as large an image as the main stream.
 
+
+the images
 
 
