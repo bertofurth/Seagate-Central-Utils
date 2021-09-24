@@ -28,13 +28,22 @@ read in conjunction with the main set of instructions in the
 Seagate-Central-Utils project. 
 
 Refer to **README.md** for the overall guidelines and refer to the
-instructions below for procps specific notes and procedures.
+instructions below for motion specific notes and procedures.
 
 ## TLDNR
 The quick "TLDNR" instructions for building motion are the same as the
-"TLDNR" instructions in the main README.md file however, the installation
-and configuration of motion is beyond what a TLDNR can cover. Please 
-see the installation instructions below for more details.
+"TLDNR" instructions in the main README.md file. 
+
+The installation of motion on the Seagate Central and the configuration
+of motion are too complicated to cover in a TLDNR however the basic
+process is
+
+* Customize the **motion.conf** and other configuration files.
+* Install the configuration files to "/usr/local/etc/motion/"
+* Create the "motion" user and add it to the "video" group.
+* Install the **motion-init.sh** startup script
+
+Please see the installation instructions below for more details.
 
 ## Build Procedure
 ### Source code download and extraction
@@ -68,15 +77,13 @@ by running the **download-src-motion.sh** script as follows.
 
 ## Installation
 ### Optional - Reducing the software size (Strongly recommended)
-By default, motion is built to include a wide range of tertiary
-utilities related to image and video processing. In particular the
-ffmpeg suite of tools.
+When building the supporting libraries for motion, a wide range
+of utilities related to image and video processing are generated.
 
-These extra tools take quite a lot of disk space. While they are
-intellectually interesting, they are not likely to be used in a typical
-installation of "motion".
+These extra tools take quite a lot of disk space and they are 
+not likely to be used on the Seagate Central.
 
-For this reason, the "trim-build-motion.sh" scrip will remove
+For this reason, the "trim-build-motion.sh" script will remove
 these extra utilities from the finished product.
 
 If you'd prefer to keep these extra utilities then modify the
@@ -96,12 +103,17 @@ We have included a few sample configuration files in this
 project. 
 
 **These configuration files need to be tailored to your 
-system configuration before motion will work.**
+system before motion will work.**
 
-The detailed configuration of motion is beyond the scope
-of this project however hopefully the comments in the sample
-configuration files are insightful enough to be a useful
-guide. 
+The sample configuration files contain comments and samples
+that I hope will be useful but for detailed instructions
+please refer to the documentation on the motion website.
+
+https://motion-project.github.io/motion_config.html
+
+After the relevant files have been customized, transfer them to the
+Seagate Central and install them in the "/usr/local/etc/motion"
+directory.
 
 ##### motion.conf
 This is the main "motion" configuration file that specifies
@@ -121,8 +133,8 @@ This file is setup to use the USB camera configured in the
 This file is setup so that the motion web interface is available
 on port 8080 of the Seagate Central and the streaming service
 is available on port 8081. Both are protected with the
-username admin with password admin. Obviously this is something
-that needs to be changed before the configuraion is put into place.
+username "admin" and password "admin". **Change these passwords
+before activating motion**
 
 ##### camera-usb.conf
 This is a sample configuration file that sets up motion to
@@ -133,14 +145,12 @@ monitor a locally connected USB camera registered as
 This is a sample configuration file that sets up motion to 
 monitor a remote net connected camera on an rtsp stream.
 
-This file needs to be tailored to point to a real network
-camera in order to be effective.
+This file needs to be tailored to point to the IP address
+of a real network camera in order to be effective. You
+may also need to tailor the "netcam_url" parameter to
+reflect the streaming service URL for your camera.
 
-After the relevant files have been customized, transfer them to the
-Seagate Central and install them in the "/usr/local/etc/motion"
-directory.
-
-#### Create "motion" user
+#### Create "motion" user and add to "video" group
 The "motion" service will be run by a dedicated user called "motion".
 This is more secure than simply running the service as "root" because 
 it means that if the "motion" service suffers a fault, or if any
@@ -173,6 +183,12 @@ to the "video" group by running the following command as root.
 
     usermod -a -G video motion
 
+You will then need to copy the group configuration file to the 
+backup configuration otherwise the changes will be overwritten on
+the next system reboot.
+
+    cp /etc/group /usr/config/backupconfig/etc/group
+     
 #### Startup script - /etc/init.d/motion-init.sh
 In order for "motion" to run at system startup, an init script starting 
 the server is required. We have included a custom startup script in this
