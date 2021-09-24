@@ -1,5 +1,5 @@
---- main.c.orig	2021-09-24 17:51:50.109115639 +1000
-+++ main.c	2021-09-24 18:14:23.456919036 +1000
+--- main.c.orig	2021-09-24 18:29:16.358886897 +1000
++++ main.c	2021-09-24 19:14:07.972122675 +1000
 @@ -31,6 +31,7 @@ extern int anycb ();
  extern BUFFER *bfind ();
  extern int ttgetc();
@@ -8,27 +8,31 @@
  
  int main (int argc, char *argv[]);
  void edinit (char bname[]);
-@@ -266,7 +267,7 @@ int getctl ()
+@@ -266,16 +267,27 @@ int getctl ()
  int quit (int f, int n)
  {
    int s;
 -
-+#ifdef BERTO
-   if (f != FALSE	       /* Argument forces it */
-       || anycb () == FALSE     /* All buffers clean */
-       || (s = mlyesno ("Modified buffers exist. Leave anyway")) == TRUE)
-@@ -276,6 +277,25 @@ int quit (int f, int n)
-     }
-   mlwrite ("");
-   return (s);
-+#endif
+-  if (f != FALSE	       /* Argument forces it */
+-      || anycb () == FALSE     /* All buffers clean */
+-      || (s = mlyesno ("Modified buffers exist. Leave anyway")) == TRUE)
+-    {
+-      vttidy ();
+-      exit (0);
+-    }
+-  mlwrite ("");
+-  return (s);
 +  if (f == FALSE && anycb() == TRUE) {
++	  /*
++	   * Ask if you want to save before exit,
++	   * just like real Emacs.
++	   */
 +	  s = mlyesno ("Modified buffers exist. Save");
 +	  if (s == TRUE) {
 +		  filesave (0, 0);
 +		  goto quit_exit;
 +	  } else {
-+		  s = mlyesno ("Modified buffers exist. Leave anyway");
++		  s = mlyesno ("Modified buffers not saved. Leave anyway");
 +		  if (s == TRUE) {
 +			  goto quit_exit;
 +		  }
@@ -39,7 +43,6 @@
 +quit_exit:
 +  vttidy ();
 +  exit (0);
-+  extern int filesave (int f, int n);
  }
  
  /*
