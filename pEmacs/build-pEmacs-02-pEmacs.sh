@@ -9,6 +9,7 @@ check_source_dir "pEmacs"
 # The makefile needs to be modified somewhat
 # to work with this build system.
 
+cp $SRC/$LIB_NAME/Makefile $SRC/$LIB_NAME/Makefile.orig
 sed -i "/^CFLAGS=/c CFLAGS=\${CPPFLAGS} -Wall -O2" $SRC/$LIB_NAME/Makefile
 sed -i "/^LFLAGS=/c LFLAGS=\${LDFLAGS} -lncurses" $SRC/$LIB_NAME/Makefile
 
