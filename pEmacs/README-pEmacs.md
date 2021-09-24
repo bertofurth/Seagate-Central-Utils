@@ -4,8 +4,8 @@ editor clone (AKA Ersatz Emacs)
 
 https://github.com/hughbarney/pEmacs
 
-"pe" supports all of the most commonly used key combinations that
-standard GNU Emacs does but without some of the more sophisticated
+"pe" supports the most commonly used key bindings of standard 
+GNU Emacs but sheds support for some of the more sophisticated
 and less frequently used features.
 
 I quickly added this useful tool to the Seagate Central because I
