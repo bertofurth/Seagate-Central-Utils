@@ -29,13 +29,13 @@ DAEMON=/usr/local/bin/$NAME
 PIDFILE=/var/run/$DESC.pid
 USER=motion
 CONFIG=/usr/local/etc/motion/motion.conf
-ARGS="-b -c $CONF -p $PIDFILE "
+ARGS="-b -c $CONFIG -p $PIDFILE "
 
 [ -x $DAEMON ] || exit 0
 
 start_daemon() {
-        #touch $LOG
-        #chown $USER $LOG
+        touch $PIDFILE
+        chown $USER $PIDFILE
     	echo "Starting $LONGDESC: $NAME"
       	start-stop-daemon --chuid $USER --start --verbose --exec $DAEMON -- $NEW_ARGS	
     	echo "done"
