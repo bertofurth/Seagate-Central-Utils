@@ -183,6 +183,12 @@ to the "video" group by running the following command as root.
 
     usermod -a -G video motion
 
+You will then need to copy the group configuration file to the 
+backup configuration otherwise the changes will be overwritten on
+the next system reboot.
+
+    cp /etc/group /usr/config/backupconfig/etc/group
+     
 #### Startup script - /etc/init.d/motion-init.sh
 In order for "motion" to run at system startup, an init script starting 
 the server is required. We have included a custom startup script in this
