@@ -1,14 +1,14 @@
 # README-motion.md
-Motion monitors video signals from a range of network and
-USB based cameras. Motion can be used to monitor activity 
-and view live streams.
+Motion monitors video streams from a range of network and
+USB based cameras. Motion can be used to record activity 
+and view live footage.
 
 https://motion-project.github.io/
 
 In order for Motion to work with a USB camera connected to
 the Seagate Central, the Linux kernel on the unit must be
-upgraded and installed **with appropriate driver modules
-included** as per the instructions seen in the
+upgraded and installed **with appropriate driver modules**
+as per the instructions seen in the
 **Seagate-Central-Slot-In-v5.x-Kernel** project at
 
 https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel
@@ -33,8 +33,8 @@ instructions below for procps specific notes and procedures.
 ## TLDNR
 The quick "TLDNR" instructions for building motion are the same as the
 "TLDNR" instructions in the main README.md file however, the installation
-and configuration of motion is installed is beyond what a TLDNR can
-cover. Please see the installation instructions below for more details.
+and configuration of motion is beyond what a TLDNR can cover. Please 
+see the installation instructions below for more details.
 
 ## Build Procedure
 ### Source code download and extraction
