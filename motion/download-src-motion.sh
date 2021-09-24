@@ -37,6 +37,7 @@ echo_archives() {
     echo "${libmicrohttpd}"
     echo "${alsalib}"
     echo "${v4lutils}"
+    echo "${libx264}"
     echo "${motion}"
 }
 
