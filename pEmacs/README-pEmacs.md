@@ -40,6 +40,16 @@ them. This can be done automatically for the versions listed above
 by running the **download-src-pEmacs.sh** script.
 
 ## Build Procedure
+The following are two **completely optional** patches you can apply
+to pEmacs before building it. They simply make "pe" a little
+bit closer to real Emacs in ways that I personally find useful.
+
+You can apply both automatically by running the 
+"apply-patches-pEmacs.sh" script as follows after the source
+code has been downloaded.
+
+     ./apply-patches-pEmacs.sh
+
 ### Optional - Patch for arrow key to leave search dialog.
 If, like me, you regularly use an arrow key to exit from the Emacs 
 search dialog, you'll notice that pEmacs has a quirk in that if you
@@ -50,11 +60,11 @@ characters such as
     
 If you want to workaround this issue then this project contains an
 optional patch that you can apply to pEmacs before building it.
-The trade-off is that if you use just the "ESC" key to exit from the
-search dialog, you'll have to subsequently press two more keys to 
-keep working!
+The trade-off is that if you actually do use the "ESC" key to exit
+from the search dialog then you'll have to subsequently press one
+more key to keep working!
 
-I personally never use just the "ESC" key to exit from the Emacs search 
+I personally never use the "ESC" key to exit from the Emacs search 
 dialog. I typically use "Enter" or an arrow key to do so. I'm not sure 
 what other people do.
 
@@ -68,6 +78,27 @@ resolving it properly would have added quite a bit of size to pEmacs
 which would have gone against the spirit of the project. In my view
 it was a worthwhile tradeoff to make.
 
+### Optional - Patch for "Save on exit"
+When you try to exit "pe" without saving your work the program will ask 
+you if you really want to exit. If you hit "y" then you exit and all 
+your changes are lost.
+
+The problem with this is that at this point *real* Emacs will ask if you
+want to save your changes. At this point I normally hit "y", then my changes
+are saved then Emacs quits.
+
+I constantly found myself exiting "pe" and answering the question as
+asked by real Emacs, and subsequently losing my work!!
+
+I wanted to make "pe" more like real Emacs in this regard, so there is 
+another optional patch that will insert a question asking if you want
+to save your changes before asking if you really want to exit.
+
+The tradeoff with the patch is that it's a little slower exiting "pe" when
+you don't want to save your changes than it otherwise would be.
+
+     patch src/pEmacs/main.c ./0002-pEmacs-Optional-Save-on-exit.patch
+     
 ## Installation
 ### Optional - Create a link from "emacs" to "pe"
 If you are inclined, you can create a symbolic link as follows so that 
