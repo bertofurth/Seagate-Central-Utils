@@ -31,6 +31,8 @@ the **src** subdirectory of the base working directory and extract
 them. This can be done automatically for the versions listed above
 by running the **download-src-less.sh** script.
 
+    ./download-src-less.sh
+
 ### "less" basic usage
 View a text file using less by running the less command as per the 
 following example.
