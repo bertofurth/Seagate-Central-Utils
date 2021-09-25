@@ -117,6 +117,12 @@ You can optionally also specify the "--target-dir directory-name" parameter
 to "cargo build" to specify a different base directory for the generated
 build products.
 
+Finally, if you don't plan to build any more rust projects in the
+near future then you can now uninstall "rustup" and the associated
+tools as they consume quite a large amount of disk space.
+
+     rustup self uninstall
+     
 ## Installation
 Change to the directory containing the generated "diskus" cross compiled 
 binary
