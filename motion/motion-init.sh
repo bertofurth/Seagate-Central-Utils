@@ -12,9 +12,15 @@
 ### END INIT INFO
 
 #
-# This is a very basic startup script that works
-# on the assumption that there is only one 
-# instance of the daemon running.
+# This is a very basic startup script for "motion"
+# on the Seagate Central. Copy this script
+# into the /etc/init.d/ directory and enable it
+# with a command similar to
+#
+# update-rc.d motion-init.sh defaults 77
+#
+# Note that this simple script works on the assumption
+# that there is only one instance of the daemon running.
 #
 DESC="motion"
 LONGDESC="motion movement detection"
