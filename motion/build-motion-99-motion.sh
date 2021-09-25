@@ -22,4 +22,10 @@ configure_it --prefix=$PREFIX \
 	     --with-webp
 make_it
 install_it
+
+# Copy sample "motion" configuration files included in
+# this project to the default configuration directory.
+mkdir -p $BUILDHOST_DEST/$PREFIX/etc/motion
+cp *.conf $BUILDHOST_DEST/$PREFIX/etc/motion/
+
 finish_it
