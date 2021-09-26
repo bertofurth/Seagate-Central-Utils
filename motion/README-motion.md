@@ -97,8 +97,9 @@ need to be implemented to get "motion" running.
 
 #### Configuration files - "/usr/local/etc/motion/..."
 Motion uses configuration files that govern it's operation.
-By default, these are stored in the "/usr/local/etc/motion/"
-directory.
+
+The main configuration file is stored at 
+"/usr/local/etc/motion/motion.conf"
 
 We have included a few sample configuration files in this
 project that have been tailored for use on a Seagate 
@@ -114,7 +115,7 @@ please refer to the documentation on the motion website.
 
 https://motion-project.github.io/motion_config.html
 
-##### motion.conf
+##### motion.conf.sample
 This is the main "motion" configuration file that specifies
 global parameters applying to all cameras being monitored
 by "motion".
@@ -141,7 +142,7 @@ Many motion users disable both of these services or
 make sure that they are well protected by a firewall
 because they are not particularly secure.
 
-##### camera-usb.conf
+##### camera-usb.conf.sample
 This is a sample configuration file that sets up motion to
 monitor a locally connected USB camera registered as
 "/dev/video0".
@@ -149,14 +150,16 @@ monitor a locally connected USB camera registered as
 It saves captured images to the "/Data/Public/Motion/NAS-USB/"
 directory.
 
-##### camera-net.conf
+##### camera-net.conf.sample
 This is a sample configuration file that sets up motion to 
-monitor a remote net connected camera on an rtsp stream.
+monitor a remote network connected camera generating an rtsp
+style video stream.
 
 This file needs to be tailored to point to the IP address
-of a real network camera in order to be effective. You
-may also need to tailor the "netcam_url" parameter to
-reflect the streaming service URL for your camera.
+of a real network camera and to use to correct authentication
+parameters in order to be effective. You may also need to tailor
+the "netcam_url" parameter to reflect the streaming service URL
+for your camera.
 
 #### Create "motion" user and add to "video" group
 The "motion" service will be run by a dedicated user called "motion".
