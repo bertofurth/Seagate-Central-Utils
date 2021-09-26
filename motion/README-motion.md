@@ -358,5 +358,20 @@ unit will remember them and assign them each new /dev/videoX identities.
 You can clear the cache of these identities by deleting the 
 "/etc/dev.tar" file and rebooting the unit.
 
+### Failed to set UVC probe control
+Sometimes during initial installation and cofiguration while
+starting and stopping the "motion" software multiple times the
+software would stop working and an error message as follows
+would appear in the system logs
+
+    uvcvideo 1-1:1.1: Failed to set UVC probe control : -110 (exp. 26).
+    
+Unfortunately the only workaround I could find was to reboot
+the unit.
+
+The issue only seemed to occur when the motion service was being
+forced to stop and restart many times. I did not see this issue
+while "motion" was running ina stable and uninterupted manner.
+
 
 
