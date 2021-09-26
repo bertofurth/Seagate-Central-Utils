@@ -12,12 +12,13 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * coreutils - GNU coreutils basic unix commands.
 * less - Full version of tool used to view text files, "less is more".
 * screen - Terminal multiplexer useful for "headless" servers.
-* diskus - Check disk usage. Faster than "du". (rust)
+* diskus - Check per directory disk usage. Faster than "du". (rust)
 * pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
 
 ### TODO 
 * wget / curl
 * gprof - CPU profiling tool. Troublehshoot high cpu.
+* agedu - Advanced Disk usage report https://www.chiark.greenend.org.uk/~sgtatham/agedu/
 
 Each utility has it's own subdirectory under the base directory
 of this project where further resources specific to each one can be
