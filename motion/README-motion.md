@@ -42,6 +42,7 @@ process is
 * Install the configuration files to "/usr/local/etc/motion/"
 * Create the "motion" user and add it to the "video" group.
 * Install the **motion-init.sh** startup script
+* Start the "motion" service manually or reboot
 
 Please see the installation instructions below for more details.
 
@@ -90,9 +91,9 @@ If you'd prefer to keep these extra utilities then modify the
 "trim-build-motion.sh" script accordingly.
 
 ### Install the new software
-In addition to transferring and installing the cross compiled software,
-the following extra steps need to be implemented for "motion"
-installation.
+In addition to transferring and installing the cross compiled 
+"motion" software on the Seagate Central, the following extra steps
+need to be implemented to get "motion" running.
 
 #### Configuration files - "/usr/local/etc/motion/..."
 Motion uses configuration files that govern it's operation.
@@ -100,46 +101,53 @@ By default, these are stored in the "/usr/local/etc/motion/"
 directory.
 
 We have included a few sample configuration files in this
-project. 
+project that have been tailored for use on a Seagate 
+Central. They were created with the goal of reducing CPU
+load as much as possible.
 
-**These configuration files need to be tailored to your 
-system before motion will work.**
+**These configuration files must be modified before they
+will work on your system!!!**
 
-The sample configuration files contain comments and samples
+The sample configuration files contain comments and examples
 that I hope will be useful but for detailed instructions
 please refer to the documentation on the motion website.
 
 https://motion-project.github.io/motion_config.html
-
-After the relevant files have been customized, transfer them to the
-Seagate Central and install them in the "/usr/local/etc/motion"
-directory.
 
 ##### motion.conf
 This is the main "motion" configuration file that specifies
 global parameters applying to all cameras being monitored
 by "motion".
 
-The sample included in this project is setup to save pictures
-from monitored cameras to the "/Data/Public/Motion" directory.
+The main parameters this global configuration sets are to do
+with the web management interface and the streaming service.
 
-Bear in mind that any folders you specify in the configuration
-files to be used for storing pictures or videos will need to be
-writeable by the "motion" user. (See below)
+By default the motion web interface is available on port
+8080 of the Seagate Central. For example.
 
-This file is setup to use the USB camera configured in the
-"camera-usb.conf" configuration file referenced below.
+     http://192.0.2.99:8080
+     
+The streaming service is activated on port 8081 and can
+be accessed using a URL similar to the following where
+"101" needs to be replaced by the "camera_id".
 
-This file is setup so that the motion web interface is available
-on port 8080 of the Seagate Central and the streaming service
-is available on port 8081. Both are protected with the
-username "admin" and password "admin". **Change these passwords
-before activating motion**
+http://nas-1.lan:8081/101/stream
+
+The example configuration has both of these services 
+password protected with username "admin" and password "admin".
+**Change these passwords before activating motion**
+
+Many motion users disable both of these services or
+make sure that they are well protected by a firewall
+because they are not particularly secure.
 
 ##### camera-usb.conf
 This is a sample configuration file that sets up motion to
 monitor a locally connected USB camera registered as
 "/dev/video0".
+
+It saves captured images to the "/Data/Public/Motion/NAS-USB/"
+directory.
 
 ##### camera-net.conf
 This is a sample configuration file that sets up motion to 
@@ -192,18 +200,19 @@ the next system reboot.
 #### Startup script - /etc/init.d/motion-init.sh
 In order for "motion" to run at system startup, an init script starting 
 the server is required. We have included a custom startup script in this
-project called "motion-init.sh".
+project called "motion-init.sh" which gets installed into the
+"/usr/local/etc/motion" directory but it needs to be moved from here.
 
-As mentioned above, this script is setup to assume that there is a user
-called "motion" that will be running the motion service. 
+This startup script is setup to assume that there is a user called
+"motion" that will be running the motion service. 
 
-The "motion-init.sh" script needs to be transferred to the Seagate
-Central and then installed into the "/etc/init.d/" directory as follows.
+The "motion-init.sh" script needs to be copied to the
+"/etc/init.d/" directory as follows.
 
     install -o root -m 755 motion-init.sh /etc/init.d
     
-Finally, generate the symbolic links that will cause the script to be
-invoked at system startup as follows.
+Generate the symbolic links that will cause the script to be invoked
+at system startup as follows.
 
     update-rc.d motion-init.sh defaults 77    
     
@@ -216,10 +225,16 @@ issued with root privileges.
 The service will also be started automatically at system startup.
 
 ## Troubleshooting
+Here are some of the issues I personally encountered when setting
+up "motion" to work with a Seagate Central. They mostly relate
+to the pitfalls of running "motion" on a low end system where
+CPU resources are at a premium, and where you're using a low
+end, low resolution USB or network camera.
+
 ### CPU load.
-Since the Seagate Central is not a particularly powerful system,
-performing complicated image processing and manipulation can take its
-toll on system resources.
+Image processing is a CPU intensive task. Since the Seagate Central 
+is not a particularly powerful system, performing complicated image
+processing and manipulation can take its toll on system resources.
 
 I would suggest configuring "motion" to process frames at a very
 low rate. My tests show that when motion is monitoring a single
@@ -227,14 +242,104 @@ camera using 640 x 480 resolution at 1 frame per second, the motion
 process will consume between 10 - 20% of one CPU in the idle state.
 
 If the frame rate is increased to 2 frames per second this goes 
-up to between 30 - 50%.
+up to between 30 - 50% of one CPU.
 
-In general the lower the frame rate, and the less pixels per
+In general, the lower the frame rate, and the less pixels per
 image that need to be processed, the lower the CPU load will be.
+Therefore, the goal should be to configure motion to use the lowest
+frame rate and the lowest picture resolution that is available.
 
+### Movies
 In addition to storing still images showing motion events, "motion"
-has the ability to generate movie files. I would suggest not enabling
+has the ability to generate movie files. I would suggest *not* enabling
 this feature as it consumes a great deal of CPU.
+
+When the CPU is overloaded, motion will deliberately "cut" frames
+from a generated movie file which means that a generated movie
+might just be the first still frame of an event shown for the entire
+length of the video!
+
+### False positives
+You will likely need to dedicate a significant amount of time
+tuning the settings in the motion configuration files in
+/usr/local/etc/motion/ to suit your environment.
+
+The most persistant problem I faced was "False positives", meaning
+that motion would start recording pictures when nothing was
+obviously moving!
+
+The main issue I had was with bright, white surfaces in the frame
+of view. Even though according to my human eyes these surfaces
+looked to be unchanging, "motion" was detecting some kind
+of rapid changes in the pixels on these objects. This is apparently
+called "flaring".
+
+Below are some of the configuration options you can use while
+troubleshooting this kind of problem.
+
+#### locate_motion_mode on
+Display a box around any areas that are supposedly moving. This
+will at the very least indicate what motion "thinks" is changing.
+
+#### text_changes on
+Show the number of pixels motion thinks have changed in the top
+right hand corner of each image.
+
+#### picture_output_motion on
+Periodically generate an extra image with the "m" suffix that
+just displays which pixels motion thinks have changed. This
+is particularly useful when you're looking at a "before" and
+"after" image but just can't see any difference.
+
+#### threshold (frames)
+The most obvious parameter to change is the threshold which
+indicates the number of pixels that have to change in order to
+trigger an event, however it's crucial to also set the parameter
+below as well.
+
+#### noise_level (1 - 255)
+This is the absolute amount of **brightness** that a pixel has to
+change in order to get counted against the threshold value. That is,
+if a pixel's brightness changes, but by less than "noise_level",
+then it won't be counted.
+
+This is particulaly useful for systems where the camera is "noisy"
+or "crackles". In addition it is useful where an frame of view
+is getting a lot of relfected light or shadows.
+
+#### lightswitch_percent 10  / lightswitch_frames 1
+If you have an environment where the light might be subtly increasing
+over time (say if a cloud passes over), or if your USB camera
+is trying to automatically compensate for light conditions by self
+adjusting it's brightness settings then the "lightswitch" parameters
+may help.
+
+The main idea behind this parameter is to stop events being logged
+with a sudden change in lighting condititons, such as a light being
+turned on. However, I have found it more useful in conditions where
+the light in a room changes subtly, such as when the monitored space
+is a room that is partially lit by outside light sources but people
+are moving outside the window and only slightly impacting lighting
+conditions.
+
+#### despeckle_filter EedDl / EeEedDdDl / EeEeEedDdDdDl  etc
+I won't go into the details of how the despeckle filter works
+but if you have a "noisy" environment then it may be worth trying
+the above settings. The more "Ee" and "dD" commands that are
+fed to this parameter, the more effective it is at eliminating
+false positives generated by noise.
+
+The problem with this feature is that it slightly increases CPU
+utilization, however this is usually worth it to avoid false
+positives.
+
+### Manually take a picture with a USB camera
+While "motion" is **not** running, the following "ffmpeg" command
+will take a picture using the USB camera on /dev/video0. 
+
+    ffmpeg -f v4l2 -i /dev/video0 -frames 1 out.jpg
+
+The "ffmpeg" utility is included in the tools built alongside "motion".
 
 ### Multiple /dev/videoX entries
 Some USB cameras can generate two or more /dev/videoX entries. Only
@@ -249,3 +354,6 @@ unit will remember them and assign them each new /dev/videoX identities.
 
 You can clear the cache of these identities by deleting the 
 "/etc/dev.tar" file and rebooting the unit.
+
+
+
