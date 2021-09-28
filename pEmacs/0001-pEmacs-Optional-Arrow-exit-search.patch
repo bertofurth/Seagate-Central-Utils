@@ -1,11 +1,11 @@
---- search.c.orig	2021-09-24 07:29:05.898135979 +1000
-+++ search.c	2021-09-24 07:59:42.995002898 +1000
-@@ -161,6 +161,26 @@ isearch(int dir)
+--- search.c.orig	2021-09-24 18:29:11.870863615 +1000
++++ search.c	2021-09-24 19:13:15.295686592 +1000
+@@ -161,6 +161,28 @@ isearch(int dir)
  			 * The same issue can also be observed in uEmacs/Pk
  			 */
  
 +			/*
-+			 * BERTO. I never use "ESC" to exit from search.
++			 * I never use "ESC" to exit from search.
 +			 * I always use either "Enter" or an arrow key.
 +			 *
 +			 * pEmacs spits out garbage like [B or [A if you
@@ -14,15 +14,17 @@
 +			 * The following kludge hack "absorbs" the garbage 
 +			 * that gets spat out if you try to use an arrow to 
 +			 * exit from search, but it means that if you actually
-+			 * use "ESC" to exit search then you have to type two 
-+			 * more characters to really exit search. 
++			 * use "ESC" to exit search then you have to type one
++			 * more character to really exit search. 
 +			 *
 +			 * Not everyone likes this behavior so only apply
 +			 * this patch to pEmacs if you're like me and never 
-+			 * use just the ESC key to exit from search.
++			 * use just the ESC key to exit from search, or if 
++			 * you don't mind hitting it twice for the exercise!!
 +			 */
-+			ttgetc();
-+			ttgetc();
++			if (ttgetc() == '[') {
++				ttgetc();
++			}
 +			
  			/* FALLTHRU */
  		case CTRL_M:

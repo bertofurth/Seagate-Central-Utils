@@ -7,6 +7,7 @@ configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
 	     --sbindir=$EXEC_PREFIX/sbin \
 	     --host=$ARCH \
+	     --enable-static \
 	     --enable-python2
 
 # N.B. Seagate Central uses python 2
