@@ -14,7 +14,7 @@ configure_it --prefix=$PREFIX \
 # won't let you build both dynamic and static
 # at the same time!!
 #
-#	     --enable-static 
+#	     --enable-static --disable-dynamic
 
 # N.B. Seagate Central uses python 2 so we
 # specify "--enable-python2"
