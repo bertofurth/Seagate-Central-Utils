@@ -11,10 +11,10 @@ configure_it --prefix=$PREFIX \
 
 # If you want static libraries then add
 # the following line to configure. alsa-lib
-# won't let you build both dynamic and static
+# won't let you build both shared and static
 # at the same time!!
 #
-#	     --enable-static --disable-dynamic
+#	     --enable-static --disable-shared
 
 # N.B. Seagate Central uses python 2 so we
 # specify "--enable-python2"
