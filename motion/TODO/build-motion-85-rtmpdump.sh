@@ -1,4 +1,12 @@
 #!/bin/bash
+
+
+# https://git.ffmpeg.org/rtmpdump.git
+# Might be of benefit to have rtmpdump / librtmp
+# If so, then add this build script to the list of
+# scripts and modify the ffmpeg build script
+# configure stage accordingly.
+#
 source ../build-common
 source ../build-functions
 check_source_dir "rtmpdump"

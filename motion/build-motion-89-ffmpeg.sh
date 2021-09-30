@@ -23,6 +23,7 @@ configure_it --prefix=$PREFIX \
 	     --enable-libwebp \
 	     --enable-libx264 \
 	     --disable-doc
+
 make_it
 install_it
 finish_it
