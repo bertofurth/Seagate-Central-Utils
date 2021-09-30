@@ -23,6 +23,8 @@ v4lutils='https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2'
 libx264='https://code.videolan.org/videolan/x264/-/archive/stable/x264-stable.tar.bz2'
 motion='https://github.com/Motion-Project/motion/archive/refs/tags/release-4.3.2.tar.gz'
 
+rtmpdumpgit='https://git.ffmpeg.org/rtmpdump.git'
+
 echo_archives() {
     echo "${libjpegturbo}"
     echo "${zlib}"
@@ -39,6 +41,10 @@ echo_archives() {
     echo "${v4lutils}"
     echo "${libx264}"
     echo "${motion}"
+}
+
+echo_git() {
+    echo "${rtmpdumpgit}"
 }
 
 die() {
@@ -69,4 +75,13 @@ do
 done
 unset ar
 
+if ! type git > /dev/null ; then
+    die "Unable to find git!"
+fi
 
+for ar in $(echo_git)
+do
+    git clone "${ar}"    \
+	|| die "Cannot git clone download $ar"
+done
+unset ar

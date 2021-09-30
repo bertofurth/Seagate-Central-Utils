@@ -76,7 +76,7 @@ case "$1" in
         ;;
     restart|force-reload)
 	stop_daemon
-	sleep 1
+	sleep 4
         NEW_ARGS="$ARGS"
 	start_daemon
         ;;
