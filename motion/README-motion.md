@@ -523,3 +523,15 @@ file instead of using /dev/video0.
 
 Check the /dev/v4l/by-id/ directory on your system once your camera is
 connected in order to determine it's unique ID.
+
+### mjpg-streamer
+An alternative to "motion" is to simply setup the Seagate Central as a
+streaming device that does no analysis. This can be accomplished using
+the "mjpg-streamer" tool from
+
+https://github.com/jacksonliam/mjpg-streamer
+
+The build script for this tool is located in the TODO subdirectory. It
+needs to be executed anytime after libjpeg-turbo has been built.
+
+See the build script for instructions and further details.
