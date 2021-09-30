@@ -104,10 +104,10 @@ picture_output on
 #
 picture_output_motion off
 
-# By setting picture_quality to 100% we consume more disk
-# space per image but we spare the CPU the work of having 
-# to compress the image.
-picture_quality 100
+# The higher the picture quality, the more disk space
+# consumed by each picture. Default of 75%
+#
+# picture_quality 75
 
 ############################################################
 # Movie output configuration parameters
