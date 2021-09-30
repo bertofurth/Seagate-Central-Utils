@@ -55,7 +55,6 @@ the same major version numbers, will still work with this guide.
 
 * libjpeg-turbo-2.1.1 - https://downloads.sourceforge.net/project/libjpeg-turbo/2.1.1/libjpeg-turbo-2.1.1.tar.gz
 * zlib-1.2.11 - https://zlib.net/zlib-1.2.11.tar.xz
-* ffmpeg-4.4 (libav*) - http://ffmpeg.org/releases/ffmpeg-4.4.tar.xz
 * tiff-4.3.0 - https://download.osgeo.org/libtiff/tiff-4.3.0.tar.gz
 * libpng-1.6.37 - https://download.sourceforge.net/libpng/libpng-1.6.37.tar.xz
 * libwebp-1.2.1 - https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.1.tar.gz
@@ -67,6 +66,7 @@ the same major version numbers, will still work with this guide.
 * alsa-lib-1.2.5 - https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.5.tar.bz2
 * v4l-utils-1.20.0 - https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2
 * libx264 latest "stable" - https://code.videolan.org/videolan/x264/-/archive/stable/x264-stable.tar.bz2
+* ffmpeg-4.4 (libav*) - http://ffmpeg.org/releases/ffmpeg-4.4.tar.xz
 * motion-4.3.2 - https://github.com/Motion-Project/motion/archive/refs/tags/release-4.3.2.tar.gz
 
 Download the required source code archives for each component to 
@@ -81,13 +81,18 @@ by running the **download-src-motion.sh** script as follows.
 When building the supporting libraries for motion, a wide range
 of utilities related to image and video processing are generated.
 
-These extra tools take quite a lot of disk space and they are 
-not likely to be used on the Seagate Central.
+These extra tools are not normally used however they may be useful
+for troubleshooting. 
 
-It might be prudent to go through the cross/usr/local/bin
-directory and delete any tools that you do not plan on using
-before you upload the cross compiled data to the Seagate
-Central. At a bare minimum, leave the "motion" tool itself.
+If you are concerned about disk usage, it might be prudent to go
+through the cross/usr/local/bin directory and delete any tools that
+you do not plan on using before you upload the cross compiled data
+to the Seagate Central. At a bare minimum, only the "motion" executable
+itself is required to run motion.
+
+We suggest you **do not** delete any of the shared libraries in the
+"cross/usr/local/lib" directory. The vast majority of these are needed
+by "motion".
 
 ### Install the new software
 In addition to transferring and installing the cross compiled 
