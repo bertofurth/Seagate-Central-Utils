@@ -13,14 +13,15 @@ as per the instructions seen in the
 
 https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel
 
-Specifically refer to **README_USB_DEVICE_MODULES.md** for
+Specifically refer to **README_USB_DEVICE_MODULES.md** in
+the Seagate-Central-Slot-In-v5.x-Kernel project for
 details on including support for new USB devices on the
 Seagate Central.
 
 https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel/blob/main/README_USB_DEVICE_MODULES.md
 
 Motion can work with external, network based cameras without
-any kernel modification.
+any extra kernel modules.
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
@@ -34,11 +35,10 @@ instructions below for motion specific notes and procedures.
 The quick "TLDNR" instructions for building motion are the same as the
 "TLDNR" instructions in the main README.md file. 
 
-The installation of motion on the Seagate Central and the configuration
-of motion are too complicated to cover in a TLDNR however the basic
-process is
+The basic process for installation and configuration of "motion" on
+the Seagate Central is 
 
-* Customize the **motion.conf** and other configuration files.
+* Customize **motion.conf** and other configuration files.
 * Install the configuration files to "/usr/local/etc/motion/"
 * Create the "motion" user and add it to the "video" group.
 * Install the **motion-init.sh** startup script
@@ -77,18 +77,17 @@ by running the **download-src-motion.sh** script as follows.
     ./download-src-motion.sh
 
 ## Installation
-### Optional - Reducing the software size (Strongly recommended)
+### Optional - Reducing the software size 
 When building the supporting libraries for motion, a wide range
 of utilities related to image and video processing are generated.
 
 These extra tools take quite a lot of disk space and they are 
 not likely to be used on the Seagate Central.
 
-For this reason, the "trim-build-motion.sh" script will remove
-these extra utilities from the finished product.
-
-If you'd prefer to keep these extra utilities then modify the
-"trim-build-motion.sh" script accordingly.
+It might be prudent to go through the cross/usr/local/bin
+directory and delete any tools that you do not plan on using
+before you upload the cross compiled data to the Seagate
+Central. At a bare minimum, leave the "motion" tool itself.
 
 ### Install the new software
 In addition to transferring and installing the cross compiled 
@@ -123,31 +122,33 @@ by "motion".
 The main parameters this global configuration sets are to do
 with the web management interface and the streaming service.
 
-By default the motion web interface is available on port
+By default, the "motion" web interface is available on port
 8080 of the Seagate Central. For example.
 
      http://192.0.2.99:8080
-     
+
+Many users disable the web interface on port 8080 or make sure
+that it is well protected by a network firewall because it is
+not particularly secure.
+
 The streaming service is activated on port 8081 and can
 be accessed using a URL similar to the following where
-"101" needs to be replaced by the "camera_id".
+"101" needs to be replaced by the "camera_id". For
+example
 
-http://nas-1.lan:8081/101/stream
+    http://192.0.2.99:8081/101/stream
 
 The example configuration has both of these services 
 password protected with username "admin" and password "admin".
-**Change these passwords before activating motion**
 
-Many motion users disable both of these services or
-make sure that they are well protected by a firewall
-because they are not particularly secure.
+**Change these passwords before activating motion**
 
 ##### camera-usb.conf.sample
 This is a sample configuration file that sets up motion to
 monitor a locally connected USB camera registered as
 "/dev/video0".
 
-It saves captured images to the "/Data/Public/Motion/NAS-USB/"
+It saves captured images to the "/Data/motion/NAS-USB/"
 directory.
 
 ##### camera-net.conf.sample
@@ -155,11 +156,8 @@ This is a sample configuration file that sets up motion to
 monitor a remote network connected camera generating an rtsp
 style video stream.
 
-This file needs to be tailored to point to the IP address
-of a real network camera and to use to correct authentication
-parameters in order to be effective. You may also need to tailor
-the "netcam_url" parameter to reflect the streaming service URL
-for your camera.
+You will need to tailor the IP address and streaming service
+URL to suit your network camera.
 
 #### Create "motion" user and add to "video" group
 The "motion" service will be run by a dedicated user called "motion".
@@ -187,7 +185,7 @@ the "motion" user a system administrator.
 
 Finally click on the "Save" button.
 
-If you plan to connect USB cameras to the Seagate Central the new
+If you plan to connect USB cameras to the Seagate Central, the new
 "motion" user needs to be added to the "video" group in order to have
 permission to access and manipulate attached USB cameras. Add "motion"
 to the "video" group by running the following command as root.
@@ -240,27 +238,90 @@ is not a particularly powerful system, performing complicated image
 processing and manipulation can take its toll on system resources.
 
 I would suggest configuring "motion" to process frames at a very
-low rate. My tests show that when motion is monitoring a single
-camera using 640 x 480 resolution at 1 frame per second, the motion
-process will consume between 10 - 20% of one CPU in the idle state.
+low rate (see "minimum_frame_time" and "framerate" motion
+configuration file parameters).
 
-If the frame rate is increased to 2 frames per second this goes 
-up to between 30 - 50% of one CPU.
+In addition using a smaller resolution for pictures ("width" and 
+"height") can also help with CPU load.
+
+I would also strongly advise going to the effort of correctly
+configuring the camera stream type as per the **Stream characteristics**
+and **Raw image stream** sections below to potentially save 
+signficant CPU resources.
 
 In general, the lower the frame rate, and the less pixels per
 image that need to be processed, the lower the CPU load will be.
 Therefore, the goal should be to configure motion to use the lowest
-frame rate and the lowest picture resolution that is available.
+frame rate and the lowest picture resolution that is acceptable.
 
-### Movies
-In addition to storing still images showing motion events, "motion"
-has the ability to generate movie files. I would suggest *not* enabling
-this feature as it consumes a great deal of CPU.
+#### Stream characteristics
+In order to let motion run efficiently it is important to
+make sure the "width" and "height" settings within the camera
+specific configuration file match one of the available stream
+profiles of the camera in use. 
+
+The "ffprobe" command is built by default as part of generating
+the "motion" tool. It can be used to determine the image dimensions 
+that an attached camera is capable of producing. Note that it can
+only be run while "motion" is not running and using the video device. 
+
+For example, the following command will show the range of available
+stream characteristics of the device on /dev/video0.
+
+    ffprobe /dev/video0 -list_formats all
+
+If you are using a network stream then the characteristics of
+the stream should be configurable on the network camera.
+
+#### Raw image stream (Advanced but important)
+This parameter is difficult to get right but it can save
+very significant CPU resources if configured correctly.
+
+By default, "motion" may try to use a JPEG or compressed stream
+coming from an attached USB camera as the source for it's image
+stream. This will add significant processing load to "motion"
+because it will need to spend CPU cycles decompressing each
+received JPEG image in order to analyse it.
+
+It is much better if motion can receive images in a raw
+and uncompressed format.
+
+Try to use the ffprobe tool (see above) to see what kinds of
+raw or uncompressed streams your camera supports. 
+
+The stream format for an attached USB camera can then be configured
+using the "v4l2_palette" motion configuration file parameter to
+match one of the available profiles seen in the ffprobe command
+output.
+
+See the "motion" documentation for details of what types of
+streams can be accepted by motion.
+
+https://motion-project.github.io/motion_config.html#v4l2_palette
+
+If a stream type (v4l2_palette) is not explicitly configured then
+motion may default to using a compressed/JPEG style stream from the
+camera which might cause extra CPU load.
+
+Check the "motion" log file while using a "log_level" of 7 to see
+what image stream parameters are being used by motion as it
+starts up.
+
+#### Movies
+"motion" has the ability to generate movie files of detected events.
+I would suggest *not* enabling this feature as it consumes a great
+deal of CPU.
 
 When the CPU is overloaded, motion will deliberately "cut" frames
 from a generated movie file which means that a generated movie
-might just be the first still frame of an event shown for the entire
+might end up being just one "still" frame shown for the entire
 length of the video!
+
+#### mask settings
+It's possible to block out portions of the field of view in motion
+by using the mask_file, mask_privacy and smart_mask_speed settings.
+These features consume significant CPU resources. If possible, try to
+avoid turning these on.
 
 ### False positives
 You will likely need to dedicate a significant amount of time
@@ -269,19 +330,19 @@ tuning the settings in the motion configuration files in
 
 The most persistant problem I faced was "False positives", meaning
 that motion would start recording pictures when nothing was
-obviously moving!
+obviously moving.
 
 The main issue I had was with bright, white surfaces in the frame
-of view. Even though according to my human eyes these surfaces
+of view. Even though, according to my human eyes, these surfaces
 looked to be unchanging, "motion" was detecting some kind
 of rapid changes in the pixels on these objects. This is apparently
 called "flaring".
 
-Below are some of the configuration options you can use while
-troubleshooting this kind of problem.
+Below are some of the configuration options you can modify while
+troubleshooting "False positives".
 
 #### locate_motion_mode on
-Display a box around any areas that are supposedly moving. This
+Draw a box around any areas that are supposedly moving. This
 will at the very least indicate what motion "thinks" is changing.
 
 #### text_changes on
@@ -289,80 +350,90 @@ Show the number of pixels motion thinks have changed in the top
 right hand corner of each image.
 
 #### picture_output_motion on
-Periodically generate an extra image with the "m" suffix that
-just displays which pixels motion thinks have changed. This
-is particularly useful when you're looking at a "before" and
-"after" image but just can't see any difference.
+With each image generated, also generate an extra image with 
+the "m" suffix that just displays which pixels motion thinks
+have changed. This is particularly useful when you're looking 
+at images generated by an event and you just can't see any
+difference.
 
 #### threshold (frames)
-The most obvious parameter to change is the threshold which
-indicates the number of pixels that have to change in order to
-trigger an event, however it's crucial to also set the parameter
-below as well.
+The most obvious parameter to change when troubleshooting 
+"False Positives" is the threshold which indicates the number of
+pixels that have to change in order to trigger an event.
+
+Setting this value too low will mean that "False postives" will
+be generated. Setting it too high will mean that events will not be
+triggered as desired. 
+
+Note that you need to take the total number of pixels in an image
+into account when setting this value. (i.e. check "width" times 
+"height")
 
 #### noise_level (1 - 255)
 This is the absolute amount of **brightness** that a pixel has to
-change in order to get counted against the threshold value. That is,
+change in order to get counted as "changed". That is,
 if a pixel's brightness changes, but by less than "noise_level",
-then it won't be counted.
+then it won't be counted against the "threshold" parameter.
 
-This is particulaly useful for systems where the camera is "noisy"
-or "crackles". In addition it is useful where an frame of view
-is getting a lot of relfected light or shadows.
+This is particulaly important for systems where the camera produces
+a "noisy" image. In addition it is useful where an frame of view
+is getting a lot of reflected light or shadows.
 
-#### lightswitch_percent 10  / lightswitch_frames 1
+#### lightswitch_percent / lightswitch_frames 
 If you have an environment where the light might be subtly increasing
 over time (say if a cloud passes over), or if your USB camera
 is trying to automatically compensate for light conditions by self
 adjusting it's brightness settings then the "lightswitch" parameters
 may help.
 
-The main idea behind this parameter is to stop events being logged
+The main idea behind these parameters is to stop events being logged
 with a sudden change in lighting condititons, such as a light being
 turned on. However, I have found it more useful in conditions where
-the light in a room changes subtly, such as when the monitored space
-is a room that is partially lit by outside light sources but people
-are moving outside the window and only slightly impacting lighting
-conditions.
+the light in a room changes subtly. For example, when the monitored space
+is a room that is partially lit from the outside and a cloud passes
+over, or when objects move past a door or window causing the light
+level to slightly change.
 
-#### despeckle_filter EedDl / EeEedDdDl / EeEeEedDdDdDl  etc
+#### despeckle_filter EedDl / EeEedDdDl / EeEeEedDdDdDl 
 I won't go into the details of how the despeckle filter works
 but if you have a "noisy" environment then it may be worth trying
 the above settings. The more "Ee" and "dD" commands that are
 fed to this parameter, the more effective it is at eliminating
 false positives generated by noise.
 
-The problem with this feature is that it slightly increases CPU
-utilization, however this is usually worth it to avoid false
+The problem with this feature is that it very slightly increases 
+CPU utilization, however this is usually worth it to avoid false
 positives.
 
 ### Manually take a picture with a USB camera
 While "motion" is **not** running, the following "ffmpeg" command
 will take a picture using the USB camera on /dev/video0. 
 
-    ffmpeg -f v4l2 -i /dev/video0 -frames 1 out.jpg
+    ffmpeg -i /dev/video0 -frames 1 out.jpg
 
 The "ffmpeg" utility is included in the tools built alongside "motion".
 
+Doing this can be useful to check that the camera is indeed
+working independantly of motion. 
+
 ### Multiple /dev/videoX entries
-Some USB cameras can generate two or more /dev/videoX entries. Only
-the first one is a valid source of video streaming for motion. The 
-others provide metadata. See
+Some USB cameras can generate two or more /dev/videoX device entries.
+Only the lowest numbered one is a valid source of video streaming for motion.
+The others provide metadata. See
 
 https://unix.stackexchange.com/questions/512759/multiple-dev-video-for-one-physical-device
 
 ### Removing persistent /dev/videoX entries
 If you connect multiple USB cameras to the Seagate Central, the
-unit will remember them and assign them each new /dev/videoX identities.
+unit will remember them and assign them each a new /dev/videoX identity.
 
 You can clear the cache of these identities by deleting the 
 "/etc/dev.tar" file and rebooting the unit.
 
 ### Failed to set UVC probe control
-Sometimes during initial installation and cofiguration while
-starting and stopping the "motion" software multiple times the
-software would stop working and an error message as follows
-would appear in the system logs
+Sometimes while starting and stopping the "motion" service multiple
+times, perhaps during initial setup, the software can stop working and
+an error message as follows might appear in the system logs
 
     uvcvideo 1-1:1.1: Failed to set UVC probe control : -110 (exp. 26).
     
@@ -371,7 +442,7 @@ the unit.
 
 The issue only seemed to occur when the motion service was being
 forced to stop and restart many times. I did not see this issue
-while "motion" was running ina stable and uninterupted manner.
+while "motion" was running in a stable and uninterupted manner.
 
 
 
