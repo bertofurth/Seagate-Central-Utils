@@ -6,7 +6,7 @@ change_into_obj_directory
 
 # mjpeg-streamer from
 # https://github.com/jacksonliam/mjpg-streamer
-# is a low bandwidth streaming tool that allows a user
+# is a low cpu streaming tool that allows a user
 # to stream directly from a webcam. This can be built
 # at any point after libjpeg-turbo has been built.
 #
