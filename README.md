@@ -16,7 +16,7 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
 
 ### TODO (but probably not)
-* wget / curl - Might be useful on the Seagate Central
+* wget / curl - Download files from websites
 * agedu - Advanced Disk usage report https://www.chiark.greenend.org.uk/~sgtatham/agedu/
 * mjpg-streamer - Stream (but don't analyse) a webcam https://github.com/jacksonliam/mjpg-streamer
 
