@@ -455,21 +455,71 @@ The issue only seemed to occur when the motion service was being
 forced to stop and restart many times. I did not see this issue
 while "motion" was running in a stable and uninterupted manner.
 
-### Use ffmpeg to generate a network stream (Interesting note)
-The "ffmpeg" tool that comes built with "motion" has a rudimentary web server
-built in that may improve in quality in future releases. The following command
-can be used to setup a "temporary" mjpeg style stream from a video source on
-/dev/video0
+## Notes
+### Optional patches for motion
+There are two optional patches for "motion" that might be of help
+but only in corner cases.
 
-    ffmpeg -framerate 1 -i /dev/video0 -r 1 -listen 1 -f mjpeg http://[::]:9999
+#### 0001-motion-NTP-update-snapshot.patch
+This patch solves a rare issue where if the NTP client service,
+which gets invoked every 30 minutes on the Seagate Central, sets the
+system clock backwards by more than 1 second then the "snapshot"
+feature of motion may errantly generate an image at that time.
+That is, on the Seagate Central, a "snapshot" could be taken
+every 30 minutes instead of the configured "snapshot_interval".
+
+     patch -i 0001-motion-NTP-update-snapshot.patch src/motion-release-4.3.2/src/motion.c
+
+This has been logged as an enhancement request for "motion".
+
+https://github.com/Motion-Project/motion/issues/1414
+
+#### 0002-motion-light-switch-low-frame-rate.patch
+Sometimes when using motion in a very low frame rate configuration, as
+we are doing on the Seagate Central, it can take a few seconds before
+an object is recognized as being part of the "static" background. This
+patch can speed up this process (I think).
+
+     patch -i 0002-motion-light-switch-low-frame-rate.patch src/motion-release-4.3.2/src/alg.c
+
+### Use ffmpeg to generate a network stream (Interesting note)
+The "ffmpeg" tool that comes built with "motion" has a rudimentary web 
+server built in that may improve in quality in future ffmpeg releases. 
+
+The following command can be used to setup a "temporary" mjpeg style 
+network stream from a video source on /dev/video0
+
+    ffmpeg -framerate 1 -input_format mjpeg -i /dev/video0 -c copy -listen 1 -f mjpeg http://[::]:9999
     
 If you use a tool like VLC that is capable of listening to an mjpeg style
-network stream, and enter a URL similar to
+network stream then you may enter a network stream URL similar to
 
     http://192.0.2.99:9999
     
-then you will be able to see the stream from the attached video camera.
+and you will be able to see the stream from the attached video camera.
+
+Since the ffmpeg command has been directed to "copy" the mjpeg stream
+from the camera and pass it along largely unmodifed, this "simple" streaming
+service does not consume much CPU at all!
 
 Note that only one client can connect at a time, and once the client has
-disconnected the command will exit. Also note that this does not work at the
-same time as "motion" is using the specified /dev/videoX device.
+disconnected the "ffmpeg" command will exit. Also note that this does not
+work at the same time as "motion" is using the specified /dev/videoX device.
+
+### Use a "by-id" device rather than /dev/videoX
+It may be wiser to use a "by-id" device name rather than /dev/videoX to
+specify an attached video camera device if you are using more than one
+USB video camera. This way, even if the device number changes, you will
+still be assured of connecting to the right device.
+
+For example, on my system I have a USB camera on /dev/video0 but I also
+have the following "by-id" device name that will be permanently assigned
+to this device.
+
+    /dev/v4l/by-id/usb-046d_0809_AFB3B233-video-index0
+
+I can then specify this unique device name in the motion configuration
+file instead of using /dev/video0.
+
+Check the /dev/v4l/by-id/ directory on your system once your camera is
+connected in order to determine it's unique ID.
