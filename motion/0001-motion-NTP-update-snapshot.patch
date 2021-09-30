@@ -1,0 +1,17 @@
+--- src/motion.c.orig	2021-09-26 13:35:35.079558871 +1000
++++ src/motion.c	2021-09-27 13:42:59.364269223 +1000
+@@ -1897,6 +1897,14 @@ static void mlp_prepare(struct context *
+     /* Get time for current frame */
+     cnt->currenttime = time(NULL);
+ 
++    /* Sanity check time */
++    if (cnt->currenttime < cnt->lastframetime) {
++       /*
++        * System time has gone backwards. NTP update?
++        */
++        cnt->lastframetime = cnt->currenttime;
++    }
++		
+     /*
+      * localtime returns static data and is not threadsafe
+      * so we use localtime_r which is reentrant and threadsafe

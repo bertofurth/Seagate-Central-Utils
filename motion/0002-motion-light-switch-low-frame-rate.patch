@@ -1,0 +1,15 @@
+--- src/alg.c.orig	2021-09-26 17:08:03.014276468 +1000
++++ src/alg.c	2021-09-26 17:10:11.355317667 +1000
+@@ -1320,7 +1320,11 @@ int alg_switchfilter(struct context *cnt
+  *   action - UPDATE_REF_FRAME or RESET_REF_FRAME
+  *
+  */
+-#define ACCEPT_STATIC_OBJECT_TIME 10  /* Seconds */
++/*
++ * After a light switches on, start looking for
++ * motion stright away. Don't wait 10 seconds!!
++ */
++#define ACCEPT_STATIC_OBJECT_TIME 1  /* Seconds */
+ #define EXCLUDE_LEVEL_PERCENT 20
+ void alg_update_reference_frame(struct context *cnt, int action)
+ {
