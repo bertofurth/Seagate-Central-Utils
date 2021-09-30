@@ -455,5 +455,21 @@ The issue only seemed to occur when the motion service was being
 forced to stop and restart many times. I did not see this issue
 while "motion" was running in a stable and uninterupted manner.
 
+### Use ffmpeg to generate a network stream (Interesting note)
+The "ffmpeg" tool that comes built with "motion" has a rudimentary web server
+built in that may improve in quality in future releases. The following command
+can be used to setup a "temporary" mjpeg style stream from a video source on
+/dev/video0
 
+    ffmpeg -framerate 1 -i /dev/video0 -r 1 -listen 1 -f mjpeg http://[::]:9999
+    
+If you use a tool like VLC that is capable of listening to an mjpeg style
+network stream, and enter a URL similar to
 
+    http://192.0.2.99:9999
+    
+then you will be able to see the stream from the attached video camera.
+
+Note that only one client can connect at a time, and once the client has
+disconnected the command will exit. Also note that this does not work at the
+same time as "motion" is using the specified /dev/videoX device.
