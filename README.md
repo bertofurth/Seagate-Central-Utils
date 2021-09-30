@@ -15,12 +15,12 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * diskus - Check per directory disk usage. Faster than "du". (rust)
 * pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
 
-### TODO 
-* wget / curl
-* gprof - CPU profiling tool. Troublehshoot high cpu.
+### TODO (but probably not)
+* wget / curl - Might be useful on the Seagate Central
 * agedu - Advanced Disk usage report https://www.chiark.greenend.org.uk/~sgtatham/agedu/
+* mjpg-streamer - Stream (but don't analyse) a webcam https://github.com/jacksonliam/mjpg-streamer
 
-Each utility has it's own subdirectory under the base directory
+Each utility has its own subdirectory under the base directory
 of this project where further resources specific to each one can be
 found. In the instructions below replace "myutil" with the name of the 
 utility being built.
@@ -101,9 +101,6 @@ There is a guide to generate a cross compilation toolset suitable
 for the Seagate Central at the following link.
 
 https://github.com/bertofurth/Seagate-Central-Toolchain
-
-It is suggested to build the latest versions of GCC and binutils
-available.
 
 At a minimum, the following packages will also need to be installed on
 the building system. Other packages will need to be installed 
@@ -221,13 +218,6 @@ similar to **download-src-myutil.sh** that attempts to download and
 extract the source archives using the versions that were tested.
 
      ./download-src-myutil.sh
-
-### Seagate Central libraries and headers
-Some, but not all, projects require that libraries be downloaded
-from the Seagate Central to the build host. By default we use the
-"sc-libs" subdirectory to store the Seagate Central libraries. See
-the README-myutil.md file for instructions to see if this step is
-required.
        
 ### Customize the build scripts
 You may need to edit the variables at the top of the **build-common**
@@ -464,6 +454,17 @@ appropriate packages that need installing. For example
 
 OpenSuse : zypper search tool-name
 Debian : apt search tool-name
+
+### Seagate Central native libraries and headers
+If you're having difficulty compiling a component library, then 
+an alternative approach might be to see if the library already
+exists as a native library on the Seagate Central and then 
+copy it to the build host for linking.
+
+The build scripts are configured to search under the "sc-libs"
+subdirectory of the base working directory for libraries in the
+"sc-libs/usr/lib" and "sc-libs/lib" directories. The same goes for
+header files and "sc-libs/usr/include".
 
 ## Troubleshooting Installation
 Here are some issues commonly encountered when installing newly
