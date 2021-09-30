@@ -19,7 +19,16 @@ camera_name NAS-USB
 # stream URL.
 camera_id 101
 
-# Video device to be used for capturing.
+# Video device to be used for capturing. Normally
+# something like /dev/video0, however you
+# may also use a "by-id" device ID to ensure that
+# a particular camera is accessed. Check the
+# /dev/v4l/by-id/ directory for your camera ID.
+#
+# For example
+#
+# videodevice /dev/v4l/by-id/usb-046d_0809_AFB3B233-video-index0
+#
 videodevice /dev/video0
 
 # Set the input palette. Try to select a "raw" style
