@@ -232,17 +232,21 @@ to the pitfalls of running "motion" on a low end system where
 CPU resources are at a premium, and where you're using a low
 end, low resolution USB or network camera.
 
-### CPU load.
+### CPU load
 Image processing is a CPU intensive task. Since the Seagate Central 
 is not a particularly powerful system, performing complicated image
 processing and manipulation can take its toll on system resources.
 
 I would suggest configuring "motion" to process frames at a very
-low rate (see "minimum_frame_time" and "framerate" motion
-configuration file parameters).
+low rate. Set the "minimum_frame_time" parameter to the number of
+seconds between each frame. 
 
-In addition using a smaller resolution for pictures ("width" and 
+In addition, using a smaller resolution for pictures ("width" and 
 "height") can also help with CPU load.
+
+I personally found the best compromise between CPU load and
+picture quality was using "minimum_frame_time 1" and a picture
+resolution of "width 640" and "height "480".
 
 I would also strongly advise going to the effort of correctly
 configuring the camera stream type as per the **Stream characteristics**
@@ -266,12 +270,13 @@ that an attached camera is capable of producing. Note that it can
 only be run while "motion" is not running and using the video device. 
 
 For example, the following command will show the range of available
-stream characteristics of the device on /dev/video0.
+stream characteristics of the device using /dev/video0.
 
     ffprobe /dev/video0 -list_formats all
 
 If you are using a network stream then the characteristics of
-the stream should be configurable on the network camera.
+the stream should be configurable on the network camera
+itself.
 
 #### Raw image stream (Advanced but important)
 This parameter is difficult to get right but it can save
@@ -281,10 +286,11 @@ By default, "motion" may try to use a JPEG or compressed stream
 coming from an attached USB camera as the source for it's image
 stream. This will add significant processing load to "motion"
 because it will need to spend CPU cycles decompressing each
-received JPEG image in order to analyse it.
+received JPEG image in order to analyse it and detect
+a motion event.
 
 It is much better if motion can receive images in a raw
-and uncompressed format.
+and uncompressed format from the camera.
 
 Try to use the ffprobe tool (see above) to see what kinds of
 raw or uncompressed streams your camera supports. 
