@@ -18,7 +18,7 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 ### TODO (but probably not)
 * wget / curl - Download files from websites
 * agedu - Advanced Disk usage report https://www.chiark.greenend.org.uk/~sgtatham/agedu/
-* mjpg-streamer - Stream (but don't analyse) a webcam https://github.com/jacksonliam/mjpg-streamer
+* mjpg-streamer - Stream a webcam (See TODO in motion folder) https://github.com/jacksonliam/mjpg-streamer
 
 Each utility has its own subdirectory under the base directory
 of this project where further resources specific to each one can be
