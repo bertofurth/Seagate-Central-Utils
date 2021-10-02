@@ -507,6 +507,8 @@ disconnected the "ffmpeg" command will exit. Also note that this does not
 work at the same time as "motion" is using the specified /dev/videoX device.
 
 ### Use a "by-id" device rather than /dev/videoX
+UPDATE : THIS DOESN'T ALWAYS WORK!!!! USE WITH CAUTION!!!
+
 It may be wiser to use a "by-id" device name rather than /dev/videoX to
 specify an attached video camera device if you are using more than one
 USB video camera. This way, even if the device number changes, you will
