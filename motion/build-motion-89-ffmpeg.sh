@@ -22,6 +22,7 @@ configure_it --prefix=$PREFIX \
 	     --enable-libv4l2 \
 	     --enable-libwebp \
 	     --enable-libx264 \
+	     --enable-shared \
 	     --disable-doc
 
 make_it
