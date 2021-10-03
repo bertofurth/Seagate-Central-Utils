@@ -251,7 +251,7 @@ In addition, using a smaller resolution for pictures ("width" and
 
 I personally found the best compromise between CPU load and
 picture quality was using "minimum_frame_time 1" and a picture
-resolution of "width 640" and "height "480".
+resolution of "width 640" and "height 480".
 
 I would also strongly advise going to the effort of correctly
 configuring the camera stream type as per the **Stream characteristics**
@@ -505,26 +505,6 @@ service does not consume much CPU at all!
 Note that only one client can connect at a time, and once the client has
 disconnected the "ffmpeg" command will exit. Also note that this does not
 work at the same time as "motion" is using the specified /dev/videoX device.
-
-### Use a "by-id" device rather than /dev/videoX
-UPDATE : THIS DOESN'T ALWAYS WORK!!!! USE WITH CAUTION!!!
-
-It may be wiser to use a "by-id" device name rather than /dev/videoX to
-specify an attached video camera device if you are using more than one
-USB video camera. This way, even if the device number changes, you will
-still be assured of connecting to the right device.
-
-For example, on my system I have a USB camera on /dev/video0 but I also
-have the following "by-id" device name that will be permanently assigned
-to this device.
-
-    /dev/v4l/by-id/usb-046d_0809_AFB3B233-video-index0
-
-I can then specify this unique device name in the motion configuration
-file instead of using /dev/video0.
-
-Check the /dev/v4l/by-id/ directory on your system once your camera is
-connected in order to determine it's unique ID.
 
 ### mjpg-streamer
 An alternative to "motion" is to simply setup the Seagate Central as a
