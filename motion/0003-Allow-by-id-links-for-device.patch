@@ -1,0 +1,27 @@
+--- src/motion.c.orig	2021-10-03 13:21:29.272001487 +1100
++++ src/motion.c	2021-10-03 19:38:14.540441622 +1100
+@@ -736,6 +736,7 @@
+ 
+ static int init_camera_type(struct context *cnt){
+ 
++    const char *real_video_device;
+     cnt->camera_type = CAMERA_TYPE_UNKNOWN;
+ 
+     #ifdef HAVE_MMAL
+@@ -758,6 +759,16 @@
+         return 0;
+     }
+ 
++    if (cnt->conf.video_device) {
++	real_video_device = realpath(cnt->conf.video_device, NULL);
++	if (strcmp(cnt->conf.video_device, real_video_device) != 0) {
++	    MOTION_LOG(NTC, TYPE_VIDEO, NO_ERRNO,
++		       _("Absolute name for video_device %s is %s"),
++		       cnt->conf.video_device, real_video_device);
++	    free (cnt->conf.video_device);
++	    cnt->conf.video_device = real_video_device;
++	}
++    }
+     #ifdef HAVE_BKTR
+         if (strncmp(cnt->conf.video_device,"/dev/bktr",9) == 0) {
+             cnt->camera_type = CAMERA_TYPE_BKTR;
