@@ -191,11 +191,15 @@ export PKG_CONFIG_PATH="$BUILDHOST_DEST/$PREFIX/lib/pkgconfig"
 #
 # The Seagate Central Cavium CNS3420 CPU uses the armv6k
 # arch and the mpcore cpu. There's no need to specify them
-# here when using the Seagate-Central-Toolchain cross compiler.
+# here when using the Seagate-Central-Toolchain cross compiler
+# however we document it here for completeness sake.
 #
-# Use "-mfloat-abi=soft" to disable hard float.
-# 
-export CFLAGS="$NOSTDINC_FLAGS -mcpu=mpcore"
+# Specify "-mfloat-abi=soft" to disable hard float.
+#
+# CPU_SPECIFIER="-mcpu=mpcore"
+# CPU_SPECIFIER="-mcpu=mpcore -mfloat-abi=soft"
+#
+export CFLAGS="$NOSTDINC_FLAGS $CPU_SPECIFIER"
 export CPPFLAGS=$CFLAGS
 export CXXFLAGS=$CFLAGS
 export ARCH=arm-linux
