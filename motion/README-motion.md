@@ -279,10 +279,13 @@ stream characteristics of the device using /dev/video0.
 
     ffprobe /dev/video0 -list_formats all
 
-If you are using a network stream then the characteristics of
-the stream should be configurable on the network camera
-itself.
+The following style of command will show the characteristics of an
+rtsp network stream from a network camera. The stream characteristics
+should be configurable on the network camera and the exact 
+format of the stream URL will be specific to the camera.
 
+    ffprobe rtsp://user:password@192.0.2.199:554/Streaming/Channels/101
+    
 #### Raw image stream (Advanced but important)
 This parameter is difficult to get right but it can save
 very significant CPU resources if configured correctly.
