@@ -322,20 +322,30 @@ what image stream parameters are being used by motion as it
 starts up.
 
 #### Movies
-"motion" has the ability to generate movie files of detected events.
-I would suggest *not* enabling this feature as it consumes a great
-deal of CPU.
+"motion" has the ability to generate movie files of detected events
+using the "movie_output on" configuration file setting. I would
+suggest *not* enabling this feature as it consumes a great deal of
+CPU resources.
 
 When the CPU is overloaded, motion will deliberately "cut" frames
 from a generated movie file which means that a generated movie
-might end up being just one "still" frame shown for the entire
-length of the video!
+may end up being just one "still" frame shown for the entire length
+of the video! 
 
 #### mask settings
 It's possible to block out portions of the field of view in motion
 by using the mask_file, mask_privacy and smart_mask_speed settings.
 These features consume significant CPU resources. If possible, try to
 avoid turning these on.
+
+#### rotation using 90 or 270 degrees
+Motion has a feature that allows you to rotate or flip an image on 
+an axis before it is saved or streamed.
+
+If you use these features then try to avoid using the "rotate 90" or
+"rotate 270" settings as they cause a significant amount of extra 
+CPU load. "rotate 180", or using the "flip_axis" setting to flip an
+image vertically or horizontally are much less CPU intensive.
 
 ### False positives
 You will likely need to dedicate a significant amount of time
@@ -444,6 +454,24 @@ unit will remember them and assign them each a new /dev/videoX identity.
 You can clear the cache of these identities by deleting the 
 "/etc/dev.tar" file and rebooting the unit.
 
+### Use a "by-id" device rather than /dev/videoX
+It may be wiser to use a "by-id" device name rather than /dev/videoX to
+specify an attached video camera device if you are using more than one
+USB video camera. This way, even if the device number changes, you will
+still be assured of connecting to the right device.
+
+For example, on my system I have a USB camera on /dev/video0 but I also
+have the following "by-id" device name that will be permanently assigned
+to this device.
+
+    /dev/v4l/by-id/usb-046d_0809_AFB3B233-video-index0
+
+I can then specify this unique device name in the motion configuration
+file instead of using /dev/video0.
+
+Check the /dev/v4l/by-id/ directory on your system once your camera is
+connected in order to determine it's unique ID.
+
 ### Failed to set UVC probe control
 Sometimes while starting and stopping the "motion" service multiple
 times, perhaps during initial setup, the software can stop working and
@@ -457,6 +485,17 @@ the unit.
 The issue only seemed to occur when the motion service was being
 forced to stop and restart many times. I did not see this issue
 while "motion" was running in a stable and uninterupted manner.
+
+### USB port goes down with camera connected
+In some cases the USB port on the Seagate Central may not be able
+to supply enough power to support multiple USB cameras, or even
+a single USB camera with high power usage. An error message
+similar to the following may appear in the system logs.
+
+    usb usb1-port1: attempt power cycle
+
+In this case consider using a powered USB hub to provide power
+to the USB camera.
 
 ## Notes
 ### Optional patches for motion
@@ -492,7 +531,7 @@ server built in that may improve in quality in future ffmpeg releases.
 The following command can be used to setup a "temporary" mjpeg style 
 network stream from a video source on /dev/video0
 
-    ffmpeg -framerate 1 -input_format mjpeg -i /dev/video0 -c copy -listen 1 -f mjpeg http://[::]:9999
+    ffmpeg -framerate 1 -i /dev/video0 -c copy -listen 1 -f mjpeg http://[::]:9999
     
 If you use a tool like VLC that is capable of listening to an mjpeg style
 network stream then you may enter a network stream URL similar to
