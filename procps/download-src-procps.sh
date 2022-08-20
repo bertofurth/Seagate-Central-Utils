@@ -9,10 +9,12 @@
 
 ncurses='http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz'
 procps='https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.bz2'
+sysstat='http://pagesperso-orange.fr/sebastien.godard/sysstat-12.6.0.tar.xz'
 
 echo_archives() {
     echo "${ncurses}"
     echo "${procps}"
+    echo "${sysstat}"
 }
 
 die() {
