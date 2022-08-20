@@ -4,8 +4,8 @@ view and manipulate system status.
 
 https://gitlab.com/procps-ng/procps/-/wikis/home
 
-sysstat contains a number of tools to monitor system performance
-and activity.
+sysstat contains a number of tools to monitor system cpu and io 
+performance. These include iostat, pidstat and mpstat.
 
 https://github.com/sysstat/sysstat
 
