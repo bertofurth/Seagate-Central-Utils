@@ -8,7 +8,7 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * Motion - Video camera monitoring software
 
 ### Command line tools
-* procps - Fully functional standard versions of top, ps, kill, etc
+* procps & sysstat - Process monitoring tools including top, ps, iostat etc
 * coreutils - GNU coreutils basic unix commands.
 * less - Full version of tool used to view text files, "less is more".
 * screen - Terminal multiplexer useful for "headless" servers.
