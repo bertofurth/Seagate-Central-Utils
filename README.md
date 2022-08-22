@@ -14,6 +14,7 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * screen - Terminal multiplexer useful for "headless" servers.
 * diskus - Check per directory disk usage. Faster than "du". (rust)
 * pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
+* iperf - Network performance testing tool.
 
 ### TODO (but probably not)
 * wget / curl - Download files from websites
