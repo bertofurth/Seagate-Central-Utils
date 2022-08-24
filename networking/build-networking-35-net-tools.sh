@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# libnml is needed by ethtool
-
 source ../build-common
 source ../build-functions
 
@@ -10,7 +8,7 @@ source ../build-functions
 #
 # If not then the user will be prompted for information
 
-CONFIG_H=$(basename $(ls -1drv net-tools-config.h* | head -1))
+CONFIG_H=net-tools-config.h
 
 check_source_dir "net-tools"
 
@@ -22,7 +20,7 @@ else
     echo "**************** WARNING **********************"
     echo "***********************************************"
     echo
-    echo "No net-tools-config.h preconfigured config file found."
+    echo "No $CONFIG_H preconfigured config file found."
     echo "You may be prompted for information by the net-tools"
     echo "make process."
     echo
