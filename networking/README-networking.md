@@ -17,6 +17,9 @@ interface.
 A full featured version of the useful "netstat" tool for showing
 network connections.
 
+## dropwatch
+Monitor packet drops
+
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
 **README.md** file located in the base directory of the
@@ -27,17 +30,13 @@ instructions below for notes and procedures specific to "pEmacs".
 
 ## Build Procedure
 ### Source code download and extraction
-This procedure was tested using the following versions of software.
-Unless otherwise noted these are the latest stable releases at the
-time of writing. Hopefully later versions, or at least those with
-the same major version numbers, will still work with this guide.
-
-* iperf-3.11 - https://downloads.es.net/pub/iperf/iperf-3.11.tar.gz
-
 Download the required source code archives for each component to 
 the **src** subdirectory of the base working directory and extract
-them. This can be done automatically for the versions listed above
-by running the **download-src-iperf.sh** script.
+them. This can be done automatically by running the
+**download-src-networking.sh** script.
+
+See the **download-src-networking.sh** script for version numbers
+and source package URLs.
     
 ## "iperf" basic usage
 
@@ -55,7 +54,13 @@ On the "client"
 
 ## "ethtool" basic usage
 
-ethtool eth0 
-ethtool -k eth0 : Show basic offload properties
-ethtool -K eth0 FEATURE <on/off> : Enable or disable features
+    ethtool eth0 
+    ethtool -k eth0 : Show basic offload properties
+    ethtool -K eth0 FEATURE <on/off> : Enable or disable features
 
+## "dropwatch" basic usage
+There is only one command line option for "dropwatch" so it is almost always
+invoked as follows.
+
+    dropwatch -lkas
+    
