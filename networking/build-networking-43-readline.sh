@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# libnml is needed by ethtool
+# readline is needed by dropwatch
 
 source ../build-common
 source ../build-functions

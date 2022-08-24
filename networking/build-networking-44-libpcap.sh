@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# libpcap is needed by dropwatch
+
 source ../build-common
 source ../build-functions
 check_source_dir "libpcap"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# libnml is needed by ethtool
+# libnl is needed by dropwatch and libpcap
 
 source ../build-common
 source ../build-functions
