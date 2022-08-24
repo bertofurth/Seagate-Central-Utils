@@ -9,9 +9,29 @@
 
 iperf3='https://downloads.es.net/pub/iperf/iperf-3.11.tar.gz'
 
+libnml='https://netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2'
+ethtool='https://mirrors.edge.kernel.org/pub/software/network/ethtool/ethtool-5.19.tar.xz'
+
+nettools='https://downloads.sourceforge.net/project/net-tools/net-tools-2.10.tar.xz'
+
+libnl='https://www.infradead.org/~tgr/libnl/files/libnl-3.2.25.tar.gz'
+readline='https://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz'
+libpcap='https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz'
+
+dropwatch='https://github.com/nhorman/dropwatch/archive/refs/tags/v1.5.4.tar.gz'
+
 echo_archives() {
-    echo "${ncurses}"
     echo "${iperf3}"
+
+    echo "${libnml}"
+    echo "${ethtool}"
+    
+    echo "${nettools}"
+
+    echo "${libnl}"
+    echo "${readline}"
+    echo "${libpcap}"
+    echo "${dropwatch}"
 }
 
 echo_git() {
