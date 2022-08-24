@@ -1,7 +1,9 @@
 # README-networking.md
+A set of networking tools that aid in troubleshooting and
+configuring networking on the Seagate Central.
 
-# NOTICE : THIS IS A WORK IN PROGRESS. NOT FINISHED YET.
-A suite of useful network troubleshooting tools 
+# NOTICE : THIS IS A WORK IN PROGRESS.
+Everything seems to be working at the moment but still needs tidying up.
 
 ## iperf
 A tool that helps to analyze networking performance between
