@@ -1,8 +1,21 @@
-# README-iperf.md
-iperf is a tool that helps to analyze networking performance between
+# README-networking.md
+
+# NOTICE : THIS IS A WORK IN PROGRESS. NOT FINISHED YET.
+A suite of useful network troubleshooting tools 
+
+## iperf
+A tool that helps to analyze networking performance between
 a "client" and a "server" device. 
 
 https://iperf.fr/
+
+## ethtool
+View and change low level driver characteristics for the ethernet
+interface.
+
+## netstat
+A full featured version of the useful "netstat" tool for showing
+network connections.
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
@@ -39,4 +52,10 @@ On the "server"
 On the "client"
 
     iperf3 -c <server-ip-address> -f K
+
+## "ethtool" basic usage
+
+ethtool eth0 
+ethtool -k eth0 : Show basic offload properties
+ethtool -K eth0 FEATURE <on/off> : Enable or disable features
 
