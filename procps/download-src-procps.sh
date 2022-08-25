@@ -11,10 +11,17 @@ ncurses='http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz'
 procps='https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.bz2'
 sysstat='http://pagesperso-orange.fr/sebastien.godard/sysstat-12.6.0.tar.xz'
 
+libtraceevent='https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git/snapshot/libtraceevent-1.6.2.tar.gz'
+libtracefs='https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/snapshot/libtracefs-1.4.2.tar.gz'
+tracecmd='https://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git/snapshot/trace-cmd-v3.1.2.tar.gz'
+
 echo_archives() {
     echo "${ncurses}"
     echo "${procps}"
     echo "${sysstat}"
+    echo "${libtraceevent}"
+    echo "${libtracefs}"
+    echo "${tracecmd}"
 }
 
 die() {

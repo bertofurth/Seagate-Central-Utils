@@ -45,7 +45,7 @@ checkerr
 
 let current_stage++
 echo Running stage $current_stage : Delete header files
-rm -rf cross/usr/local/share/locale
+rm -rf cross/usr/local/include
 checkerr
 
 let current_stage++
