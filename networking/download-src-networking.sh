@@ -7,6 +7,8 @@
 
 # Based on gcc's download_prerequisites script
 
+ncurses='http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz'
+
 iperf3='https://downloads.es.net/pub/iperf/iperf-3.11.tar.gz'
 
 libnml='https://netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2'
@@ -21,6 +23,8 @@ libpcap='https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz'
 dropwatch='https://github.com/nhorman/dropwatch/archive/refs/tags/v1.5.4.tar.gz'
 
 echo_archives() {
+    echo "${ncurses}
+
     echo "${iperf3}"
 
     echo "${libnml}"
