@@ -20,6 +20,7 @@ libnl='https://www.infradead.org/~tgr/libnl/files/libnl-3.2.25.tar.gz'
 readline='https://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz'
 libpcap='https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz'
 
+binutils='https://mirrors.kernel.org/gnu/binutils/binutils-2.39.tar.xz'
 dropwatch='https://github.com/nhorman/dropwatch/archive/refs/tags/v1.5.4.tar.gz'
 
 echo_archives() {
@@ -35,6 +36,7 @@ echo_archives() {
     echo "${libnl}"
     echo "${readline}"
     echo "${libpcap}"
+    echo "${binutils}"
     echo "${dropwatch}"
 }
 
