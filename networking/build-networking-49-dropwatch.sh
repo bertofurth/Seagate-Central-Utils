@@ -16,8 +16,8 @@ export LIBNLG3_CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/libnl3"
 # Libtool files aren't accurate when they're on the
 # building host so let's temporarily move them
 
-mkdir la
-mv -f $BUILDHOST_DEST/$PREFIX/lib/*.la la/
+mkdir $OBJ/$LIB_NAME/la
+mv -f $BUILDHOST_DEST/$PREFIX/lib/*.la $OBJ/$LIB_NAME/la/
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
@@ -28,7 +28,7 @@ make_it
 install_it
 
 # Move the libtool files back
-mv -f la/*.la $BUILDHOST_DEST/$PREFIX/lib/
+mv -f $OBJ/$LIB_NAME/la/*.la $BUILDHOST_DEST/$PREFIX/lib/
 
 finish_it
 
