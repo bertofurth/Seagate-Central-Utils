@@ -2,25 +2,33 @@
 
 # libnml is needed by ethtool
 
-### I CANT GET THIS TO WORK
-
-exit 0
-
 source ../build-common
 source ../build-functions
 check_source_dir "dropwatch"
 # Generate configure script (dropwatch needs this)
 ./autogen.sh
 change_into_obj_directory
-export READLINE_CFLAGS=$CFLAGS
-export READLINE_LIBS=$LDFLAGS
+export READLINE_CFLAGS="$CFLAGS"
+export READLINE_LIBS="$LDFLAGS -lreadline -lncurses"
 export LIBNLG3_CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/libnl3"
+
+
+# Libtool files aren't accurate when they're on the
+# building host so let's temporarily move them
+
+mkdir la
+mv -f $BUILDHOST_DEST/$PREFIX/lib/*.la la/
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
 	     --sbindir=$EXEC_PREFIX/sbin \
+	     --without-bfd \
 	     --host=$ARCH 
 make_it
 install_it
+
+# Move the libtool files back
+mv -f la/*.la $BUILDHOST_DEST/$PREFIX/lib/
+
 finish_it
 
