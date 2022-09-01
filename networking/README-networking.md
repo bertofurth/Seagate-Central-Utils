@@ -2,6 +2,14 @@
 A set of networking tools that aid in troubleshooting and
 configuring networking on the Seagate Central.
 
+The build and installation instructions below are designed to be
+read in conjunction with the main set of instructions in the
+**README.md** file located in the base directory of the
+Seagate-Central-Utils project. 
+
+Refer to **README.md** for the overall guidelines and refer to the
+instructions below for notes and procedures specific to these tools.
+
 # NOTICE : THIS IS A WORK IN PROGRESS.
 Everything seems to be working at the moment but still needs tidying up.
 
@@ -20,15 +28,8 @@ A full featured version of the useful "netstat" tool for showing
 network connections.
 
 ## dropwatch
-Monitor packet drops
-
-The build and installation instructions below are designed to be
-read in conjunction with the main set of instructions in the
-**README.md** file located in the base directory of the
-Seagate-Central-Utils project. 
-
-Refer to **README.md** for the overall guidelines and refer to the
-instructions below for notes and procedures specific to "pEmacs".
+Monitor packet drops. This requires that the kernel on the unit be
+recompiled with the CONFIG_NET_DROP_MONITOR flag enabled.
 
 ## Build Procedure
 ### Source code download and extraction
