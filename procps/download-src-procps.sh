@@ -28,6 +28,8 @@ echo_archives() {
     echo "${libtracefs}"
     echo "${tracecmd}"
     echo "${popt}"
+    echo "${binutils}"
+    echo "${zlib}"
     echo "${oprofile}"
 }
 
