@@ -27,10 +27,10 @@ echo_archives() {
     echo "${libtraceevent}"
     echo "${libtracefs}"
     echo "${tracecmd}"
-    echo "${popt}"
-    echo "${binutils}"
-    echo "${zlib}"
-    echo "${oprofile}"
+#    echo "${popt}"
+#    echo "${binutils}"
+#    echo "${zlib}"
+#    echo "${oprofile}"
 }
 
 die() {
