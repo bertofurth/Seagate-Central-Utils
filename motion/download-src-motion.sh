@@ -8,7 +8,7 @@
 # Based on gcc's download_prerequisites script
 
 libjpegturbo='https://downloads.sourceforge.net/project/libjpeg-turbo/2.1.1/libjpeg-turbo-2.1.1.tar.gz'
-zlib='https://zlib.net/zlib-1.2.11.tar.xz'
+zlib='https://zlib.net/fossils/zlib-1.2.12.tar.gz'
 ffmpeg='http://ffmpeg.org/releases/ffmpeg-4.4.tar.xz'
 tiff='https://download.osgeo.org/libtiff/tiff-4.3.0.tar.gz'
 libpng='https://download.sourceforge.net/libpng/libpng-1.6.37.tar.xz'
