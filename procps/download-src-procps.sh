@@ -15,6 +15,11 @@ libtraceevent='https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git/sn
 libtracefs='https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/snapshot/libtracefs-1.4.2.tar.gz'
 tracecmd='https://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git/snapshot/trace-cmd-v3.1.2.tar.gz'
 
+popt='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz'
+binutils='https://mirrors.kernel.org/gnu/binutils/binutils-2.39.tar.xz'
+zlib='https://zlib.net/fossils/zlib-1.2.12.tar.gz'
+oprofile='https://prdownloads.sourceforge.net/oprofile/oprofile-1.4.0.tar.gz'
+
 echo_archives() {
     echo "${ncurses}"
     echo "${procps}"
@@ -22,6 +27,8 @@ echo_archives() {
     echo "${libtraceevent}"
     echo "${libtracefs}"
     echo "${tracecmd}"
+    echo "${popt}"
+    echo "${oprofile}"
 }
 
 die() {
