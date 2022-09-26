@@ -19,13 +19,13 @@ a "client" and a "server" device.
 
 https://iperf.fr/
 
-## ethtool
-View and change low level driver characteristics for the ethernet
-interface.
-
 ## netstat
 A full featured version of the useful "netstat" tool for showing
 network connections.
+
+## ethtool
+View and change low level driver characteristics for the ethernet
+interface.
 
 ## dropwatch
 Monitor packet drops. This requires that the kernel on the unit be
@@ -42,24 +42,33 @@ See the **download-src-networking.sh** script for version numbers
 and source package URLs.
     
 ## "iperf" basic usage
+Start a process on a listening "server" as follows.
 
-From
-
-https://www.tecmint.com/test-network-throughput-in-linux/
-
-On the "server"
-
-    iperf3 -s -f K 
+    iperf3 -s 
     
-On the "client"
+On the "client" issue the following command to test transmission speeds
+from the client to the server.
 
-    iperf3 -c <server-ip-address> -f K
+    iperf3 -c <server-ip-address>
+
+On the "client" issue the following command to test transmission speeds
+from the server to the client
+
+    iperf3 -c <server-ip-address> -R
+
+Both the server and the client will report statistics about how fast a
+network stream was maintained.
+
+## "netstat" basic usage
+
+     netstat -a
 
 ## "ethtool" basic usage
 
     ethtool eth0 
     ethtool -k eth0 : Show basic offload properties
     ethtool -K eth0 FEATURE <on/off> : Enable or disable features
+    ethtool -g eth0 : Show ethernet tx/rx ring properties
 
 ## "dropwatch" basic usage
 There is only one command line option for "dropwatch" so it is almost always
@@ -67,3 +76,10 @@ invoked as follows.
 
     dropwatch -lkas
     
+Then at the dropwatch prompt issue the "start" command. Hit CTRL-C to end 
+monitoring.
+
+    dropwatch> start
+    
+Note again that the kernel must be recompiled with the CONFIG_NET_DROP_MONITOR
+option enabled for this tool to be able to monitor drops.
