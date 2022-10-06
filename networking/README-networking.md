@@ -27,6 +27,10 @@ network connections.
 View and change low level driver characteristics for the ethernet
 interface.
 
+## iproute2
+The standard "ip" commands that can be used to configure and view
+network settings. Includes commands ip, ss, nstat and others.
+
 ## dropwatch
 Monitor packet drops. This requires that the kernel on the unit be
 recompiled with the CONFIG_NET_DROP_MONITOR flag enabled.
