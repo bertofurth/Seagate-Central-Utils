@@ -16,7 +16,7 @@ export EXTRA_CFLAGS="-DMS_PRIVATE=262144 -DMS_REC=16384 -DCLOCK_BOOTTIME=7"
 
 configure_it
 
-export SBINDIR=$PREFIX/sbin
+export SBINDIR=$PREFIX/bin
 export DESTDIR=$BUILDHOST_DEST
 make_it V=1
 install_it
