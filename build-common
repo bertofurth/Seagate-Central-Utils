@@ -186,7 +186,7 @@ export NOSTDINC_FLAGS="--sysroot=$SYSROOT -I$SYSROOT/usr/include \
 # "--pkg-config=pkg-config" to point to a working version of 
 # pkg-config.
 #
-export PKG_CONFIG_PATH="$BUILDHOST_DEST/$PREFIX/lib/pkgconfig"
+export PKG_CONFIG_LIBDIR="$BUILDHOST_DEST/$PREFIX/lib/pkgconfig"
 
 #
 # The Seagate Central Cavium CNS3420 CPU uses the armv6k

@@ -23,6 +23,8 @@ libpcap='https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz'
 binutils='https://mirrors.kernel.org/gnu/binutils/binutils-2.39.tar.xz'
 dropwatch='https://github.com/nhorman/dropwatch/archive/refs/tags/v1.5.4.tar.gz'
 
+iproute2='https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.5.0.tar.xz'
+
 echo_archives() {
     echo "${ncurses}"
 
@@ -38,6 +40,8 @@ echo_archives() {
     echo "${libpcap}"
     echo "${binutils}"
     echo "${dropwatch}"
+
+    echo "${iproute2}"
 }
 
 echo_git() {
