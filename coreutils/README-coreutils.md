@@ -2,7 +2,7 @@
 coreutils is a set of utilities providing some of the basic
 core commands of a modern GNU base unix system. 
 
-https://www.gnu.org/software/coreutils/![image](https://user-images.githubusercontent.com/53927348/133438365-71bf5616-1bf5-4462-a3dd-dd1bafd2a9b2.png)
+https://www.gnu.org/software/coreutils
 
 Most basic unix commands are already implemented on the Seagate
 Central however many are provided by the "busybox" tool which
@@ -67,7 +67,7 @@ all of them on the Seagate Central.
 We would suggest only installing the specific utilities where you are
 genuinely not happy with the version provided on the Seagate Central.
 
-For your reference here is a full list of the coreutils commands built 
+For reference, here is a full list of the coreutils commands built 
 by these instructions.
 
 b2sum, base32, base64, basename, basenc, cat, chacl, chcon, chgrp, 
