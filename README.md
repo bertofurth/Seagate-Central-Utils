@@ -15,9 +15,9 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 * diskus - Check per directory disk usage. Faster than "du". (rust)
 * pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
 * networking - Network troubleshooting tools.
+* wget2 - Download files from web sites
 
 ### TODO (but probably not)
-* wget / curl - Download files from websites
 * agedu - Advanced Disk usage report https://www.chiark.greenend.org.uk/~sgtatham/agedu/
 * mjpg-streamer - Stream a webcam (See TODO in motion folder) https://github.com/jacksonliam/mjpg-streamer
 
