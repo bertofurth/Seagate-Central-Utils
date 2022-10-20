@@ -158,7 +158,7 @@ platform that you only give Syncthing "light" duties. It may be that during
 an initial sync or while a large data transfer is taking place the system may
 temporarily be a little overwhelmed.
 
-Additionally, I would not suggest enabling full encryption functionality
-for folders with a large volume of data as this may further strain the limited
-CPU resources of the unit.
+Additionally, I would suggest disabling any compression and not enabling full
+encryption functionality for stored files in folders with a large volume of
+data as this may further strain the limited CPU resources of the unit.
 
