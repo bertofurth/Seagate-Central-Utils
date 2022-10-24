@@ -2,10 +2,13 @@
 Instructions for compiling and installing new and updated utilities 
 for the Seagate Central NAS (ARM32 - armv6l) based platform.
 
+TODO : Move commonly built elements to a common directory
+
 ### Servers
 * minidlna - Efficient media server replacement for the inbuilt Twonky DLNA. 
 * syncthing - Multi platform file synchronisation tool. (go)
 * Motion - Video camera monitoring software
+* lighttpd - Updated and more functional version of web server.
 
 ### Command line tools
 * procps & sysstat - Process monitoring tools including top, ps, iostat etc
@@ -23,8 +26,8 @@ for the Seagate Central NAS (ARM32 - armv6l) based platform.
 
 Each utility has its own subdirectory under the base directory
 of this project where further resources specific to each one can be
-found. In the instructions below replace "myutil" with the name of the 
-utility being built.
+found. In the instructions below **replace "myutil" with the name of the 
+utility being built**.
 
 The build and installation instructions in this file are designed to be
 read in conjunction with the utility specific instructions as seen
@@ -39,7 +42,7 @@ suite installed, run the following commands to download and compile
     git clone https://github.com/bertofurth/Seagate-Central-Utils.git
     cd Seagate-Central-Utils
     
-    # Change into the "myutil" sub-directory  
+    # Change into the "myutil" sub-directory 
     cd myutil
     
     # Obtain the required source code
@@ -63,7 +66,7 @@ to run as root.
 
      tar -xvf seagate-central-myutil.tar.gz
      cd seagate-central-myutil
-     cp -r usr/* /usr
+     cp -r * /
 
 See the per utility README-myutil.md file for any utility specific
 configuration steps.
@@ -120,12 +123,11 @@ and that you can successfully issue the **su** command to gain root
 privileges. Note that some later versions of Seagate Central firmware
 deliberately disable su access by default.
 
-If you do not have su access to the target Seagate Central, then consider
-following the "Firmware Upgrade" instructions in the 
-**Seagate-Central-Samba** project at the link below which will
-automatically re-enable su access as a result of the procedure.
+If you do not have su/root access to the target Seagate Central, then 
+consider following the instructions linked below in the 
+**Seagate-Central-Tips** project.
 
-https://github.com/bertofurth/Seagate-Central-Samba/
+https://github.com/bertofurth/Seagate-Central-Tips/blob/main/Reset-SU-Root-Password.md
 
 ### Know how to copy files between your host and the Seagate Central. 
 Not only should you know how to transfer files to and from your 
@@ -147,7 +149,7 @@ The only time during these procedures you should be acting as the
 root user on the build system is if you are deliberately installing 
 new components on your build system to facilitate the building process. 
 
-### Optional - Add /usr/local/... to Seagate Central PATH
+### Optional / Strongly Recommended - Add /usr/local/ to Seagate Central PATH
 The instructions in these projects are normally organized so that
 new software will be installed on the Seagate Central under the
 "/usr/local/bin" or "/usr/local/sbin" directories.
