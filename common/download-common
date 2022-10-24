@@ -12,11 +12,15 @@ die() {
     exit 1
 }
 
+# Supply this function with the list of URLs to download
 do_download() {
     mkdir -p src
     cd src
 
     if type wget > /dev/null ; then
+	# "wget -N -c" : Only download the file if it does not
+	# already exists locally, or if the size is different
+	# locally, or if the timestamp on the server is newer.
 	fetch='wget -N -c'
     else
 	if type curl > /dev/null; then
@@ -28,4 +32,10 @@ do_download() {
 
     for ar in $@
     do
+        ${fetch} "${ar}"    \
+	    || die "Cannot download $ar"
+	tar -xf "$(basename ${ar})" \
+	    || die "Cannot extract $(basename ${ar})"
+    done
+    unset ar
 }
