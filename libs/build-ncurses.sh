@@ -1,16 +1,12 @@
 #!/bin/bash
 #
-# So many of the utilities in this project depend on ncurses
-# that we're going to have a common "build ncurses" script
-# that they all use.
-#
 # ncurses on the Seagate Central is a little bit problematic
 # in that it only supports a few terminal types. I'm sure this
 # build script could be improved but it seems to work well
 # for now.
 #
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 
 #If using ncurses 5.x
 #export CXXFLAGS=$CXXFLAGS" -std=gnu++11"
@@ -56,7 +52,7 @@ if [ $? -ne 0 ]; then
     echo
     echo Failed to generate $OBJ/$LIB_NAME/ncurses/fallback.c
     echo Check that ncurses utilities \"tic\" and \"infocmp\" are
-    echo installed on this system.
+    echo installed on this build system.
     exit -1
 fi
 popd
