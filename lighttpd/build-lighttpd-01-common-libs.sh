@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-source ../common-libs/build-ncurses.sh
+source ../libs/build-ncurses.sh
