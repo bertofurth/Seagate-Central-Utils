@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# This file should not be executed, instead it should be
+# sourced by the download script in each utility directory
+
+# Based on gcc's download_prerequisites script
+
+set -o pipefail
+
+die() {
+    echo "error: $@" >&2
+    exit 1
+}
+
+do_download() {
+    mkdir -p src
+    cd src
+
+    if type wget > /dev/null ; then
+	fetch='wget -N -c'
+    else
+	if type curl > /dev/null; then
+	    fetch='curl -LO'
+	else
+	    die "Unable to find wget or curl"
+	fi
+    fi
+
+    for ar in $@
+    do
+}
