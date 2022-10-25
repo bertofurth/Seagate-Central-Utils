@@ -34,9 +34,10 @@ configure_it --prefix=$PREFIX \
 	     --sbindir=$EXEC_PREFIX/sbin \
 	     --host=$ARCH \
 	     --enable-shared \
+	     --enable-static \
 	     --without-tpm \
 	     --enable-openssl-compatibility
-#	     --enable-static 
+
 
 # Tried to get rid of the thousands
 # of warning messages during build saying
