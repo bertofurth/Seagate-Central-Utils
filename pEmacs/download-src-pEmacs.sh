@@ -12,7 +12,7 @@ echo_git() {
 }
 
 mkdir -p src
-cd src
+pushd src
 
 if ! type git > /dev/null ; then
     die "Unable to find git!"
@@ -24,6 +24,7 @@ do
 	|| die "Cannot git clone download $ar"
 done
 unset ar	  
+popd
 
 if [[ -n $SKIP_COMMON ]]; then
     exit 0
