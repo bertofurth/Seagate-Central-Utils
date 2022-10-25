@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# Prerequisites for gnutls
+# libunistring
+# libidn2
+# libtasn1
+# p11-kit
+
 source ../common/build-common
 source ../common/build-functions
 check_source_dir "gnutls"
@@ -8,6 +15,12 @@ change_into_obj_directory
 # temporarily rename it.
 #
 mv $BUILDHOST_DEST/$PREFIX/lib/libidn2.la $BUILDHOST_DEST/$PREFIX/lib/libidn2.la.orig
+
+#
+# Need to specify where the p11-kit headers are or we get
+# error message
+# fatal error: p11-kit/pkcs11.h: No such file or directory
+export P11_KIT_CFLAGS=-I$BUILDHOST_DEST/$PREFIX/include/p11-kit-1
 
 # Configure options:
 #
