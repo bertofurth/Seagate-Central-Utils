@@ -27,16 +27,16 @@ export P11_KIT_CFLAGS=-I$BUILDHOST_DEST/$PREFIX/include/p11-kit-1
 # without-tpm : TPM is support for the Trusted Platform
 # Module, a hardware module not included in the Seagate
 # Central.
-#
+# 
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
 	     --sbindir=$EXEC_PREFIX/sbin \
 	     --host=$ARCH \
-	     --enable-static \
 	     --enable-shared \
 	     --without-tpm \
 	     --enable-openssl-compatibility
+#	     --enable-static 
 
 # Tried to get rid of the thousands
 # of warning messages during build saying
