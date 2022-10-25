@@ -81,10 +81,10 @@ EXEC_PREFIX=${EXEC_PREFIX:-/usr/local}
 # tree of native library files and include headers as copied
 # from the Seagate Central.
 #
-# From the Seagate central copy /lib/* and /usr/lib/* to this
+# From the Seagate central download /lib/* and /usr/lib/* to this
 # directory. Also copy /usr/include/* along with subdirectories.
 #
-# You may need to edit usr/lib/libc.so and
+# You may need to manually edit usr/lib/libc.so and
 # usr/lib/libpthread.so to remove absolute path names.
 #
 SEAGATE_LIBS_BASE=$(pwd)/sc-libs
@@ -120,13 +120,17 @@ export PATH=$TOOLS:$PATH
 #
 export LDFLAGS="--sysroot=$SYSROOT \
        -L$SYSROOT/lib -L$SYSROOT/usr/lib \
-       -L$BUILDHOST_DEST/$PREFIX/lib -L$SEAGATE_LIBS_BASE/lib \
-       -L$SEAGATE_LIBS_BASE/usr/lib \
+       -L$BUILDHOST_DEST/$PREFIX/lib \
        -Wl,-rpath-link=$SYSROOT/lib \
        -Wl,-rpath-link=$SYSROOT/usr/lib \
-       -Wl,-rpath-link=$BUILDHOST_DEST/$PREFIX/lib \
-       -Wl,-rpath-link=$SEAGATE_LIBS_BASE/lib  \
-       -Wl,-rpath-link=$SEAGATE_LIBS_BASE/usr/lib"
+       -Wl,-rpath-link=$BUILDHOST_DEST/$PREFIX/lib"
+
+if [[ -d $SEAGATE_LIBS_BASE ]]; then
+   export LDFLAGS="$LDFLAGS -L$SEAGATE_LIBS_BASE/lib \
+   -L$SEAGATE_LIBS_BASE/usr/lib \
+   -Wl,-rpath-link=$SEAGATE_LIBS_BASE/lib
+   -Wl,-rpath-link=$SEAGATE_LIBS_BASE/usr/lib"
+fi
 
 # "rpath" lets binaries running on the target platform
 # know where to search for shared libraries that are
@@ -176,8 +180,12 @@ export LDFLAGS="$LDFLAGS -Wl,-z,max-page-size=0x10000 -Wl,-z,common-page-size=0x
 # $SEAGATE_LIBS_BASE/usr/include/md5
 #
 export NOSTDINC_FLAGS="--sysroot=$SYSROOT -I$SYSROOT/usr/include \
-       -I$BUILDHOST_DEST/$PREFIX/include \
+       -I$BUILDHOST_DEST/$PREFIX/include"
+
+if [[ -d $SEAGATE_LIBS_BASE ]]; then
+       export NOSTDINC_FLAGS="$NOSTDINC_FLAGS \
        -I$SEAGATE_LIBS_BASE/usr/include"
+fi
 
 #
 # For some configure scripts it's important to have access
