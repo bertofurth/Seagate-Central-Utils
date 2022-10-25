@@ -16,3 +16,4 @@ fi
 
 # Download common libraries
 ../libs/download-src-ncurses.sh
+../libs/download-src-Linux-PAM.sh
