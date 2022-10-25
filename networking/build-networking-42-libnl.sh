@@ -1,9 +1,7 @@
 #!/bin/bash
-
 # libnl is needed by dropwatch and libpcap
-
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "libnl"
 change_into_obj_directory
 configure_it --prefix=$PREFIX \

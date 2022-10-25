@@ -1,7 +1,6 @@
 #!/bin/bash
-
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 
 # Is there a pre-existing "net-tools-config.h" file for
 # net-tools that can be used as the config.h?
@@ -27,7 +26,7 @@ else
 fi
 
 # net tools doesn't build "out of tree" very well.
-# change_into_obj_directory
+#change_into_obj_directory
 
 # N.B There's no "configure" program for net-tools
 

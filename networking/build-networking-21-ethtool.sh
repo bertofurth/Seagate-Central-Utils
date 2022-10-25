@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# N.B. ethtool need libnml
+# N.B. ethtool needs libnml
 
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "ethtool"
 change_into_obj_directory
 configure_it --prefix=$PREFIX \

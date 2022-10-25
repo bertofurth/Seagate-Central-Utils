@@ -1,9 +1,8 @@
 #!/bin/bash
 # iproute2 - Latest version I can get to cross compile
 # for Seagate Central with this script is v5.5
-
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "iproute2"
 
 # iproute2 doesn't build "out of tree"
