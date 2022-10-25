@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "gpgme"
 change_into_obj_directory
 # Libtool files aren't accurate when they're on the

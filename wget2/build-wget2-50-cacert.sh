@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 
 # This script downloads the latest set of ca certificates
 # as used by web browsers to authenticate web sites and then
