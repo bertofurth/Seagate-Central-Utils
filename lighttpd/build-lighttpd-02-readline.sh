@@ -1,3 +1,3 @@
 #!/bin/bash
-../libs/build-readline.sh
+source ../libs/build-readline.sh
 

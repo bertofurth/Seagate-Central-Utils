@@ -1,2 +1,2 @@
 #!/bin/bash
-../libs/build-gmp.sh
+source ../libs/build-gmp.sh
