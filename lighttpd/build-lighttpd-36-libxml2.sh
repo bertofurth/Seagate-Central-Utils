@@ -1,11 +1,6 @@
 #!/bin/bash
-
-#
-# Make sure you have "tclsh" installed
-#
-
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "libxml2"
 # Generate configuration files but do not automatically
 # run "configure"

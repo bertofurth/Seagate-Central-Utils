@@ -1,9 +1,6 @@
 #!/bin/bash
-
-# readline is needed by dropwatch
-
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "lighttpd"
 change_into_obj_directory
 export LUA_CFLAGS="${CFLAGS}"
@@ -24,11 +21,9 @@ configure_it --prefix=$PREFIX \
 	     --with-pam \
 	     --with-zstd \
 	     --with-webdav-props
-
 make_it
 
 # Move the libtool files back
 mv -f $OBJ/$LIB_NAME/la/*.la $BUILDHOST_DEST/$PREFIX/lib/
 install_it
 finish_it
-
