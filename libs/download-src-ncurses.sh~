@@ -6,8 +6,7 @@ source ../common/download-common
 # these are the latest stable versions at the time of
 # writing.
 
-# List source files specific to this project
-
+ncurses='http://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz'
 gmp='http://mirrors.kernel.org/gnu/gmp/gmp-6.2.1.tar.xz'
 nettle='http://mirrors.kernel.org/gnu/nettle/nettle-3.7.3.tar.gz'
 readline='https://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz'
@@ -23,6 +22,7 @@ libxml2='https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.10.3/libxml2-v2.10.
 lighttpd='https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.67.tar.xz'
 
 echo_archives() {
+    echo "${ncurses}"
     echo "${gmp}"
     echo "${nettle}"
     echo "${readline}"
@@ -38,8 +38,4 @@ echo_archives() {
     echo "${lighttpd}"
 }
 
-# Download common libraries
-../libs/download-src-ncurses.sh
-
-# Download source specific to this project
 do_download $(echo_archives)

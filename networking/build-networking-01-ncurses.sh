@@ -1,2 +1,2 @@
 #!/bin/bash
-source ../build-ncurses.sh
+source ../libs/build-ncurses.sh
