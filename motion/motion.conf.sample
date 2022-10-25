@@ -34,7 +34,7 @@ log_file /Data/motion/motion.log
 #
 # 7 : Good for initial setup troubleshooting
 # 6 : Good for normal operation
-log_level 7
+log_level 6
 
 ############################################################
 # Webcontrol configuration parameters
@@ -43,7 +43,7 @@ log_level 7
 # Port number used for the webcontrol.
 webcontrol_port 8080
 
-# Restrict webcontrol connections to the localhost.
+# Don't restrict webcontrol connections to the localhost.
 webcontrol_localhost off
 
 # Type of configuration options to allow via the webcontrol.
@@ -58,7 +58,7 @@ webcontrol_ipv6 on
 
 # Enable authentication for webcontrol interface
 #
-# CHANGE THIS BEFORE YOU ACTIVATE MOTION!!
+# CHANGE THIS USERNAME:PASSWORD BEFORE YOU ACTIVATE MOTION!!
 webcontrol_auth_method  2
 webcontrol_authentication admin:admin
 
@@ -69,12 +69,12 @@ webcontrol_authentication admin:admin
 # The port number for the live stream.
 stream_port 8081
 
-# Restrict stream connections to the localhost.
+# Don't restrict stream connections to the localhost.
 stream_localhost off
 
 # Require Authentication for stream
 #
-# CHANGE THIS BEFORE YOU ACTIVATE MOTION!!
+# CHANGE THIS USERNAME:PASSWORD BEFORE YOU ACTIVATE MOTION!!
 stream_auth_method 2
 stream_authentication admin:admin
 
