@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "pEmacs"
 
 # pEmacs doesn't support "out of tree" builds.
@@ -38,5 +38,10 @@ if [ $? -ne 0 ]; then
     echo Exiting \($SECONDS seconds\)
     exit -1
 fi
+
+# Link "emacs" to "pe". Why not?? I would be stunned if
+# anyone actually put real emacs on a Seagate Central
+ln -s emacs $BUILDHOST_DEST/$EXEC_PREFIX/bin/pe
+
 finish_it
 
