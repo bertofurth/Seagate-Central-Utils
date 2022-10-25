@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# readline is needed by dropwatch
+# Prerequisites for readline:
+# ncurses (optional)
 
 source ../build-common
 source ../build-functions
