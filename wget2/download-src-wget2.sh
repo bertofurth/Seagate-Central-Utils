@@ -20,5 +20,8 @@ fi
 ../libs/download-src-zlib.sh
 ../libs/download-src-gmp.sh
 ../libs/download-src-nettle.sh
+../libs/download-src-libunistring.sh
+../libs/download-src-libidn2.sh
 ../libs/download-src-libtasn1.sh
+../libs/download-src-p11-kit.sh
 ../libs/download-src-gnutls.sh
