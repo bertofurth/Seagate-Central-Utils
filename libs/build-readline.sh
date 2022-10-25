@@ -3,8 +3,8 @@
 # Prerequisites for readline:
 # ncurses (optional)
 
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "readline"
 change_into_obj_directory
 configure_it --prefix=$PREFIX \
