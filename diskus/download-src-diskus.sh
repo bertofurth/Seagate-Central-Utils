@@ -1,4 +1,6 @@
 #!/bin/sh
+source ../common/download-common
+
 # Run this script to download and extract the versions
 # of source code this project was tested with. In general
 # these are the latest stable versions at the time of
