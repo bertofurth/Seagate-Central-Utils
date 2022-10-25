@@ -9,6 +9,7 @@ export CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/ncurses"
 
 # --enable-pam : Allow screen to be locked with the
 #                user's password
+# --enable-colors256 : Why not? I like colors!
 # --with-sys-screenrc : Put the global screenrc in
 #                       /etc/screenrc instead of the
 #                       default /usr/local/etc/
@@ -18,6 +19,7 @@ configure_it --prefix=$PREFIX \
 	     --sbindir=$EXEC_PREFIX/sbin \
 	     --host=$ARCH \
 	     --enable-pam \
+	     --enable-colors256 \
 	     --with-sys-screenrc=/etc/screenrc
 make_it
 install_it
