@@ -9,7 +9,7 @@ source ../common/download-common
 # Download source files specific to this project
 do_download https://downloads.sourceforge.net/project/pcre/pcre2/10.37/pcre2-10.37.tar.bz2
 do_download https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.10.3/libxml2-v2.10.3.tar.bz2
-do_download https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.67.tar.xz'
+do_download https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.67.tar.xz
 
 if [[ -n $SKIP_COMMON ]]; then
    exit 0	 
