@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 
 if ! type cargo > /dev/null ; then
     echo "Unable to find cargo. Has rust been installed?"

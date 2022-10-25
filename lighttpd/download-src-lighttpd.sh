@@ -24,7 +24,10 @@ fi
 ../libs/download-src-zlib.sh
 ../libs/download-src-zstd.sh
 ../libs/download-src-Linux-PAM.sh
+../libs/download-src-libunistring.sh
+../libs/download-src-libidn2.sh
 ../libs/download-src-libtasn1.sh
+../libs/download-src-p11-kit.sh
 ../libs/download-src-gnutls.sh
 ../libs/download-src-sqlite.sh
 
