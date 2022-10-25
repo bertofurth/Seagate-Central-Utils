@@ -1,4 +1,7 @@
 #!/bin/bash
+# Prerequisites for lua
+# readline
+
 source ../common/build-common
 source ../common/build-functions
 check_source_dir "lua"
