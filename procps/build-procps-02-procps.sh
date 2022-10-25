@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 
 # Optional : Use Seagate Central specific ncurses library
 # and stop from using libtinfo which doesn't exist

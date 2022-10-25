@@ -2,8 +2,8 @@
 
 # libnml is needed by ethtool
 
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "dropwatch"
 # Generate configure script (dropwatch needs this)
 ./autogen.sh
