@@ -15,7 +15,7 @@ die() {
 # Supply this function with the list of URLs to download
 do_download() {
     mkdir -p src
-    cd src
+    pushd src
 
     if type wget > /dev/null ; then
 	# "wget -N -c" : Only download the file if it does not
@@ -38,4 +38,5 @@ do_download() {
 	    || die "Cannot extract $(basename ${ar})"
     done
     unset ar
+    popd
 }
