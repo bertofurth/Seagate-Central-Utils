@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 
 if ! type go > /dev/null ; then
     echo "Unable to find go. Has go been installed?"

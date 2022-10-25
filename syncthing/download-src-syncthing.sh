@@ -1,42 +1,16 @@
 #!/bin/sh
+source ../common/download-common
 
 # Run this script to download and extract the versions
-# of source code this project was tested with. Unless
-# otherwise noted these are the latest stable versions
-# available at the time of writing.
+# of source code this project was tested with. In general
+# these are the latest stable versions at the time of
+# writing.
 
-# Based on gcc's download_prerequisites script
+# Download source files specific to this project
+do_download https://github.com/syncthing/syncthing/archive/refs/tags/v1.18.2.tar.gz
 
-syncthing='https://github.com/syncthing/syncthing/archive/refs/tags/v1.18.2.tar.gz'
-
-echo_archives() {
-    echo "${syncthing}"
-}
-
-die() {
-    echo "error: $@" >&2
-    exit 1
-}
-
-mkdir -p src
-cd src
-
-if type wget > /dev/null ; then
-    fetch='wget --backups=1'
-else
-    if type curl > /dev/null; then
-	fetch='curl -LO'
-    else
-	die "Unable to find wget or curl"
-    fi    
+if [[ -n $SKIP_COMMON ]]; then
+    exit 0
 fi
 
-
-for ar in $(echo_archives)
-do
-	${fetch} "${ar}"    \
-		 || die "Cannot download $ar"
-        tar -xf "$(basename ${ar})" \
-		 || die "Cannot extract $(basename ${ar})"
-done
-unset ar
+# Download common libraries
