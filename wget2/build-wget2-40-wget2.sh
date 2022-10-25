@@ -20,5 +20,7 @@ install_it
 # Move the libtool files back
 mv -f $OBJ/$LIB_NAME/la/*.la $BUILDHOST_DEST/$PREFIX/lib/
 
+# Optional. Link wget to wget2. Why not??
+ln wget2 $BUILDHOST_DEST/$PREFIX/bin/wget
 finish_it
 

@@ -41,7 +41,7 @@ fi
 
 # Link "emacs" to "pe". Why not?? I would be stunned if
 # anyone actually put real emacs on a Seagate Central
-ln -s emacs $BUILDHOST_DEST/$EXEC_PREFIX/bin/pe
+ln -s pe $BUILDHOST_DEST/$EXEC_PREFIX/bin/emacs
 
 finish_it
 
