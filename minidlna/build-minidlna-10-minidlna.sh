@@ -1,14 +1,10 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "minidlna"
 
 # MiniDLNA 1.3.0 doesn't seem to build well "out
 # of tree" so we build within the source directory.
-#
-# If a future version works better "out of tree" then
-# uncomment the following command to change to a
-# dedicated build directory under "obj/".
 #
 #change_into_obj_directory
 
