@@ -1,6 +1,6 @@
 #!/bin/bash
-source ../build-common
-source ../build-functions
+source ../common/build-common
+source ../common/build-functions
 check_source_dir "lua"
 # no "configure" for lua
 #change_into_obj_directory
