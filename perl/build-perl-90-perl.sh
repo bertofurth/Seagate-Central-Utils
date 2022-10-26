@@ -6,7 +6,7 @@ source ../common/build-functions
 # and save the location
 
 check_source_dir "perl-cross"
-PERL_CROSS_SRC=${SRC}/${LIBNAME}
+PERL_CROSS_SRC=${SRC}/${LIB_NAME}
 unset LIB_NAME
 
 # Now find the actual perl-5 directory
@@ -16,7 +16,7 @@ check_source_dir "perl-5"
 # directory over the top of the perl
 # source directory.
 
-cp -r $PERL_CROSS_SRC/* ${SRC}/${LIBNAME}
+cp -r $PERL_CROSS_SRC/* ${SRC}/${LIB_NAME}/
 
 change_into_obj_directory
 
