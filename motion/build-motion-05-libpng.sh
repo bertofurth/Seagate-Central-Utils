@@ -3,7 +3,6 @@ source ../common/build-common
 source ../common/build-functions
 check_source_dir "libpng"
 change_into_obj_directory
-# export ZLIBINC=$BUILDHOST_DEST/$PREFIX/include
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
 	     --sbindir=$EXEC_PREFIX/sbin \

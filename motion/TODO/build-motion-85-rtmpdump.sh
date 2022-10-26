@@ -23,7 +23,9 @@ check_source_dir "rtmpdump"
 export CROSS_COMPILE
 export XCFLAGS=$CFLAGS
 export XLDFLAGS=$LDFLAGS
-export DESTDIR=$BUILDHOST_DEST/$EXEC_PREFIX/
+
+# IS THIS RIGHT????
+export DESTDIR=$DESTDIR/$EXEC_PREFIX/
 
 make_it SYS=posix CRYPTO=GNUTLS 
 install_it SYS=posix CRYPTO=GNUTLS

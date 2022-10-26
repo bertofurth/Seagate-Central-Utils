@@ -6,7 +6,7 @@ change_into_obj_directory
 #
 # libgnutls.la seems to cause problems. Temporarily
 # make it invisible.
-mv $BUILDHOST_DEST/$PREFIX/lib/libgnutls.la $BUILDHOST_DEST/$PREFIX/lib/libgnutls.la.orig
+mv $DESTDIR/$PREFIX/lib/libgnutls.la $DESTDIR/$PREFIX/lib/libgnutls.la.orig
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
@@ -26,5 +26,5 @@ sed -i "/HAVE_ACCEPT4/c #undef HAVE_ACCEPT4" $OBJ/$LIB_NAME/MHD_config.h
 make_it
 install_it
 # Put libgnutls.la back
-mv $BUILDHOST_DEST/$PREFIX/lib/libgnutls.la.orig $BUILDHOST_DEST/$PREFIX/lib/libgnutls.la
+mv $DESTDIR/$PREFIX/lib/libgnutls.la.orig $DESTDIR/$PREFIX/lib/libgnutls.la
 finish_it

@@ -25,7 +25,7 @@ install_it
 
 # Copy sample "motion" configuration files included in
 # this project to the default configuration directory.
-mkdir -p $BUILDHOST_DEST/$PREFIX/etc/motion
-cp $TOP/*.conf.sample $BUILDHOST_DEST/$PREFIX/etc/motion/
+mkdir -p $DESTDIR/$PREFIX/etc/motion
+cp $TOP/*.conf.sample $DESTDIR/$PREFIX/etc/motion/
 
 finish_it
