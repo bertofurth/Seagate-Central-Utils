@@ -14,13 +14,13 @@ change_into_obj_directory
 # gnutls doesn't like the following .la file
 # temporarily rename it.
 #
-mv $BUILDHOST_DEST/$PREFIX/lib/libidn2.la $BUILDHOST_DEST/$PREFIX/lib/libidn2.la.orig
+mv $DESTDIR/$PREFIX/lib/libidn2.la $DESTDIR/$PREFIX/lib/libidn2.la.orig
 
 #
 # Need to specify where the p11-kit headers are or we get
 # error message
 # fatal error: p11-kit/pkcs11.h: No such file or directory
-export P11_KIT_CFLAGS=-I$BUILDHOST_DEST/$PREFIX/include/p11-kit-1
+export P11_KIT_CFLAGS=-I$DESTDIR/$PREFIX/include/p11-kit-1
 
 # Configure options:
 #
@@ -49,5 +49,10 @@ configure_it --prefix=$PREFIX \
 
 make_it
 install_it
+
+# Move the .la file back.
+#
+mv $DESTDIR/$PREFIX/lib/libidn2.la.orig $DESTDIR/$PREFIX/lib/libidn2.la
+
 finish_it
 

@@ -30,7 +30,7 @@ fi
 
 # N.B There's no "configure" program for net-tools
 
-export BASEDIR=$BUILDHOST_DEST/$PREFIX
+export BASEDIR=$DESTDIR/$PREFIX
 #export BINDIR=$EXEC_PREFIX/bin
 #export SBINDIR=$EXEC_PREFIX/sbin
 

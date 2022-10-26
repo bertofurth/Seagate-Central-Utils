@@ -68,6 +68,6 @@ install_it
 #
 # ld: cannot find -ltinfo: No such file or directory
 #
-ln -s libncurses.so $BUILDHOST_DEST/$PREFIX/lib/libtinfo.so
+ln -s libncurses.so $DESTDIR/$PREFIX/lib/libtinfo.so
 
 finish_it

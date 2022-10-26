@@ -6,7 +6,7 @@ check_source_dir "libpcap"
 change_into_obj_directory
 
 # libnl headers needs to be included in this way
-export CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/libnl3"
+export CFLAGS="$CFLAGS -I$DESTDIR/$PREFIX/include/libnl3"
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \

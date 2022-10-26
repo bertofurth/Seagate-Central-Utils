@@ -21,6 +21,6 @@ unset AR
 # If you can do it more elegantly than this then
 # please let us know.
 
-make_it linux-readline CC="$CC" LDFLAGS="-L/$BUILDHOST_DEST/$PREFIX/lib" MYLIBS="-lncurses"
-install_it INSTALL_TOP="$BUILDHOST_DEST/$PREFIX"
+make_it linux-readline CC="$CC" LDFLAGS="-L/$DESTDIR/$PREFIX/lib" MYLIBS="-lncurses"
+install_it INSTALL_TOP="$DESTDIR/$PREFIX"
 finish_it

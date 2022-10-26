@@ -5,11 +5,11 @@ check_source_dir "lighttpd"
 change_into_obj_directory
 export LUA_CFLAGS="${CFLAGS}"
 export LUA_LIBS="${LDFLAGS}"
-export XML_CFLAGS="${CFLAGS} -I$BUILDHOST_DEST/$PREFIX/include/libxml2"
+export XML_CFLAGS="${CFLAGS} -I$DESTDIR/$PREFIX/include/libxml2"
 # libtool has problems so we temporarily
 # move the .la files in the cross directory
 mkdir $OBJ/$LIB_NAME/la
-mv -f $BUILDHOST_DEST/$PREFIX/lib/*.la $OBJ/$LIB_NAME/la/
+mv -f $DESTDIR/$PREFIX/lib/*.la $OBJ/$LIB_NAME/la/
 
 configure_it --prefix=$PREFIX \
 	     --bindir=$EXEC_PREFIX/bin \
@@ -24,6 +24,6 @@ configure_it --prefix=$PREFIX \
 make_it
 
 # Move the libtool files back
-mv -f $OBJ/$LIB_NAME/la/*.la $BUILDHOST_DEST/$PREFIX/lib/
+mv -f $OBJ/$LIB_NAME/la/*.la $DESTDIR/$PREFIX/lib/
 install_it
 finish_it

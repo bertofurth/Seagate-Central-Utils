@@ -11,8 +11,8 @@ configure_it --prefix=$PREFIX \
 	     --sbindir=$EXEC_PREFIX/sbin \
 	     --host=$ARCH \
 	     --without-python \
-	     --with-readline=$BUILDHOST_DEST/$PREFIX/lib \
-	     --with-zlib=$BUILDHOST_DEST/$PREFIX/lib
+	     --with-readline=$DESTDIR/$PREFIX/lib \
+	     --with-zlib=$DESTDIR/$PREFIX/lib
 	     
 make_it
 install_it

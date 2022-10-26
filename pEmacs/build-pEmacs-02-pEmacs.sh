@@ -13,14 +13,8 @@ cp $SRC/$LIB_NAME/Makefile $SRC/$LIB_NAME/Makefile.orig
 sed -i "/^CFLAGS=/c CFLAGS=\${CPPFLAGS} -Wall -O2" $SRC/$LIB_NAME/Makefile
 sed -i "/^LFLAGS=/c LFLAGS=\${LDFLAGS} -lncurses" $SRC/$LIB_NAME/Makefile
 
-# Account for weird location of ncurses
-# export CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/ncurses"
-
 # No configure script for pEmacs
-#configure_it --prefix=$PREFIX \
-#	     --bindir=$EXEC_PREFIX/bin \
-#	     --sbindir=$EXEC_PREFIX/sbin \
-#	     --host=$ARCH
+#configure_it
 
 make_it
 
@@ -30,8 +24,8 @@ make_it
 
 # Copy the newly built binary "pe" to the destination dir
 
-mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX/bin
-cp ./pe $BUILDHOST_DEST/$EXEC_PREFIX/bin/
+mkdir -p $DESTDIR/$EXEC_PREFIX/bin
+cp ./pe $DESTDIR/$EXEC_PREFIX/bin/
 if [ $? -ne 0 ]; then
     echo
     echo Couldn\'t copy \"pe\" from $(pwd). Check build!
@@ -40,8 +34,8 @@ if [ $? -ne 0 ]; then
 fi
 
 # Link "emacs" to "pe". Why not?? I would be stunned if
-# anyone actually put real emacs on a Seagate Central
-ln -s pe $BUILDHOST_DEST/$EXEC_PREFIX/bin/emacs
+# anyone actually put *real* emacs on a Seagate Central
+ln -s pe $DESTDIR/$EXEC_PREFIX/bin/emacs
 
 finish_it
 
