@@ -1,18 +1,6 @@
 #!/bin/bash
 source ../common/build-common
 source ../common/build-functions
-
-# Optional : Use Seagate Central specific ncurses library
-# and stop from using libtinfo which doesn't exist
-# on the Seagate Central.
-# export NCURSES_LIBS=-l:libncurses.so.5.0.7
-
-# Specify location of ncurses include header.
-# This should work but it doesn't.
-# export NCURSES_CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/ncurses"
-#
-# export CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/ncurses"
-
 check_source_dir "procps"
 
 # Generate configure script (unusual but procps needs this)

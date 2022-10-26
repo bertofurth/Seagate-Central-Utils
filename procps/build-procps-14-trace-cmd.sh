@@ -16,8 +16,8 @@ check_source_dir "trace-cmd"
 # we are using glibc 2.11 (as used on the Central)
 # which is ancient.
 #
-export CFLAGS="$CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/traceevent \
-       	       -I$BUILDHOST_DEST/$PREFIX/include/tracefs \
+export CFLAGS="$CFLAGS -I$DESTDIR/$PREFIX/include/traceevent \
+       	       -I$DESTDIR/$PREFIX/include/tracefs \
 	       -DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
 	       -DCLOCK_MONOTONIC_RAW=4 \
 	       -DAF_VSOCK=40"

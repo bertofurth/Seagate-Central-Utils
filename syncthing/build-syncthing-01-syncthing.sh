@@ -30,6 +30,6 @@ fi
 echo make for $LIB_NAME complete. See $LOG/"$NAME"_make.log
 
 # Copy the generated binary into the expected place
-mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX/sbin
-cp syncthing $BUILDHOST_DEST/$EXEC_PREFIX/sbin
+mkdir -p $DESTDIR/$EXEC_PREFIX/sbin
+cp syncthing $DESTDIR/$EXEC_PREFIX/sbin
 finish_it

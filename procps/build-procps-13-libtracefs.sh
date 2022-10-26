@@ -14,7 +14,7 @@ check_source_dir "libtracefs"
 # CFLAGS adjustments needed to avoid compilation
 # problems.
 #
-export CFLAGS="-DF_GETPIPE_SZ=1032 $CFLAGS -I$BUILDHOST_DEST/$PREFIX/include/traceevent"
+export CFLAGS="-DF_GETPIPE_SZ=1032 $CFLAGS -I$DESTDIR/$PREFIX/include/traceevent"
 
 # Specify the directory to generate objects in
 # using the O= flag

@@ -40,14 +40,14 @@ if [ -z $CA_NAME ]; then
     exit -1
 fi
 
-echo "Copying $CA_NAME into $BUILDHOST_DEST/etc/cert/ssl/"
-mkdir -p $BUILDHOST_DEST/etc/cert/ssl/
-cp $CA_NAME $BUILDHOST_DEST/etc/cert/ssl/
+echo "Copying $CA_NAME into $DESTDIR/etc/cert/ssl/"
+mkdir -p $DESTDIR/etc/cert/ssl/
+cp $CA_NAME $DESTDIR/etc/cert/ssl/
 
 echo
 echo "****************************************"
 echo
-echo Success! $NAME finished installing $CA_NAME to $BUILDHOST_DEST \($SECONDS seconds\)
+echo Success! $NAME finished installing $CA_NAME to $DESTDIR \($SECONDS seconds\)
 echo
 echo "****************************************"
 echo
