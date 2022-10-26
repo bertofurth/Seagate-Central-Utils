@@ -21,6 +21,6 @@ install_it
 mv -f $OBJ/$LIB_NAME/la/*.la $BUILDHOST_DEST/$PREFIX/lib/
 
 # Optional. Link wget to wget2. Why not??
-ln wget2 $BUILDHOST_DEST/$PREFIX/bin/wget
+ln -s wget2 $BUILDHOST_DEST/$PREFIX/bin/wget
 finish_it
 
