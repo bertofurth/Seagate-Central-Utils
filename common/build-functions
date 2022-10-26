@@ -36,7 +36,9 @@ check_source_dir()
 	if [ -z $LIB_NAME ]; then	
 	   echo
 	   echo Unable to find source directory for $1
-	   echo Has the source code been extracted\? \(tar -xf\)
+	   echo Has the source code been downloaded and
+	   echo extracted to the $SRC directory\?
+	   echo 
 	   exit -1
 	fi
 
