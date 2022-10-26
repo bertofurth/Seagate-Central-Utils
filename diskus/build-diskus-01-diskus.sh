@@ -36,6 +36,6 @@ echo cargo build for $LIB_NAME complete. See $LOG/"$NAME"_make.log
 cd ..
 
 # Copy the generated binary into the expected place
-mkdir -p $BUILDHOST_DEST/$EXEC_PREFIX/bin
-cp target/arm-unknown-linux-gnueabi/debug/diskus $BUILDHOST_DEST/$EXEC_PREFIX/bin/
+mkdir -p $DESTDIR/$EXEC_PREFIX/bin
+cp target/arm-unknown-linux-gnueabi/debug/diskus $DESTDIR/$EXEC_PREFIX/bin/
 finish_it

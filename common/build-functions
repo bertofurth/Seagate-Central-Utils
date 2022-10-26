@@ -127,10 +127,10 @@ make_it()
 install_it()
 {
         mkdir -p $LOG
-	make DESTDIR=$BUILDHOST_DEST install $@ |& tee $LOG/"$NAME"_install.log
+	make DESTDIR=$DESTDIR install $@ |& tee $LOG/"$NAME"_install.log
 	if [ $? -ne 0 ]; then
     	   echo   
-           echo make install of $LIB_NAME to $BUILDHOST_DEST Failed.
+           echo make install of $LIB_NAME to $DESTDIR Failed.
 	   echo See $LOG/"$NAME"_install.log
 	   echo Exiting \($SECONDS seconds\)
 	   exit -1
@@ -149,7 +149,7 @@ finish_it()
         echo
 	echo "****************************************"
 	echo 
-	echo Success! $NAME finished installing $LIB_NAME to $BUILDHOST_DEST \($SECONDS seconds\)
+	echo Success! $NAME finished installing $LIB_NAME to $DESTDIR \($SECONDS seconds\)
 	echo
 	echo "****************************************"
 	echo

@@ -10,7 +10,7 @@
 # will likely be something like arm-XXX-linux-gnueabi-
 # Normally this will have a dash (-) at the end.
 #
-CROSS_COMPILE=arm-sc-linux-gnueabi-
+CROSS_COMPILE=${CROSS_COMPILE:-arm-sc-linux-gnueabi-}
 
 #
 # The location of the root of the cross compiling tool suite
@@ -20,7 +20,7 @@ CROSS_COMPILE=arm-sc-linux-gnueabi-
 #
 # Make sure to use an absolute path and not the ~ or . symbols.
 #
-CROSS=$HOME/Seagate-Central-Toolchain/cross
+CROSS==${CROSS_COMPILE:-${HOME}/Seagate-Central-Toolchain/cross}
 TOOLS=$CROSS/tools/bin
 SYSROOT=$CROSS/sysroot
 
@@ -38,7 +38,11 @@ SYSROOT=$CROSS/sysroot
 #
 # Set environment variable J=1 for troubleshooting.
 #
-J=${J-$(nproc)}
+if type nproc > /dev/null ; then
+   J=${J:-$(nproc)}
+else
+   J=${J:-1}
+fi
 
 # The directory on the compiling host where binaries and
 # other generated files will be temporarily installed
@@ -48,7 +52,7 @@ J=${J-$(nproc)}
 # where the generated files need to be copied to on the
 # Seagate Central.
 #
-BUILDHOST_DEST=$(pwd)/cross
+DESTDIR=${DESTDIR:-$(pwd)/cross}
 
 # The directory where the libraries and associated files
 # will be installed on the target device (i.e. on the
@@ -57,7 +61,7 @@ BUILDHOST_DEST=$(pwd)/cross
 #
 # Note 1 : This is NOT the place where the resultant binaries
 # and libraries will be temporarily copied to on the compiling
-# host (see BUILDHOST_DEST).
+# host (see DESTDIR).
 #
 # Note 2: The main purpose of this variable is to set the
 # elf attribute DT_RPATH (set to $PREFIX/lib) in generated
@@ -71,7 +75,7 @@ PREFIX=${PREFIX:-/usr/local}
 # target device. Default value is "/usr/local" so as to not
 # overwrite the native binaries in "/usr".
 #
-EXEC_PREFIX=${EXEC_PREFIX:-/usr/local}
+EXEC_PREFIX=${EXEC_PREFIX:-${PREFIX}}
 
 # Sometimes it's easier to download pre-built libraries
 # from the target (Seagate Central) and link against
@@ -120,10 +124,10 @@ export PATH=$TOOLS:$PATH
 #
 export LDFLAGS="--sysroot=$SYSROOT \
        -L$SYSROOT/lib -L$SYSROOT/usr/lib \
-       -L$BUILDHOST_DEST/$PREFIX/lib \
+       -L$DESTDIR/$PREFIX/lib \
        -Wl,-rpath-link=$SYSROOT/lib \
        -Wl,-rpath-link=$SYSROOT/usr/lib \
-       -Wl,-rpath-link=$BUILDHOST_DEST/$PREFIX/lib"
+       -Wl,-rpath-link=$DESTDIR/$PREFIX/lib"
 
 if [[ -d $SEAGATE_LIBS_BASE ]]; then
    export LDFLAGS="$LDFLAGS -L$SEAGATE_LIBS_BASE/lib \
@@ -180,7 +184,7 @@ export LDFLAGS="$LDFLAGS -Wl,-z,max-page-size=0x10000 -Wl,-z,common-page-size=0x
 # $SEAGATE_LIBS_BASE/usr/include/md5
 #
 export NOSTDINC_FLAGS="--sysroot=$SYSROOT -I$SYSROOT/usr/include \
-       -I$BUILDHOST_DEST/$PREFIX/include"
+       -I$DESTDIR/$PREFIX/include"
 
 if [[ -d $SEAGATE_LIBS_BASE ]]; then
        export NOSTDINC_FLAGS="$NOSTDINC_FLAGS \
@@ -194,7 +198,7 @@ fi
 # "--pkg-config=pkg-config" to point to a working version of 
 # pkg-config.
 #
-export PKG_CONFIG_LIBDIR="$BUILDHOST_DEST/$PREFIX/lib/pkgconfig"
+export PKG_CONFIG_LIBDIR="$DESTDIR/$PREFIX/lib/pkgconfig"
 
 #
 # The Seagate Central Cavium CNS3420 CPU uses the armv6k
