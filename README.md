@@ -2,8 +2,6 @@
 Instructions for compiling and installing new and updated utilities 
 for the Seagate Central NAS (ARM32 - armv6l) based platform.
 
-TODO : Move commonly built elements to a common directory
-
 ### Servers
 * minidlna - Efficient media server replacement for the inbuilt Twonky DLNA. 
 * syncthing - Multi platform file synchronisation tool. (go)
@@ -17,12 +15,13 @@ TODO : Move commonly built elements to a common directory
 * screen - Terminal multiplexer useful for "headless" servers.
 * diskus - Check per directory disk usage. Faster than "du". (rust)
 * pEmacs - Perfect Emacs. Small footprint editor. Much better than "nano".
-* networking - Network troubleshooting tools.
+* networking - Network troubleshooting tools (iperf3, ss, others...)
 * wget2 - Download files from web sites
 
 ### TODO (but probably not)
 * agedu - Advanced Disk usage report https://www.chiark.greenend.org.uk/~sgtatham/agedu/
 * mjpg-streamer - Stream a webcam (See TODO in motion folder) https://github.com/jacksonliam/mjpg-streamer
+* tcpdump - Command line network sniffer
 
 Each utility has its own subdirectory under the base directory
 of this project where further resources specific to each one can be
