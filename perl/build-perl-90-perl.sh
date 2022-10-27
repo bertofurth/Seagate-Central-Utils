@@ -24,21 +24,21 @@ unset LIB_NAME
 # combined contents of the perl-5 source
 # directory with perl-cross copied over it
 
-# Copy the contents of the perl-cross
-# directory over the top of the perl
-# source directory.
 mkdir -p ${SRC}/${TEMP_PERL_DIR}
 check_source_dir ${TEMP_PERL_DIR}
+change_into_obj_directory
+
 # Clear out the directory. Build doesn't work
 # well if there's stuff in there already
-rm -rf ${SRC}/${TEMP_PERL_DIR}/*
-echo Copying contents of ${PERL_5_SRC} to ${SRC}/${LIB_NAME}
-cp -r ${PERL_5_SRC}/* .
-echo Copying contents of ${PERL_CROSS_SRC} to ${SRC}/${LIB_NAME}
-cp -r ${PERL_CROSS_SRC}/* .
 
-# Build works better in tree
-#change_into_obj_directory
+rm -rf ${OBJ}/${LIB_NAME}/*
+
+# Copy the contents of the perl-5 and
+# perl-cross directories to the obj directory
+echo Copying contents of ${PERL_5_SRC} to ${OBJ}/${LIB_NAME}
+cp -r ${PERL_5_SRC}/* .
+echo Copying contents of ${PERL_CROSS_SRC} to ${OBJ}/${LIB_NAME}
+cp -r ${PERL_CROSS_SRC}/* .
 
 #
 # Configure options for perl-cross are a little
