@@ -53,7 +53,6 @@ cp -r ${PERL_CROSS_SRC}/* .
 configure_it --prefix=$PREFIX \
 	     --target=$ARCH \
 	     --target-tools-prefix=$CROSS_COMPILE \
-	     -des \
 	     -Dmyhostname=localhost \
 	     -Dperladmin=root@localhost \
 	     -Dusethreads -Duseithreads 
