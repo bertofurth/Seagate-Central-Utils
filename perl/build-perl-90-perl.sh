@@ -2,6 +2,10 @@
 source ../common/build-common
 source ../common/build-functions
 
+#
+# Cross compiling perl is quite an unusual process
+# See https://arsv.github.io/perl-cross/ for the details
+
 # First find the perl-cross- directory
 # and save the location
 
@@ -15,10 +19,11 @@ check_source_dir "perl-5"
 # Copy the contents of the perl-cross
 # directory over the top of the perl
 # source directory.
-
+echo Copying contents of ${PERL_CROSS_SRC} over ${SRC}/${LIB_NAME}
 cp -r $PERL_CROSS_SRC/* ${SRC}/${LIB_NAME}/
 
-change_into_obj_directory
+# Build works better in tree
+#change_into_obj_directory
 
 #
 # N.B. Configure options for perl-cross are a little
