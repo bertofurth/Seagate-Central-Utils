@@ -31,7 +31,7 @@ mkdir -p ${SRC}/${TEMP_PERL_DIR}
 check_source_dir ${TEMP_PERL_DIR}
 # Clear out the directory. Build doesn't work
 # well if there's stuff in there already
-rm -rf .
+rm -rf ${SRC}/${TEMP_PERL_DIR}/*
 echo Copying contents of ${PERL_5_SRC} to ${SRC}/${LIB_NAME}
 cp -r ${PERL_5_SRC}/* .
 echo Copying contents of ${PERL_CROSS_SRC} to ${SRC}/${LIB_NAME}
