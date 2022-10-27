@@ -41,12 +41,26 @@ cp -r ${PERL_CROSS_SRC}/* .
 #change_into_obj_directory
 
 #
-# N.B. Configure options for perl-cross are a little
+# Configure options for perl-cross are a little
 # non-standard.
 #
+# The arguments with -D are the same as those used by
+# native Seagate Central perl
+#
+# Note that we specify an "otherlibdirs" as the location
+# of the original perl modules installed on the Seagate
+# Central
 configure_it --prefix=$PREFIX \
 	     --target=$ARCH \
-	     --target-tools-prefix=$CROSS_COMPILE
+	     --target-tools-prefix=$CROSS_COMPILE \
+	     -des \
+	     -Dmyhostname=localhost \
+	     -Dperladmin=root@localhost \
+	     -Dusethreads -Duseithreads 
+
+#	     -Dotherlibdirs=/usr/lib/perl5/5.8.8 
+
+
 make_it
 install_it
 finish_it
