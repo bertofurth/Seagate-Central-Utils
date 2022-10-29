@@ -1,12 +1,7 @@
-# README-less.md
-less is a "pager", meaning it is used to display text files in
-a terminal or ssh session.
+# README-perl.md
+TODO : UNFINISHED
 
-https://greenwoodsoftware.com/less/faq.html
-
-The version of "less" included with the native Seagate Central
-firmware is the devil's spawn!! It doesn't support the search 
-function which is one of the most useful features of "less".
+perl
 
 The build and installation instructions below are designed to be
 read in conjunction with the main set of instructions in the
