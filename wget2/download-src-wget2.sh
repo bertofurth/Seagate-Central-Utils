@@ -17,6 +17,8 @@ if [[ -n $SKIP_COMMON ]]; then
 fi
 
 # Download common libraries
+../libs/download-src-ncurses.sh
+../libs/download-src-readline.sh
 ../libs/download-src-zlib.sh
 ../libs/download-src-gmp.sh
 ../libs/download-src-nettle.sh
