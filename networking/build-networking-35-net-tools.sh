@@ -34,11 +34,13 @@ export BASEDIR=$DESTDIR/$PREFIX
 #export BINDIR=$EXEC_PREFIX/bin
 #export SBINDIR=$EXEC_PREFIX/sbin
 
-make_it
+# Note we have to explicitly tell the installer
+# to install the mii-tool utility
+make_it HAVE_MII=1
 
 # FYI net-tools puts the "man" pages in a weird place
 # At usr/local/usr/share/man. It should get cleaned
 # up by the trim script.
-install_it
+install_it HAVE_MII=1
 finish_it
 
