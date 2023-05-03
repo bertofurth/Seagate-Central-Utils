@@ -79,9 +79,9 @@ https://github.com/bertofurth/Seagate-Central-Toolchain
 
 Some of the utilities described in this project assume that the 
 target Seagate Central has an upgraded Linux kernel as per the 
-**Seagate-Central-Slot-In-v5.x-Kernel** project at
+**Seagate-Central-Modern-Slot-In-Kernel** project at
 
-https://github.com/bertofurth/Seagate-Central-Slot-In-v5.x-Kernel
+https://github.com/bertofurth/Seagate-Central-Modern-Slot-In-Kernel
 
 Also worth mentioning is that the Samba service on the Seagate
 Central NAS can be upgraded using the instructions in the
